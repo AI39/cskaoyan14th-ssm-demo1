@@ -59,7 +59,9 @@
     <mvc:resources mapping="/img3/**" location="file:F://wallpaper/图标/哔哩哔哩/"/>
     -->
     <!--添加位置-->
-
+    <mvc:resources mapping="/image/**" location="/WEB-INF/image/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
 
     <!--文件上传的配置，注意：id一定要等于multipartResolver-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
