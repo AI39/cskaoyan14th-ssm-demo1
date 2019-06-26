@@ -29,19 +29,19 @@
 <div  id="toolbar_fCountCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='fCountCheck:add' }" >
+		<c:if test="${per=='find:add' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="fCountCheck_add()">新增</a>  
 		    </div>  
 		</c:if>
-		<c:if test="${per=='fCountCheck:edit' }" >
+		<c:if test="${per=='find:edit' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="fCountCheck_edit()">
 					编辑
 				</a>
 		    </div>  
 		</c:if>
-		<c:if test="${per=='fCountCheck:delete' }" >
+		<c:if test="${per=='find:delete' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="fCountCheck_delete()">
 					删除

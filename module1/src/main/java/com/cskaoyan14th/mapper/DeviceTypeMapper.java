@@ -29,6 +29,10 @@ public interface DeviceTypeMapper {
 
     int updateByPrimaryKey(DeviceType record);
 
+    int selectPageDeviceTypeCount(@Param("limit") int limit, @Param("offset")int offset);
+
+    List<DeviceType> selectPageDeviceTypeList(@Param("limit") int limit, @Param("offset") int offset);
+
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
 }

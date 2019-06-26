@@ -19,6 +19,12 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
         <!--逆向工程-->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -48,21 +54,12 @@
             <version>3.3</version>
         </dependency>
         <!-- Jackson Json处理工具包 -->
-      <!--  <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.6.0</version>
-        </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.7</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.jackson</groupId>-->
-            <!--<artifactId>jackson-mapper-asl</artifactId>-->
-            <!--<version>1.5.0</version>-->
-        <!--</dependency>-->
+
         <!-- 单元测试 -->
         <dependency>
             <groupId>junit</groupId>
@@ -97,7 +94,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>4.0.0</version>
+            <version>5.0.0</version>
         </dependency>
         <!-- MySql -->
         <dependency>
@@ -179,18 +176,6 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.6.12</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>5.1.5.RELEASE</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

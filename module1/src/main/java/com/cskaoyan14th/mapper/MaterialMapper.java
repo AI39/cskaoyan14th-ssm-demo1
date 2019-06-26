@@ -2,7 +2,6 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Material;
 import com.cskaoyan14th.bean.MaterialExample;
-import com.cskaoyan14th.bean.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
