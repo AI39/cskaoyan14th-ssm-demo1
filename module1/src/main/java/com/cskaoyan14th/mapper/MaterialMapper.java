@@ -2,6 +2,7 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.Material;
 import com.cskaoyan14th.bean.MaterialExample;
+import com.cskaoyan14th.bean.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,5 +31,8 @@ public interface MaterialMapper {
     int updateByPrimaryKey(Material record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    int selectPageMaterialCount(@Param("limit") int limit,@Param("offset")int offset);
+
+    List<Material> selectMaterialList(@Param("limit") int limit, @Param("offset") int offset);
 
 }
