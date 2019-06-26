@@ -27,6 +27,22 @@
         <!--<property name="configLocation" value="classpath:mybatis.xml"/>--><!--如有需求，可以新增加一个mybatis.xml，并在里面配置懒加载，二级缓存等-->
         <property name="typeAliasesPackage" value="com.cskaoyan14th.bean"/><!--配置mybatie返回类型的别名-->
         <property name="dataSource" ref="myds"/>
+        <!--配置分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            <!--reasonable=true-->
+                            <!--supportMethodsArguments=true-->
+                            <!--params=count=countSql-->
+                            <!--autoRuntimeDialect=true-->
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--配置datasource-->
     <bean id="myds" class="com.alibaba.druid.pool.DruidDataSource">

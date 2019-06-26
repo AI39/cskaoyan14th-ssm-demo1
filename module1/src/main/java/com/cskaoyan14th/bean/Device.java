@@ -116,4 +116,20 @@ public class Device {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    @Override
+    public String toString() {
+        return "Device{" +
+                "deviceId='" + deviceId + '\'' +
+                ", deviceName='" + deviceName + '\'' +
+                ", deviceTypeId='" + deviceTypeId + '\'' +
+                ", deviceStatusId='" + deviceStatusId + '\'' +
+                ", deviceStatus='" + deviceStatus + '\'' +
+                ", devicePurchaseDate=" + devicePurchaseDate +
+                ", devicePurchasePrice=" + devicePurchasePrice +
+                ", deviceManufactureDate=" + deviceManufactureDate +
+                ", deviceServiceLife=" + deviceServiceLife +
+                ", deviceKeeperId='" + deviceKeeperId + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,9 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Custom;
+import com.cskaoyan14th.bean.Device;
 import com.cskaoyan14th.mapper.CustomMapper;
+import com.cskaoyan14th.mapper.DeviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,18 @@ public class TestController {
     @Autowired
     CustomMapper customMapper;
 
+    @Autowired
+    DeviceMapper deviceMapper;
+
     /*测试逆向工程，即测试操作数据库*/
     @RequestMapping("/test/sql")
     public String testConverter() {
-        Custom custom = customMapper.selectByPrimaryKey("001");
+        /*Custom custom = customMapper.selectByPrimaryKey("001");
+
         System.out.println(custom);
+        return "404";*/
+        Device device = deviceMapper.selectByPrimaryKey("001");
+        System.out.println(device);
         return "404";
     }
 
