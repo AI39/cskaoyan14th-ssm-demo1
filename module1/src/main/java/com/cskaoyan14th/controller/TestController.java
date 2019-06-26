@@ -22,6 +22,7 @@ public class TestController {
     /*测试逆向工程，即测试操作数据库*/
     @RequestMapping("/test/sql")
     public String testConverter() {
+        System.out.println("123");
         Custom custom = customMapper.selectByPrimaryKey("001");
         System.out.println(custom);
         return "404";
