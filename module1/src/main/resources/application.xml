@@ -31,6 +31,7 @@
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
                     <property name="properties">
                         <value>
                             helperDialect=mysql
@@ -43,6 +44,7 @@
                 </bean>
             </array>
         </property>
+        <!---->
     </bean>
     <!--配置datasource-->
     <bean id="myds" class="com.alibaba.druid.pool.DruidDataSource">

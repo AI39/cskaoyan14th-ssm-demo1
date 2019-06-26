@@ -43,21 +43,21 @@
 <div  id="toolbar_pMeasureCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='pMeasureCheck:add' }" >
+		<c:if test="${per=='find:add' }" >																			<%--这五个jsp需要改参数，因为工具类有点问题，我不想在每个controller中都写那些--%>
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="pMeasureCheck_add()">
 					新增
 				</a>
 		    </div>  
 		</c:if>
-		<c:if test="${per=='pMeasureCheck:edit' }" >
+		<c:if test="${per=='find:edit' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="pMeasureCheck_edit()">
 					编辑
 				</a>
 		    </div>  
 		</c:if>
-		<c:if test="${per=='pMeasureCheck:delete' }" >
+		<c:if test="${per=='find:delete' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="pMeasureCheck_delete()">
 					删除
