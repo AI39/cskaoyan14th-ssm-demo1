@@ -53,4 +53,14 @@ public class Material {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    @Override
+    public String toString() {
+        return "Material{" +
+                "materialId='" + materialId + '\'' +
+                ", materialType='" + materialType + '\'' +
+                ", status='" + status + '\'' +
+                ", remaining=" + remaining +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

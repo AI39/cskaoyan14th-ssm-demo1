@@ -5,7 +5,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
 <!-- Table -->
-<table class="easyui-datagrid" id="deviceType" title="设备种类列表" 
+<table class="easyui-datagrid" id="deviceType" title="设备种类列表"
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
        	url:'deviceType/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceType">
     <thead>

@@ -1,10 +1,13 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Custom;
+import com.cskaoyan14th.bean.Device;
 import com.cskaoyan14th.mapper.CustomMapper;
+import com.cskaoyan14th.mapper.DeviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,13 +22,51 @@ public class TestController {
     @Autowired
     CustomMapper customMapper;
 
+    @Autowired
+    DeviceMapper deviceMapper;
+
     /*测试逆向工程，即测试操作数据库*/
     @RequestMapping("/test/sql")
     public String testConverter() {
-        System.out.println("123");
+
+        Custom custom = customMapper.selectByPrimaryKey("001");
+
+        /*Custom custom = customMapper.selectByPrimaryKey("001");
+
+ c584bcee0a858c3a0dfd067c00ddd48b8e18ef3c
+        System.out.println(custom);
+        return "404";*/
+        Device device = deviceMapper.selectByPrimaryKey("001");
+        System.out.println(device);
+        return "404";
+    }
+    /*测试逆向工程，即测试操作数据库*/
+    @RequestMapping("test/json")
+    @ResponseBody
+    public Custom testJson() {
+        //Custom custom1 = customMapper.selectByPrimaryKey("1");
         Custom custom = customMapper.selectByPrimaryKey("001");
         System.out.println(custom);
-        return "404";
+        return custom;
+    }
+    @RequestMapping("test/jsp")
+    @ResponseBody
+    public String test3() {
+        return "index";
+    }
+    @RequestMapping("/test/jsp2")
+    public String test4() {
+        return "index";
+    }
+
+    @RequestMapping("/")
+    public String test5() {
+        return "WEB-INF/jsp/home";
+    }
+
+    @RequestMapping("test/tohome")
+    public String test6() {
+        return "WEB-INF/jsp/home";
     }
 
     /*测试处理器，即数据转换器*/
