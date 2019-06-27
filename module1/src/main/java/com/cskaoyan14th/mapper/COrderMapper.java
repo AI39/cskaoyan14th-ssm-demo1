@@ -30,5 +30,7 @@ public interface COrderMapper {
     int updateByPrimaryKey(COrder record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    //c_order表左连接custom表和product表
+    List<COrder> queryOrdersLeftCustomAndProduct();
 
 }

@@ -322,5 +322,59 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <sql id="Order_Base_Column_List">
+    o.order_id, o.custom_id, o.product_id, o.order_date, o.request_date, o.note, o.quantity, o.unit_price,
+    o.unit, o.image, o.file, o.status
+  </sql>
+  <sql id="Custom_Base_Column_List">
+    c.custom_id as cid, c.custom_name, c.full_name, c.address, c.fax, c.email, c.owner_name, c.owner_tel, c.status as custom_status,
+    c.note as custom_note
+  </sql>
+  <sql id="Product_Base_Column_List">
+    p.product_id as pid, p.product_name, p.product_type, p.image as product_image, p.note as product_note, p.status as product_status
+  </sql>
+  <resultMap id="myOrderMap1" type="com.cskaoyan14th.bean.COrder">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="custom_id" jdbcType="VARCHAR" property="customId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="request_date" jdbcType="TIMESTAMP" property="requestDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="file" jdbcType="VARCHAR" property="file" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <association property="custom" javaType="com.cskaoyan14th.bean.Custom" >
+      <result column="cid" jdbcType="VARCHAR" property="customId" />
+      <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+      <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="fax" jdbcType="VARCHAR" property="fax" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+      <result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
+      <result column="custom_status" jdbcType="INTEGER" property="status" />
+      <result column="custom_note" jdbcType="VARCHAR" property="note" />
+    </association>
+    <association property="product" javaType="com.cskaoyan14th.bean.Product">
+      <result column="pid" jdbcType="VARCHAR" property="productId" />
+      <result column="product_name" jdbcType="VARCHAR" property="productName" />
+      <result column="product_type" jdbcType="VARCHAR" property="productType" />
+      <result column="product_image" jdbcType="VARCHAR" property="image" />
+      <result column="product_note" jdbcType="VARCHAR" property="note" />
+      <result column="product_status" jdbcType="INTEGER" property="status" />
+    </association>
+  </resultMap>
+  <select id="queryOrdersLeftCustomAndProduct" resultMap="myOrderMap1">
+      select
+      <include refid="Order_Base_Column_List"/>,
+      <include refid="Custom_Base_Column_List"/>,
+      <include refid="Product_Base_Column_List"/>
+      from c_order o
+      left join custom c on o.custom_id = c.custom_id
+      left join product p on o.product_id = p.product_id
 
+  </select>
 </mapper>
