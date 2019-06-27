@@ -1,9 +1,7 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
-import com.cskaoyan14th.mapper.FinalCountCheckMapper;
-import com.cskaoyan14th.mapper.ProcessCountCheckMapper;
-import com.cskaoyan14th.mapper.UnqualifyApplyMapper;
+import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.util.MyUtil;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -28,8 +26,12 @@ public class QualifyController {
     UnqualifyApplyMapper unqualifyApplyMapper;
     @Autowired
     FinalCountCheckMapper finalCountCheckMapper;
+    /*@Autowired
+    FinalMeasureCheckMapper finalMeasureCheckMapper;*/
     @Autowired
     ProcessCountCheckMapper processCountCheckMapper;
+    @Autowired
+    ProcessMeasureCheckMapper processMeasureCheckMapper;
 
     /*不合格品管理*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
@@ -111,6 +113,20 @@ public class QualifyController {
         objects.add("p_measure_check:delete");
         session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/p_measure_check_list";
+    }
+
+    @RequestMapping("p_measure_check/list")
+    @ResponseBody
+    public Vo<ProcessMeasureCheck> ProcessMeasureCheckList(int page, int rows){
+        PageHelper.startPage(page,rows);
+        ProcessMeasureCheckExample processMeasureCheckExample = new ProcessMeasureCheckExample();
+        ProcessMeasureCheckExample.Criteria criteria = processMeasureCheckExample.createCriteria();
+        criteria.andProcessIdIsNotNull();
+        List<ProcessMeasureCheck> processMeasureCheckList1 = processMeasureCheckMapper.selectByExample(processMeasureCheckExample);
+        PageInfo<ProcessMeasureCheck> pageInfo = new PageInfo<>(processMeasureCheckList1);
+        Vo<ProcessMeasureCheck> processMeasureCheckList = new Vo<>(pageInfo.getTotal(), pageInfo.getList());
+        System.out.println(processMeasureCheckList);
+        return processMeasureCheckList;
     }
 
     /*工序计数质检*/
