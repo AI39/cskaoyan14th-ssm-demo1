@@ -22,4 +22,10 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productMapper.selectByExample(example);
         return products;
     }
+
+    @Override
+    public Product queryProductById(String pid) {
+        Product product = productMapper.selectByPrimaryKey(pid);
+        return product;
+    }
 }

@@ -64,4 +64,47 @@ public class OrderController {
         }
         return responseVo;
     }
+
+    @RequestMapping("edit_judge")
+    @ResponseBody
+    public String editJudge(){return "";}
+
+    @RequestMapping("edit")
+    public String edit(){
+        return "WEB-INF/jsp/order_edit";
+    }
+    @RequestMapping("update_all")
+    @ResponseBody
+    public ResponseVo updateAll(COrder order){
+        ResponseVo responseVo = new ResponseVo();
+        int update = orderService.updateOrder(order);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("delete_judge")
+    @ResponseBody
+    public String deleteJudge(){
+        return "";
+    }
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public ResponseVo deleteBatch(String[] ids){
+        ResponseVo responseVo = new ResponseVo();
+        int delete = orderService.deleteOrderByIds(ids);
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
+    }
 }
