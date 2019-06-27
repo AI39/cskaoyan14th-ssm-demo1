@@ -64,5 +64,36 @@ public class Manufacture {
     }
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    private COrder cOrder;
+    private Technology technology;
 
+    public COrder getcOrder() {
+        return cOrder;
+    }
+
+    public void setcOrder(COrder cOrder) {
+        this.cOrder = cOrder;
+    }
+
+    public Technology getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(Technology technology) {
+        this.technology = technology;
+    }
+
+    @Override
+    public String toString() {
+        return "Manufacture{" +
+                "manufactureSn='" + manufactureSn + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", technologyId='" + technologyId + '\'' +
+                ", launchQuantity=" + launchQuantity +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
+                ", cOrder=" + cOrder +
+                ", technology=" + technology +
+                '}';
+    }
 }
