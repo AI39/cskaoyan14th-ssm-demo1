@@ -34,4 +34,7 @@ public interface MaterialMapper {
 
     List<Material> selectMaterialList(@Param("limit") int limit, @Param("offset") int offset);
 
+    List<Material> selectMaterialLikeListById(@Param("materialid") String id);
+
+    List<Material> selectMaterialLikeListByType(@Param("materialtype") String type);
 }
