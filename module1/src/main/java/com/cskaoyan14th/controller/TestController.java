@@ -28,8 +28,12 @@ public class TestController {
     /*测试逆向工程，即测试操作数据库*/
     @RequestMapping("/test/sql")
     public String testConverter() {
+
+        Custom custom = customMapper.selectByPrimaryKey("001");
+
         /*Custom custom = customMapper.selectByPrimaryKey("001");
 
+ c584bcee0a858c3a0dfd067c00ddd48b8e18ef3c
         System.out.println(custom);
         return "404";*/
         Device device = deviceMapper.selectByPrimaryKey("001");

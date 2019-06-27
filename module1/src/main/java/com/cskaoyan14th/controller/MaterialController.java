@@ -2,8 +2,9 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Material;
 import com.cskaoyan14th.bean.Page;
-import com.cskaoyan14th.bean.ResponseVo;
+import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.service.MaterialService;
+import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

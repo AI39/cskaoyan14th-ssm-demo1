@@ -14,4 +14,12 @@ public class MyUtil {
         sysPermissionList.add(substring + ":delete");
         request.getSession().setAttribute("sysPermissionList", sysPermissionList);
     }
+    public static void sysPermissionList(HttpServletRequest request, String type) {
+
+        List<String> sysPermissionList = new ArrayList<>();
+        sysPermissionList.add(type + ":add");
+        sysPermissionList.add(type + ":edit");
+        sysPermissionList.add(type + ":delete");
+        request.getSession().setAttribute("sysPermissionList", sysPermissionList);
+    }
 }

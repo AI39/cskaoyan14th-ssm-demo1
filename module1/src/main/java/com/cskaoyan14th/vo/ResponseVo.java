@@ -1,18 +1,17 @@
-package com.cskaoyan14th.bean;
+package com.cskaoyan14th.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseVo<T> {
-    private Integer status;
+    private int status;
     private String msg;
     private T data;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
