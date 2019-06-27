@@ -3,6 +3,7 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.DeviceService;
 import com.cskaoyan14th.util.MyUtil;
+import com.cskaoyan14th.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +67,7 @@ public class DeviceController {
         if (i == 1) {
             responseVo.setStatus(200);
             responseVo.setMsg("OK");
+            return responseVo;
         }
         return responseVo;
     }

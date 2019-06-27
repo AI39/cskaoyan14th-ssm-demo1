@@ -1,4 +1,4 @@
-package com.cskaoyan14th.bean;
+package com.cskaoyan14th.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
