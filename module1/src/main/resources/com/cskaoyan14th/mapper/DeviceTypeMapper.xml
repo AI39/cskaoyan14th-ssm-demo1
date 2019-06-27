@@ -260,27 +260,5 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-  <!--设备种类分页总记录数-->
-  <select id="selectPageDeviceTypeCount" resultType="_int">
-    SELECT COUNT(1) from (select 1 from device_type limit #{limit} offset #{offset}) t
-  </select>
-
-  <!--设备种类分页list-->
-  <resultMap id="deviceType" type="com.cskaoyan14th.bean.DeviceType">
-    <result property="deviceTypeId" column="device_type_id"/>
-    <result property="deviceTypeName" column="device_type_name"/>
-    <result property="deviceTypeModel" column="device_type_model"/>
-    <result property="deviceTypeSpec" column="device_type_spec"/>
-    <result property="deviceTypeSupplier" column="device_type_supplier"/>
-    <result property="deviceTypeProducer" column="device_type_producer"/>
-    <result property="deviceTypeQuantity" column="device_type_quantity"/>
-    <result property="deviceTypeWarranty" column="device_type_warranty"/>
-
-  </resultMap>
-  <select id="selectPageDeviceTypeList" resultMap="deviceType">
-    select
-    <include refid="Base_Column_List"/>
-    from device_type limit #{limit} offset #{offset}
-  </select>
 
 </mapper>
