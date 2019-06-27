@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,8 +33,12 @@ public class QualifyController {
 
     /*不合格品管理*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
-    public String unqualifyFind(HttpServletRequest request){
-        MyUtil.sysPermissionList(request);
+    public String unqualifyFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("unqualify:add");
+        objects.add("unqualify:edit");
+        objects.add("unqualify:delete");
+        session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/unqualify_list";                                                                        /*这里面需要调用query写json返回*/
     }
 
@@ -55,8 +61,12 @@ public class QualifyController {
 
     /*成品计量质检*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
-    public String fMeasureCheckFind(HttpServletRequest request){
-        MyUtil.sysPermissionList(request);
+    public String fMeasureCheckFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("measure:add");
+        objects.add("measure:edit");
+        objects.add("measure:delete");
+        session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/measurement_list";
     }
 
@@ -64,8 +74,12 @@ public class QualifyController {
 
     /*成品计数质检*/
     @RequestMapping("f_count_check/find")                                                                           /*显示增删改按钮*/
-    public String fCountCheckFind(HttpServletRequest request){
-        MyUtil.sysPermissionList(request);
+    public String fCountCheckFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("f_count_check:add");
+        objects.add("f_count_check:edit");
+        objects.add("f_count_check:delete");
+        session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/f_count_check_list";
     }
 
@@ -90,15 +104,23 @@ public class QualifyController {
 
     /*工序计量质检*/
     @RequestMapping("p_measure_check/find")                                                                         /*显示增删改按钮*/
-    public String pMeasureCheckFind(HttpServletRequest request){
-        MyUtil.sysPermissionList(request);
+    public String pMeasureCheckFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("p_measure_check:add");
+        objects.add("p_measure_check:edit");
+        objects.add("p_measure_check:delete");
+        session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/p_measure_check_list";
     }
 
     /*工序计数质检*/
     @RequestMapping("p_count_check/find")                                                                           /*显示增删改按钮*/
-    public String pCountCheckFind(HttpServletRequest request){
-        MyUtil.sysPermissionList(request);
+    public String pCountCheckFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("p_count_check:add");
+        objects.add("p_count_check:edit");
+        objects.add("p_count_check:delete");
+        session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/p_count_check_list";
     }
 

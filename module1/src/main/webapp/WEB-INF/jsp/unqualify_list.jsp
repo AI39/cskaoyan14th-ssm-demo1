@@ -42,21 +42,21 @@
 <div  id="toolbar_unqualify" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='find:add' }" >
+		<c:if test="${per=='unqualify:add' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="unqualify_add()">
 					新增
 				</a>
 		    </div>  
 		</c:if>
-		<c:if test="${per=='find:edit' }" >
+		<c:if test="${per=='unqualify:edit' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="unqualify_edit()">
 					编辑
 				</a>
 		    </div>  
 		</c:if>
-		<c:if test="${per=='find:delete' }" >
+		<c:if test="${per=='unqualify:delete' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="unqualify_delete()">
 					删除
