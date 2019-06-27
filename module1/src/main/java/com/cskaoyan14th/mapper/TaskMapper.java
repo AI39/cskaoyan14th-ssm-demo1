@@ -32,4 +32,6 @@ public interface TaskMapper {
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
     List<Task> multiSelectAll();
+
+    int deleteByIds(@Param("ids") String[] ids);
 }

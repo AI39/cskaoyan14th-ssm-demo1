@@ -32,4 +32,7 @@ public interface WorkMapper {
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
     List<Work> multiSelectAll();
+
+    int deleteByIds(@Param("ids") String[] ids);
+
 }

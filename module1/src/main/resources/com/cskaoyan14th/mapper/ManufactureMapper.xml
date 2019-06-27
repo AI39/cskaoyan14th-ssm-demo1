@@ -248,4 +248,13 @@
       left join c_order co on m.order_id = co.order_id
       left join technology t on m.technology_id = t.technology_id
   </select>
+
+  <delete id="deleteByIds" >
+    delete
+    from manufacture
+    where manufacture_sn in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

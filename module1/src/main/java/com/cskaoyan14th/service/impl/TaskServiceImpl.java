@@ -24,4 +24,19 @@ public class TaskServiceImpl implements TaskService {
         Vo<Task> taskList = new Vo<Task>(pageInfo.getTotal(), pageInfo.getList());
         return taskList;
     }
+
+    @Override
+    public int insert(Task task) {
+        return taskMapper.insert(task);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Task task) {
+        return taskMapper.updateByPrimaryKeySelective(task);
+    }
+
+    @Override
+    public int deleteByIds(String[] ids) {
+        return taskMapper.deleteByIds(ids);
+    }
 }

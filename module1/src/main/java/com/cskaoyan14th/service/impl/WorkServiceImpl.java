@@ -24,4 +24,19 @@ public class WorkServiceImpl implements WorkService {
         Vo<Work> workList = new Vo<Work>(pageInfo.getTotal(), pageInfo.getList());
         return workList;
     }
+
+    @Override
+    public int insert(Work work) {
+        return workMapper.insert(work);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Work work) {
+        return workMapper.updateByPrimaryKeySelective(work);
+    }
+
+    @Override
+    public int deleteByIds(String[] ids) {
+        return workMapper.deleteByIds(ids);
+    }
 }

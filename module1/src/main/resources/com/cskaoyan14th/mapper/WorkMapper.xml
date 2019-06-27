@@ -250,4 +250,12 @@
       left join device d on w.device_id = d.device_id
   </select>
 
+  <delete id="deleteByIds" >
+      delete
+      from work
+      where work_id in
+      <foreach collection="ids" item="id" separator="," open="(" close=")">
+          #{id}
+      </foreach>
+  </delete>
 </mapper>

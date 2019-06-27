@@ -221,4 +221,13 @@
       select task_id, manufacture_sn, work_id, task_quantity, working_hours
       from task
   </select>
+
+  <delete id="deleteByIds" >
+    delete
+    from task
+    where task_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

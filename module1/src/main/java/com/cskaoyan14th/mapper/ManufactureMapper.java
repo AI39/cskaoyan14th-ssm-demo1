@@ -33,4 +33,6 @@ public interface ManufactureMapper {
 
     List<Manufacture> multiSelectAll();
 
+    int deleteByIds(@Param("ids") String[] ids);
+
 }
