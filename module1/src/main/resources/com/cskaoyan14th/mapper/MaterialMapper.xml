@@ -211,4 +211,22 @@
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
 
+  <!--设置物料分页总记录数-->
+  <select id="selectPageMaterialCount" resultType="_int">
+    select count(1) from (select 1 from material limit #{limit} offset #{offset}) t
+  </select>
+
+  <!--物料分页list-->
+  <resultMap id="materialMap" type="com.cskaoyan14th.bean.Material">
+    <result property="materialId" column="material_id"/>
+    <result property="materialType" column="meterial_type"/>
+    <result property="status" column="status"/>
+    <result property="remaining" column="remaining"/>
+    <result property="note" column="note"/>
+  </resultMap>
+  <select id="selectMaterialList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from material limit #{limit} offset #{offset}
+  </select>
 </mapper>

@@ -30,5 +30,8 @@ public interface MaterialMapper {
     int updateByPrimaryKey(Material record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    int selectPageMaterialCount(@Param("limit") int limit,@Param("offset")int offset);
+
+    List<Material> selectMaterialList(@Param("limit") int limit, @Param("offset") int offset);
 
 }

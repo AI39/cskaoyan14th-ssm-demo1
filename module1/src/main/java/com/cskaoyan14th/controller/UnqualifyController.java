@@ -1,7 +1,7 @@
 package com.cskaoyan14th.controller;
 
 
-import com.cskaoyan14th.utils.MyUtil;
+import com.cskaoyan14th.util.MyUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
