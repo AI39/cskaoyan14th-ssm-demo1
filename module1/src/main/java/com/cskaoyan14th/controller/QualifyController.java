@@ -3,6 +3,7 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.util.MyUtil;
+import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,8 +27,8 @@ public class QualifyController {
     UnqualifyApplyMapper unqualifyApplyMapper;
     @Autowired
     FinalCountCheckMapper finalCountCheckMapper;
-    /*@Autowired
-    FinalMeasureCheckMapper finalMeasureCheckMapper;*/
+    @Autowired
+    FinalMeasuretCheckMapper finalMeasuretCheckMapper;
     @Autowired
     ProcessCountCheckMapper processCountCheckMapper;
     @Autowired
@@ -61,6 +62,18 @@ public class QualifyController {
         return unqualifyApplyList;
     }
 
+    @RequestMapping("unqualify/add_judge")                                                                         //unqualify新增检查
+    @ResponseBody
+    public ResponseVo<DeviceType> deviceTypeAdd_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("unqualify/add")                                                                                //deviceType新增页面显示
+    public String deviceTypeAdd() {
+        return "/WEB-INF/jsp/unqualify_add";                                                                       /*跳转到新增界面*/
+    }
+
     /*成品计量质检*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
     public String fMeasureCheckFind(HttpSession session){
@@ -70,6 +83,19 @@ public class QualifyController {
         objects.add("measure:delete");
         session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/measurement_list";
+    }
+    @RequestMapping("measure/list")
+    @ResponseBody
+    public Vo<FinalMeasuretCheck> finalMeasureCheckList(int page, int rows){
+        PageHelper.startPage(page,rows);
+        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
+        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
+        criteria.andOrderIdIsNotNull();
+        List<FinalMeasuretCheck> finalMeasureCheckList1 = finalMeasuretCheckMapper.selectByExample(finalMeasuretCheckExample);
+        PageInfo<FinalMeasuretCheck> pageInfo = new PageInfo<>(finalMeasureCheckList1);
+        Vo<FinalMeasuretCheck> finalMeasureCheckList = new Vo<>(pageInfo.getTotal(), pageInfo.getList());
+        System.out.println(finalMeasureCheckList);
+        return finalMeasureCheckList;
     }
 
 
