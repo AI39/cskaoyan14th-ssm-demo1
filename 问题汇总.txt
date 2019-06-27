@@ -1,0 +1,8 @@
+﻿问题1：pull仓库后需要做的一些配置
+	直接导入module1，然后配置一下resource目录
+	
+问题2：控制台输出中文乱码
+	tomcat配置一下vm：新增加-Dfile.encoding=utf-8
+
+问题3：home.jsp无法访问
+	导入shiro依赖
