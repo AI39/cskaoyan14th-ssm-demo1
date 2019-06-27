@@ -12,12 +12,11 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("material")
 public class MaterialController {
     @Autowired
     MaterialService materialService;
 
-    @RequestMapping("find")
+    @RequestMapping("/material/find")
     public String materialInfoFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
         objects.add("material:add");
@@ -28,7 +27,7 @@ public class MaterialController {
     }
 
 
-    @RequestMapping("list")
+    @RequestMapping("/material/list")
     @ResponseBody
     public Page<Material> materialInfoList(int page, int rows){
         Page<Material> materialPage = materialService.getMaterialPage(page, rows);
