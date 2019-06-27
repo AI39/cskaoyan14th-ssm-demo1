@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Material;
+import com.cskaoyan14th.bean.Page;
 import com.cskaoyan14th.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +30,8 @@ public class MaterialController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Page<Material> materialInfoList(int page,int rows){
-        Page<Material> materialPage = materialService.getMaterialPage(page,rows);
+    public Page<Material> materialInfoList(int page, int rows){
+        Page<Material> materialPage = materialService.getMaterialPage(page, rows);
         return materialPage;
     }
 

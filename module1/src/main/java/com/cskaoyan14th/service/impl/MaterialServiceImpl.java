@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Material;
+import com.cskaoyan14th.bean.Page;
 import com.cskaoyan14th.mapper.MaterialMapper;
 import com.cskaoyan14th.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.DeviceType;
+import com.cskaoyan14th.bean.Page;
 import com.github.pagehelper.PageInfo;
 
 public interface DeviceService {

@@ -2,6 +2,7 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.DeviceType;
 import com.cskaoyan14th.bean.DeviceTypeExample;
+import com.cskaoyan14th.bean.Page;
 import com.cskaoyan14th.mapper.DeviceTypeMapper;
 import com.cskaoyan14th.service.DeviceService;
 import com.github.pagehelper.PageHelper;
