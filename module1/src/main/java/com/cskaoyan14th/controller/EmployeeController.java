@@ -2,8 +2,12 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.mapper.EmployeeMapper;
+import com.cskaoyan14th.service.EmployeeService;
+import com.cskaoyan14th.service.UnqualifyService;
+import com.cskaoyan14th.service.impl.UnqualifyServiceImpl;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.aspectj.lang.annotation.Before;
@@ -25,9 +29,7 @@ import java.util.List;
 @RequestMapping("employee")
 public class EmployeeController {
     @Autowired
-    SqlSessionFactory sqlSessionFactory;
-   @Autowired
-   EmployeeMapper employeeMapper;
+    EmployeeService employeeService;
 
     @RequestMapping("find")
     public String find (HttpSession session){
@@ -36,24 +38,13 @@ public class EmployeeController {
         objects.add("employee:edit");
         objects.add("employee:delete");
         session.setAttribute("sysPermissionList",objects);
-
-
-
         return "/WEB-INF/jsp/employee_list";
     }
 
     @RequestMapping("list")
     @ResponseBody
     public Vo<Employee>  list(int page ,int rows){
-
-
-        List<Employee> employees = employeeMapper.queryMember();
-        System.out.println(employees);
-        long i = employeeMapper.queryCount();
-        PageHelper.startPage(page,rows);
-        Vo<Employee> employeeVo = new Vo<>(i,employees);
-
+        Vo<Employee> employeeVo = employeeService.queryEmployment(page, rows);
         return employeeVo;
     }
-
 }
