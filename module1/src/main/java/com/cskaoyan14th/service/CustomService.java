@@ -17,4 +17,8 @@ public interface CustomService {
     int updateCustom(Custom custom);
 
     int deleteCustomsByIds(String[] ids);
+
+    Vo<Custom> queryCustomsByCustomId(String searchValue, int page, int rows);
+
+    Vo<Custom> queryCustomsByCustomName(String searchValue, int page, int rows);
 }

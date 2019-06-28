@@ -34,4 +34,10 @@ public interface TaskMapper {
     List<Task> multiSelectAll();
 
     int deleteByIds(@Param("ids") String[] ids);
+
+    List<Task> multiSelectByLikeTaskId(@Param("id") String id);
+
+    List<Task> multiSelectByLikeTaskWorkId(@Param("id") String id);
+
+    List<Task> multiSelectByLikeTaskManufactureSn(@Param("id") String id);
 }

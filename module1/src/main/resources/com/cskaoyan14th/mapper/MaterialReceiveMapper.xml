@@ -244,13 +244,19 @@
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
 
   <resultMap id="receiveMap" type="com.cskaoyan14th.bean.MaterialReceive">
-    <id column="receive_id" jdbcType="VARCHAR" property="receiveId"/>
-    <result column="material_id" jdbcType="VARCHAR" property="materialId"/>
-    <result column="amount" jdbcType="VARCHAR" property="amount"/>
-    <result column="receive_date" jdbcType="TIMESTAMP" property="receiveDate"/>
-    <result column="sender" jdbcType="VARCHAR" property="sender"/>
-    <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
-    <result column="note" jdbcType="VARCHAR" property="note"/>
+    <result column="receive_id" property="receiveId"/>
+    <result column="amount" property="amount"/>
+    <result column="receive_date" property="receiveDate"/>
+    <result column="sender" property="sender"/>
+    <result column="receiver" property="receiver"/>
+    <result column="note" property="note"/>
+    <association property="material" javaType="com.cskaoyan14th.bean.Material">
+      <result column="material_id" property="materialId"/>
+      <result column="matetial_type" property="materialType"/>
+      <result column="status" property="status"/>
+      <result column="remaining" property="remaining"/>
+      <result column="note" property="note"/>
+    </association>
   </resultMap>
   <select id="selectMaterialReceive" resultMap="receiveMap">
     select
@@ -260,11 +266,55 @@
     t1.sender,
     t1.receiver,
     t1.note,
-    t2.material_id
+    t2.material_id,
+    t2.material_type,
+    t2.status,
+    t2.remaining,
+    t2.note
     from material_receive t1
     left join
     material t2
     on t1.material_id=t2.material_id
+  </select>
+
+  <select id="selectMaterialReceiveByReceiveId" resultMap="receiveMap">
+    select
+    t1.receive_id,
+    t1.amount,
+    t1.receive_date,
+    t1.sender,
+    t1.receiver,
+    t1.note,
+    t2.material_id,
+    t2.material_type,
+    t2.status,
+    t2.remaining,
+    t2.note
+    from material_receive t1
+    left join
+    material t2
+    on t1.material_id=t2.material_id
+    where t1.receive_id like #{receiveid}
+  </select>
+
+  <select id="selectMaterialReceiveByMaterialId" resultMap="receiveMap">
+    select
+    t1.receive_id,
+    t1.amount,
+    t1.receive_date,
+    t1.sender,
+    t1.receiver,
+    t1.note,
+    t2.material_id,
+    t2.material_type,
+    t2.status,
+    t2.remaining,
+    t2.note
+    from material_receive t1
+    left join
+    material t2
+    on t1.material_id=t2.material_id
+    where t2.material_id like #{materialid}
   </select>
 
 

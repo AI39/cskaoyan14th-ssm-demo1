@@ -70,5 +70,23 @@ public class CustomServiceImpl implements CustomService {
         return customMapper.deleteByExample(example);
     }
 
+    @Override
+    public Vo<Custom> queryCustomsByCustomId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<Custom> list = customMapper.likeSelectCustomsByCustomId(searchValue);
+        PageInfo<Custom> pageInfo = new PageInfo<>(list);
+        Vo<Custom> customList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return customList;
+    }
+
+    @Override
+    public Vo<Custom> queryCustomsByCustomName(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<Custom> list = customMapper.likeSelectCustomsByCustomName(searchValue);
+        PageInfo<Custom> pageInfo = new PageInfo<>(list);
+        Vo<Custom> customList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return customList;
+    }
+
 
 }

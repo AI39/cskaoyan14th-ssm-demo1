@@ -322,5 +322,37 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-
+  <sql id="Process_Count_Check_Base_Column_List">
+    p.p_count_check_id, p.process_id, p.check_item, p.sample, p.check_number, p.unqualify, p.qualify, p.cdate, p.measure_data,
+    p.emp_id, p.result, p.note
+  </sql>
+  <sql id="Employee_Base_Column_List">
+    e.emp_id , e.emp_name, e.sex as emp_sex, e.id_code as emp_id_code, e.birthday as emp_birthday, e.join_date as emp_join_date,
+    e.status as emp_status, e.education as emp_education, e.degree as emp_degree, e.major as emp_major, e.graduate_school as emp_graduate_school,
+    e.education_form as emp_education_from, e.department_id as emp_department_id
+  </sql>
+  <resultMap id="PCMap" type="com.cskaoyan14th.bean.ProcessCountCheckVo">
+    <id column="p_count_check_id" property="pCountCheckId"/>
+    <result column="process_id" property="processId"/>
+    <result column="check_item" property="checkItem"/>
+    <result column="sample" property="sample"/>
+    <result column="check_number" property="checkNumber"/>
+    <result column="unqualify" property="unqualify"/>
+    <result column="qualify" property="qualify"/>
+    <result column="cdate" property="cdate"/>
+    <result column="measure_data" property="measureData"/>
+    <result column="emp_id" property="empId"/>
+    <result column="emp_name" property="empName"/>
+    <result column="result" property="result"/>
+    <result column="note" property="note"/>
+  </resultMap>
+  <select id="queryProcessCountCheckLeftEmployee" resultMap="PCMap">
+    select p.p_count_check_id, p.process_id, p.check_item, p.sample, p.check_number, p.unqualify, p.qualify, p.cdate, p.measure_data,
+    e.emp_name, p.result, p.note
+    from
+    process_count_check p,
+    employee e
+    where
+    p.emp_id = e.emp_id
+  </select>
 </mapper>
