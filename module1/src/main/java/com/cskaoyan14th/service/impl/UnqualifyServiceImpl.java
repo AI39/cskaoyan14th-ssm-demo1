@@ -3,6 +3,7 @@ package com.cskaoyan14th.service.impl;
 import com.cskaoyan14th.bean.COrder;
 
 import com.cskaoyan14th.bean.UnqualifyApply;
+import com.cskaoyan14th.bean.UnqualifyApplyExample;
 import com.cskaoyan14th.mapper.UnqualifyApplyMapper;
 
 import com.cskaoyan14th.service.UnqualifyService;
@@ -42,6 +43,23 @@ public class UnqualifyServiceImpl implements UnqualifyService {
     public int unqualifyInsert(UnqualifyApply unqualifyApply) {
         int insert = unqualifyApplyMapper.insert(unqualifyApply);
         return insert;
+    }
+
+    @Override
+    public int unqualifyUpdate(UnqualifyApply unqualifyApply) {
+        int update = unqualifyApplyMapper.updateByPrimaryKey(unqualifyApply);
+        System.out.println("插入后返回："+update);
+        return update;
+    }
+
+    @Override
+    public int deleteUnqualifyByIds(List<String> ids) {
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdIn(ids);
+        int delete = unqualifyApplyMapper.deleteByExample(unqualifyApplyExample);
+        System.out.println(delete);
+        return delete;
     }
 
 }

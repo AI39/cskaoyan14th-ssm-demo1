@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class QualifyController {
     public String unqualifyAdd() {
         return "/WEB-INF/jsp/unqualify_add";                                                                       /*跳转到新增界面*/
     }
-    @RequestMapping("unqualify/insert")
+    @RequestMapping("unqualify/insert")                                                                             //新增操作
     @ResponseBody
     public ResponseVo<UnqualifyApply> unqualifyInsert( UnqualifyApply unqualifyApply){
         ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
@@ -87,6 +88,47 @@ public class QualifyController {
     @RequestMapping("unqualify/edit")                                                                                //新增编辑显示
     public String unqualifyEdit() {
         return "/WEB-INF/jsp/unqualify_edit";                                                                       /*跳转到编辑界面*/
+    }
+
+    @RequestMapping("unqualify/update_all")                                                                         /*编辑的逻辑实现*/
+    @ResponseBody
+    public ResponseVo unqualifyUpdateAll(UnqualifyApply unqualifyApply){
+        ResponseVo responseVo = new ResponseVo();
+        int update = unqualifyService.unqualifyUpdate(unqualifyApply);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
+
+    /*单独根据超链接编辑还没有实现*/
+
+
+    @RequestMapping("unqualify/delete_judge")
+    @ResponseBody
+    public ResponseVo<UnqualifyApply> unqualifyDeleteJudge(){                                                       /*删除判断*/
+        ResponseVo data = new ResponseVo();
+        return data;
+    }
+
+    @RequestMapping("unqualify/delete_batch")
+    @ResponseBody
+    public ResponseVo<UnqualifyApply> unqualifyDeleteBatch(String[] ids){
+        ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             /*这里为什么要把他转换成list*/
+        int delete = unqualifyService.deleteUnqualifyByIds(list);                                                   /**/
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
     }
 
 
