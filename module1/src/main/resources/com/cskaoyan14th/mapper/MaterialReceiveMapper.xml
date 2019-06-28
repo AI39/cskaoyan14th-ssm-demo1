@@ -243,4 +243,29 @@
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
 
+  <resultMap id="receiveMap" type="com.cskaoyan14th.bean.MaterialReceive">
+    <id column="receive_id" jdbcType="VARCHAR" property="receiveId"/>
+    <result column="material_id" jdbcType="VARCHAR" property="materialId"/>
+    <result column="amount" jdbcType="VARCHAR" property="amount"/>
+    <result column="receive_date" jdbcType="TIMESTAMP" property="receiveDate"/>
+    <result column="sender" jdbcType="VARCHAR" property="sender"/>
+    <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
+    <result column="note" jdbcType="VARCHAR" property="note"/>
+  </resultMap>
+  <select id="selectMaterialReceive" resultMap="receiveMap">
+    select
+    t1.receive_id,
+    t1.amount,
+    t1.receive_date,
+    t1.sender,
+    t1.receiver,
+    t1.note,
+    t2.material_id
+    from material_receive t1
+    left join
+    material t2
+    on t1.material_id=t2.material_id
+  </select>
+
+
 </mapper>

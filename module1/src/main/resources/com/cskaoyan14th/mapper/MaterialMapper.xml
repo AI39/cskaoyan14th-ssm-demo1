@@ -229,4 +229,18 @@
     <include refid="Base_Column_List"/>
     from material limit #{limit} offset #{offset}
   </select>
+
+    <!--模糊查询By Id-->
+    <select id="selectMaterialLikeListById" resultType="com.cskaoyan14th.bean.Material">
+        select <include refid="Base_Column_List"/>
+        from material
+        where material_id like %#{materialid}%
+    </select>
+
+    <!--模糊查询By Id-->
+    <select id="selectMaterialLikeListByType" resultType="com.cskaoyan14th.bean.Material">
+        select <include refid="Base_Column_List"/>
+        from material
+        where material_type like %#{materialtype}%
+    </select>
 </mapper>

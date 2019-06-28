@@ -11,7 +11,10 @@ import java.util.List;
 
 public interface OrderService {
 
-    Vo<COrder> queryOrdersLeftCustomAndProduct(int page, int rows);
+        Vo<COrder> queryOrdersLeftCustomAndProduct(int page, int rows);
     List<COrder> queryOrderLeftCustomAndProductById(int orderId);
     int insertOrder(COrder order);
+    int updateOrder(COrder order);
+
+    int deleteOrderByIds(String[] ids);
 }

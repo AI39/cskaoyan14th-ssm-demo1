@@ -7,4 +7,5 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> queryProductList();
+    Product queryProductById(String pid);
 }

@@ -1,8 +1,10 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.COrder;
+
 import com.cskaoyan14th.bean.UnqualifyApply;
 import com.cskaoyan14th.mapper.UnqualifyApplyMapper;
+
 import com.cskaoyan14th.service.UnqualifyService;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Service
 public class UnqualifyServiceImpl implements UnqualifyService {
+
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
     @Override
@@ -33,4 +36,5 @@ public class UnqualifyServiceImpl implements UnqualifyService {
 
         return unqualifyApplyList;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.COrder;
+import com.cskaoyan14th.bean.COrderExample;
 import com.cskaoyan14th.mapper.COrderMapper;
 import com.cskaoyan14th.service.OrderService;
 import com.cskaoyan14th.vo.Vo;
@@ -9,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,5 +49,28 @@ public class OrderServiceImpl implements OrderService {
         int insert = orderMapper.insert(order);
         return insert;
     }
+
+
+    @Override
+    public int updateOrder(COrder order) {
+        int update = orderMapper.updateByPrimaryKey(order);
+        System.out.println("插入后返回："+update);
+        return update;
+    }
+
+    @Override
+    public int deleteOrderByIds(String[] ids) {
+        COrderExample example = new COrderExample();
+        COrderExample.Criteria criteria = example.createCriteria();
+        List<String> idList = new ArrayList<>();
+        for (String id : ids) {
+            idList.add(id);
+        }
+        criteria.andOrderIdIn(idList);
+        int delete = orderMapper.deleteByExample(example);
+        System.out.println(delete);
+        return delete;
+    }
+
 
 }

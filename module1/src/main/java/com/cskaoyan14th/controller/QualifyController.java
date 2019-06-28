@@ -98,7 +98,7 @@ public class QualifyController {
     @RequestMapping("measure/list")
     @ResponseBody
     public Vo<FinalMeasuretCheckVo> finalMeasureCheckList(int page, int rows){
-        new
+
 
     }
 
