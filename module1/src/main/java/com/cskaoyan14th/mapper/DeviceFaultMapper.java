@@ -35,4 +35,5 @@ public interface DeviceFaultMapper {
 
     List<DeviceFaultShow> selectDeviceFaultShow();
 
+    List<DeviceFaultShow> selectDeviceFaultShowBySingleConditionLike(@Param("type") String type, @Param("searchValue") String searchValue);
 }
