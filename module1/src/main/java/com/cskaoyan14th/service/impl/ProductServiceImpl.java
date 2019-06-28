@@ -69,4 +69,37 @@ public class ProductServiceImpl implements ProductService {
         int delete = productMapper.deleteByExample(example);
         return delete;
     }
+
+    @Override
+    public Vo<Product> queryProductsByProductId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        List<Product> list = productMapper.likeSelectProductsByProductId(searchValue);
+
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        Vo<Product> productList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return productList;
+    }
+
+    @Override
+    public Vo<Product> queryProductsByProductName(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        List<Product> list = productMapper.likeSelectProductsByProductName(searchValue);
+
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        Vo<Product> productList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return productList;
+    }
+
+    @Override
+    public Vo<Product> queryProductsByProductType(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        List<Product> list = productMapper.likeSelectProductsByProductType(searchValue);
+
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        Vo<Product> productList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return productList;
+    }
 }
