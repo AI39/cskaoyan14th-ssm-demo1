@@ -61,9 +61,9 @@ public class EmployeeController {
     @RequestMapping("insert")
     @ResponseBody
     public ResponseVo insert( Employee employee){
-        int i = employeeService.insertEmployee(employee);
-        ResponseVo box = new ResponseVoBox().Box(i);
-        return box;
+             int i = employeeService.insertEmployee(employee);
+             ResponseVo box = new ResponseVoBox().Box(i);
+             return box;
     }
     /**
      * 以下为人员编辑模块
@@ -97,7 +97,7 @@ public class EmployeeController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public ResponseVo delete_batch(int ids){
+    public ResponseVo delete_batch(String[] ids){
         int i = employeeService.deleteEmployee(ids);
         ResponseVo box = new ResponseVoBox().Box(i);
         return box;
@@ -114,4 +114,47 @@ public class EmployeeController {
         Employee employee = employeeService.queryEmploymentByEmpId(empId);
         return employee;
     }
+
+    /**
+     * 根据部门名称查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("search_employee_by_departmentName")
+    @ResponseBody
+    public Vo<Employee> searchByDepartmentName(String searchValue,int page,int rows){
+        Vo<Employee> employeeResponseVo = employeeService.queryByDepartmentName(searchValue,page,rows);
+        return employeeResponseVo;
+    }
+
+    /**
+     * 根据empId查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("search_employee_by_employeeId")
+    @ResponseBody
+    public Vo<Employee> searchByEmpId(String searchValue,int page,int rows){
+        Vo<Employee> employeeResponseVo = employeeService.searchByEmpId(searchValue,page,rows);
+        return employeeResponseVo;
+    }
+
+    /**
+     * 根据而empName查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("search_employee_by_employeeName")
+    @ResponseBody
+    public Vo<Employee> searchByEmpName(String searchValue,int page,int rows){
+        Vo<Employee> employeeResponseVo = employeeService.searchByEmpName(searchValue,page,rows);
+        return employeeResponseVo;
+    }
+
 }
