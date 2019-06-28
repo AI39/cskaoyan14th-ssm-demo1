@@ -36,7 +36,6 @@ public class QualifyController {
     UnqualifyService unqualifyService;
     @Autowired
     FinalMeasureCheckService finalMeasureCheckService;
-    @Autowired
 
     /*不合格品管理*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
@@ -81,25 +80,13 @@ public class QualifyController {
         session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/measurement_list";
     }
-    @RequestMapping("measure/list")
-    @ResponseBody
-    public Vo<FinalMeasuretCheck> finalMeasureCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
-        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
-        criteria.andOrderIdIsNotNull();
-        List<FinalMeasuretCheck> finalMeasureCheckList1 = finalMeasuretCheckMapper.selectByExample(finalMeasuretCheckExample);
-        PageInfo<FinalMeasuretCheck> pageInfo = new PageInfo<>(finalMeasureCheckList1);
-        Vo<FinalMeasuretCheck> finalMeasureCheckList = new Vo<>(pageInfo.getTotal(), pageInfo.getList());
-        System.out.println(finalMeasureCheckList);
-        return finalMeasureCheckList;
-    }
+
 
     @RequestMapping("measure/list")
     @ResponseBody
     public Vo<FinalMeasuretCheckVo> finalMeasureCheckList(int page, int rows){
-
-
+        Vo<FinalMeasuretCheckVo> finalMeasuretCheckList = finalMeasureCheckService.queryFinalMeasureLeftEmployee(page, rows);
+        return finalMeasuretCheckList;
     }
 
 

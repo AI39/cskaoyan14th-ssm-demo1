@@ -1,6 +1,9 @@
 package com.cskaoyan14th.service;
 
-import org.springframework.stereotype.Repository;
+import com.cskaoyan14th.bean.FinalMeasuretCheckVo;
+import com.cskaoyan14th.bean.UnqualifyApply;
+import com.cskaoyan14th.vo.Vo;
+
 
 /**
  * @author Yuechao Yang
@@ -8,4 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 
 public interface FinalMeasureCheckService {
+    Vo<FinalMeasuretCheckVo> queryFinalMeasureLeftEmployee(int page, int rows);
 }
