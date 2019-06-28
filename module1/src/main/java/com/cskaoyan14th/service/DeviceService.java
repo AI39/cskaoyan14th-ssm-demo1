@@ -61,4 +61,40 @@ public interface DeviceService {
     Vo<DeviceFaultShow> getDeviceFaultShowVo(int page, int rows);
 
     List<DeviceFaultShow> getDeviceFaultShow();
+
+    Boolean deviceFaultIsExists(String deviceFaultId);
+
+    int insertDeviceFault(DeviceFault deviceFault);
+
+    int updateDeviceFault(DeviceFault deviceFault);
+
+    int updateDeviceNoteByDeviceId(Device device);
+
+    int updateDeviceCheckNoteByDeviceCheckId(DeviceCheck deviceCheck);
+
+    int updateDeviceFaultNoteByDeviceFaultId(DeviceFault deviceFault);
+
+    int deleteDeviceFaultByIds(ArrayList<String> list);
+
+    Vo<DeviceFaultShow> searchDeviceFaultShowByDeviceFaultId(String searchValue, int page, int rows);
+
+    Vo<DeviceFaultShow> searchDeviceFaultShowByDeviceName(String searchValue, int page, int rows);
+
+    Vo<DeviceMaintainShow> getDeviceMaintainShowVo(int page, int rows);
+
+    DeviceFault getDeviceFaultById(String deviceFaultId);
+
+    Boolean deviceMaintainIsExists(String deviceMaintainId);
+
+    int insertDeviceMaintain(DeviceMaintain deviceMaintain);
+
+    int updateDeviceMaintain(DeviceMaintain deviceMaintain);
+
+    int updateDeviceMaintainNoteByDeviceMaintainId(DeviceMaintain deviceMaintain);
+
+    int deleteDeviceMaintainByIds(ArrayList<String> list);
+
+    Vo<DeviceMaintainShow> searchDeviceMaintainShowByDeviceMaintainId(String searchValue, int page, int rows);
+
+    Vo<DeviceMaintainShow> searchDeviceMaintainShowByDeviceFaultId(String searchValue, int page, int rows);
 }

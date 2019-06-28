@@ -20,7 +20,8 @@ public class WorkController {
     @Autowired
     WorkServiceImpl workService;
 
-    @RequestMapping("/find")
+    /*查start*/
+    @RequestMapping("find")
     public ModelAndView find(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         List<String> sysPermissionList = new ToolbarButtons("work").getSysPermissionList();
@@ -29,25 +30,27 @@ public class WorkController {
         return modelAndView;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("list")
     @ResponseBody
     public Vo<Work> list(int page, int rows) {
         //System.out.println(workService.getWorkList(page, rows));
         return workService.getWorkList(page, rows);
     }
+    /*查end*/
 
-    @RequestMapping("/add_judge")
+    /*增start*/
+    @RequestMapping("add_judge")
     @ResponseBody
     public String add_judge() {
         return "";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add() {
         return "/WEB-INF/jsp/work_add";
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("insert")
     @ResponseBody
     public ResponseVo insert(Work work){
         ResponseVo responseVo = new ResponseVo();
@@ -61,19 +64,21 @@ public class WorkController {
         }
         return responseVo;
     }
+    /*增end*/
 
-    @RequestMapping("/edit_judge")
+    /*改start*/
+    @RequestMapping("edit_judge")
     @ResponseBody
     public String edit_judge() {
         return "";
     }
 
-    @RequestMapping("/edit")
+    @RequestMapping("edit")
     public String edit() {
         return "/WEB-INF/jsp/work_edit";
     }
 
-    @RequestMapping("/update_all")
+    @RequestMapping("update_all")
     @ResponseBody
     public ResponseVo update_all(Work work){
         ResponseVo responseVo = new ResponseVo();
@@ -87,14 +92,16 @@ public class WorkController {
         }
         return responseVo;
     }
+    /*改end*/
 
-    @RequestMapping("/delete_judge")
+    /*删start*/
+    @RequestMapping("delete_judge")
     @ResponseBody
     public String delete_judge() {
         return "";
     }
 
-    @RequestMapping("/delete_batch")
+    @RequestMapping("delete_batch")
     @ResponseBody
     public ResponseVo delete_batch(String[] ids) {
         ResponseVo responseVo = new ResponseVo();
@@ -108,4 +115,36 @@ public class WorkController {
         }
         return responseVo;
     }
+    /*删end*/
+
+    /*搜索start*/
+    @RequestMapping("search_work_by_workId")
+    @ResponseBody
+    public Vo<Work> search_work_by_workId(String searchValue, int page, int rows) {
+        //System.out.println(workService.searchWorkListByWorkId(searchValue, page, rows));
+        return workService.searchWorkListByWorkId(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_work_by_workProduct")
+    @ResponseBody
+    public Vo<Work> search_work_by_workProduct(String searchValue, int page, int rows) {
+        //System.out.println(workService.searchWorkListByWorkProduct(searchValue, page, rows));
+        return workService.searchWorkListByWorkProduct(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_work_by_workDevice")
+    @ResponseBody
+    public Vo<Work> search_work_by_workDevice(String searchValue, int page, int rows) {
+        //System.out.println(workService.searchWorkListByWorkDevice(searchValue, page, rows));
+        return workService.searchWorkListByWorkDevice(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_work_by_workProcess")
+    @ResponseBody
+    public Vo<Work> search_work_by_workProcess(String searchValue, int page, int rows) {
+        //System.out.println(workService.searchWorkListByWorkProcess(searchValue, page, rows));
+        return workService.searchWorkListByWorkProcess(searchValue, page, rows);
+    }
+
+    /*搜索end*/
 }

@@ -35,4 +35,9 @@ public interface ManufactureMapper {
 
     int deleteByIds(@Param("ids") String[] ids);
 
+    List<Manufacture> multiSelectByLikeManufactureSn(@Param("id") String id);
+
+    List<Manufacture> multiSelectByLikeManufactureOrderId(@Param("id") String id);
+
+    List<Manufacture> multiSelectByTechnologyIds(@Param("ids") List<String> ids);
 }

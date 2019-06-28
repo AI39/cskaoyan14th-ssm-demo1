@@ -235,8 +235,11 @@
     <result column="device_id" property="deviceId"/>
     <result column="rating" property="rating"/>
     <association property="product" javaType="com.cskaoyan14th.bean.Product">
-        <result column="process_id" property="productId"/>
+        <result column="product_id" property="productId"/>
         <result column="product_name" property="productName"/>
+    </association>
+    <association property="process" javaType="com.cskaoyan14th.bean.Process">
+      <result column="process_id" property="processId"/>
     </association>
     <association property="device" javaType="com.cskaoyan14th.bean.Device">
         <result column="device_id" property="deviceId"/>
@@ -258,4 +261,45 @@
           #{id}
       </foreach>
   </delete>
+
+  <select id="multiSelectByLikeWorkId" resultMap="workMapper">
+      select w.work_id, w.process_number, w.product_id, w.process_id, w.device_id, w.rating, p.product_name, d.device_name
+      from work w
+      left join product p on w.product_id = p.product_id
+      left join device d on w.device_id = d.device_id
+      where w.work_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByProductIds" resultMap="workMapper">
+      select w.work_id, w.process_number, w.product_id, w.process_id, w.device_id, w.rating, p.product_name, d.device_name
+      from work w
+      left join product p on w.product_id = p.product_id
+      left join device d on w.device_id = d.device_id
+      where w.product_id in
+      <foreach collection="ids" item="id" separator="," open="(" close=")">
+          #{id}
+      </foreach>
+  </select>
+
+  <select id="multiSelectByDeviceIds" resultMap="workMapper">
+    select w.work_id, w.process_number, w.product_id, w.process_id, w.device_id, w.rating, p.product_name, d.device_name
+    from work w
+    left join product p on w.product_id = p.product_id
+    left join device d on w.device_id = d.device_id
+    where w.device_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+        #{id}
+    </foreach>
+  </select>
+
+  <select id="multiSelectByProcessIds" resultMap="workMapper">
+    select w.work_id, w.process_number, w.product_id, w.process_id, w.device_id, w.rating, p.product_name, d.device_name
+    from work w
+    left join product p on w.product_id = p.product_id
+    left join device d on w.device_id = d.device_id
+    where w.process_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+        #{id}
+    </foreach>
+  </select>
 </mapper>
