@@ -20,7 +20,8 @@ public class ManufactureController {
     @Autowired
     ManufactureServiceImpl manufactureService;
 
-    @RequestMapping("/find")
+    /*查start*/
+    @RequestMapping("find")
     public ModelAndView find(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         List<String> sysPermissionList = new ToolbarButtons("manufacture").getSysPermissionList();
@@ -29,25 +30,27 @@ public class ManufactureController {
         return modelAndView;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("list")
     @ResponseBody
     public Vo<Manufacture> list(int page, int rows) {
         //System.out.println(manufactureService.getManufactureList(page, rows));
         return manufactureService.getManufactureList(page, rows);
     }
+    /*查end*/
 
-    @RequestMapping("/add_judge")
+    /*增start*/
+    @RequestMapping("add_judge")
     @ResponseBody
     public String add_judge() {
         return "";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add() {
         return "/WEB-INF/jsp/manufacture_add";
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("insert")
     @ResponseBody
     public ResponseVo insert(Manufacture manufacture){
         ResponseVo responseVo = new ResponseVo();
@@ -61,19 +64,21 @@ public class ManufactureController {
         }
         return responseVo;
     }
+    /*增end*/
 
-    @RequestMapping("/edit_judge")
+    /*改start*/
+    @RequestMapping("edit_judge")
     @ResponseBody
     public String edit_judge() {
         return "";
     }
 
-    @RequestMapping("/edit")
+    @RequestMapping("edit")
     public String edit() {
         return "/WEB-INF/jsp/manufacture_edit";
     }
 
-    @RequestMapping("/update_all")
+    @RequestMapping("update_all")
     @ResponseBody
     public ResponseVo update_all(Manufacture manufacture){
         ResponseVo responseVo = new ResponseVo();
@@ -87,14 +92,16 @@ public class ManufactureController {
         }
         return responseVo;
     }
+    /*改end*/
 
-    @RequestMapping("/delete_judge")
+    /*删start*/
+    @RequestMapping("delete_judge")
     @ResponseBody
     public String delete_judge() {
         return "";
     }
 
-    @RequestMapping("/delete_batch")
+    @RequestMapping("delete_batch")
     @ResponseBody
     public ResponseVo delete_batch(String[] ids) {
         ResponseVo responseVo = new ResponseVo();
@@ -108,4 +115,29 @@ public class ManufactureController {
         }
         return responseVo;
     }
+    /*删end*/
+
+    /*搜索start*/
+    @RequestMapping("search_manufacture_by_manufactureSn")
+    @ResponseBody
+    public Vo<Manufacture> search_manufacture_by_manufactureSn(String searchValue, int page, int rows) {
+        //System.out.println(manufactureService.searchManufactureListByManufactureSn(searchValue, page, rows));
+        return manufactureService.searchManufactureListByManufactureSn(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_manufacture_by_manufactureOrderId")
+    @ResponseBody
+    public Vo<Manufacture> search_manufacture_by_manufactureOrderId(String searchValue, int page, int rows) {
+        //System.out.println(manufactureService.searchManufactureListByManufactureOrderId(searchValue, page, rows));
+        return manufactureService.searchManufactureListByManufactureOrderId(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_manufacture_by_manufactureTechnologyName")
+    @ResponseBody
+    public Vo<Manufacture> search_manufacture_by_manufactureTechnologyName(String searchValue, int page, int rows) {
+        //System.out.println(manufactureService.searchManufactureListByManufactureTechnologyName(searchValue, page, rows));
+        return manufactureService.searchManufactureListByManufactureTechnologyName(searchValue, page, rows);
+    }
+
+    /*搜索end*/
 }

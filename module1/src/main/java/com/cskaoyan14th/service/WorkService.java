@@ -11,4 +11,13 @@ public interface WorkService {
     int updateByPrimaryKeySelective(Work work);
 
     int deleteByIds(String[] ids);
+
+    Vo<Work> searchWorkListByWorkId(String searchValue, int page, int rows);
+
+    Vo<Work> searchWorkListByWorkProduct(String searchValue, int page, int rows);
+
+    Vo<Work> searchWorkListByWorkDevice(String searchValue, int page, int rows);
+
+    Vo<Work> searchWorkListByWorkProcess(String searchValue, int page, int rows);
+
 }

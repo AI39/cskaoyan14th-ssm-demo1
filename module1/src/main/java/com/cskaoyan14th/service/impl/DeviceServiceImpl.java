@@ -22,6 +22,8 @@ public class DeviceServiceImpl implements DeviceService {
     DeviceCheckMapper deviceCheckMapper;
     @Autowired
     DeviceFaultMapper deviceFaultMapper;
+    @Autowired
+    DeviceMaintainMapper deviceMaintainMapper;
 
     public Vo<DeviceType> getDeviceTypeVo(int page, int rows) {
         PageHelper.startPage(page,rows);
@@ -284,6 +286,96 @@ public class DeviceServiceImpl implements DeviceService {
         return list;
     }
 
+    @Override
+    public Boolean deviceFaultIsExists(String deviceFaultId) {
+        DeviceFaultExample deviceFaultExample = new DeviceFaultExample();
+        DeviceFaultExample.Criteria criteria = deviceFaultExample.createCriteria();
+        criteria.andDeviceFaultIdEqualTo(deviceFaultId);
+        List<DeviceFault> list = deviceFaultMapper.selectByExample(deviceFaultExample);
+        if(list != null && list.size() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int insertDeviceFault(DeviceFault deviceFault) {
+        int i = deviceFaultMapper.insert(deviceFault);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceFault(DeviceFault deviceFault) {
+        int i = deviceFaultMapper.updateByPrimaryKey(deviceFault);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceNoteByDeviceId(Device device) {
+        int i = deviceMapper.updateByPrimaryKeySelective(device);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceCheckNoteByDeviceCheckId(DeviceCheck deviceCheck) {
+        int i = deviceCheckMapper.updateByPrimaryKeySelective(deviceCheck);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceFaultNoteByDeviceFaultId(DeviceFault deviceFault) {
+        int i = deviceFaultMapper.updateByPrimaryKeySelective(deviceFault);
+        return i;
+    }
+
+    @Override
+    public int deleteDeviceFaultByIds(ArrayList<String> list) {
+        DeviceFaultExample deviceFaultExample = new DeviceFaultExample();
+        DeviceFaultExample.Criteria criteria = deviceFaultExample.createCriteria();
+        criteria.andDeviceFaultIdIn(list);
+        int i = deviceFaultMapper.deleteByExample(deviceFaultExample);
+        return i;
+    }
+
+    @Override
+    public Vo<DeviceFaultShow> searchDeviceFaultShowByDeviceFaultId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<DeviceFaultShow> list = deviceFaultMapper.selectDeviceFaultShowBySingleConditionLike("deviceFaultId", "%" + searchValue + "%");
+
+        PageInfo<DeviceFaultShow> pageInfo = new PageInfo<>(list);
+
+        Vo<DeviceFaultShow> deviceFaultShowVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return deviceFaultShowVo;
+    }
+
+    @Override
+    public Vo<DeviceFaultShow> searchDeviceFaultShowByDeviceName(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<DeviceFaultShow> list = deviceFaultMapper.selectDeviceFaultShowBySingleConditionLike("deviceName", "%" + searchValue + "%");
+
+        PageInfo<DeviceFaultShow> pageInfo = new PageInfo<>(list);
+
+        Vo<DeviceFaultShow> deviceFaultShowVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return deviceFaultShowVo;
+    }
+
+    @Override
+    public Vo<DeviceMaintainShow> getDeviceMaintainShowVo(int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<DeviceMaintainShow> list = deviceMaintainMapper.selectDeviceMaintainShow();
+
+        PageInfo<DeviceMaintainShow> pageInfo = new PageInfo<>(list);
+
+        Vo<DeviceMaintainShow> deviceMaintainShowVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return deviceMaintainShowVo;
+    }
+
+    @Override
+    public DeviceFault getDeviceFaultById(String deviceFaultId) {
+        DeviceFault deviceFault = deviceFaultMapper.selectByPrimaryKey(deviceFaultId);
+        return deviceFault;
+    }
+
 
     @Override
     public DeviceType getDeviceTypeById(String deviceTypeId) {
@@ -291,4 +383,64 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceType;
     }
 
+    @Override
+    public Boolean deviceMaintainIsExists(String deviceMaintainId) {
+        DeviceMaintainExample deviceMaintainExample = new DeviceMaintainExample();
+        DeviceMaintainExample.Criteria criteria = deviceMaintainExample.createCriteria();
+        criteria.andDeviceMaintainIdEqualTo(deviceMaintainId);
+        List<DeviceMaintain> list = deviceMaintainMapper.selectByExample(deviceMaintainExample);
+        if(list != null && list.size() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int insertDeviceMaintain(DeviceMaintain deviceMaintain) {
+        int i = deviceMaintainMapper.insert(deviceMaintain);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceMaintain(DeviceMaintain deviceMaintain) {
+        int i = deviceMaintainMapper.updateByPrimaryKey(deviceMaintain);
+        return i;
+    }
+
+    @Override
+    public int updateDeviceMaintainNoteByDeviceMaintainId(DeviceMaintain deviceMaintain) {
+        int i = deviceMaintainMapper.updateByPrimaryKeySelective(deviceMaintain);
+        return i;
+    }
+
+    @Override
+    public int deleteDeviceMaintainByIds(ArrayList<String> list) {
+        DeviceMaintainExample deviceMaintainExample = new DeviceMaintainExample();
+        DeviceMaintainExample.Criteria criteria = deviceMaintainExample.createCriteria();
+        criteria.andDeviceMaintainIdIn(list);
+        int i = deviceMaintainMapper.deleteByExample(deviceMaintainExample);
+        return i;
+    }
+
+    @Override
+    public Vo<DeviceMaintainShow> searchDeviceMaintainShowByDeviceMaintainId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<DeviceMaintainShow> list = deviceMaintainMapper.selectDeviceMaintainShowBySingleConditionLike("deviceMaintainId", "%" + searchValue + "%");
+
+        PageInfo<DeviceMaintainShow> pageInfo = new PageInfo<>(list);
+
+        Vo<DeviceMaintainShow> deviceMaintainShowVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return deviceMaintainShowVo;
+    }
+
+    @Override
+    public Vo<DeviceMaintainShow> searchDeviceMaintainShowByDeviceFaultId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<DeviceMaintainShow> list = deviceMaintainMapper.selectDeviceMaintainShowBySingleConditionLike("deviceFaultId", "%" + searchValue + "%");
+
+        PageInfo<DeviceMaintainShow> pageInfo = new PageInfo<>(list);
+
+        Vo<DeviceMaintainShow> deviceMaintainShowVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return deviceMaintainShowVo;
+    }
 }

@@ -230,4 +230,22 @@
       #{id}
     </foreach>
   </delete>
+
+  <select id="multiSelectByLikeTaskId" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where task_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByLikeTaskWorkId" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where work_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByLikeTaskManufactureSn" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where manufacture_sn like CONCAT('%',#{id},'%')
+  </select>
 </mapper>

@@ -98,6 +98,12 @@ public class GetDataController {
     public Device getDeviceById(@PathVariable("deviceId") String deviceId) {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
-
     }
+    @RequestMapping("deviceFault/get/{deviceFaultId}")
+    @ResponseBody
+    public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {
+        DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
+        return deviceFault;
+    }
+
 }
