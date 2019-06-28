@@ -180,5 +180,14 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="departmentMap" type="com.cskaoyan14th.bean.Department">
+    <result column="departmentId" property="departmentId"/>
+    <result column="departmentName" property="departmentName"/>
+    <result column="note" property="note"/>
+  </resultMap>
+  <select id="queryDepartment" resultMap="departmentMap">
+    select department_id as departmentId ,department_name as departmentName , note from department
+  </select>
+
 
 </mapper>

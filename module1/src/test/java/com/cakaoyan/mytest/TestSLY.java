@@ -21,4 +21,10 @@ public class TestSLY {
         List<Employee> employees = mapper.queryMember();
         System.out.println(employees);
     }
+
+    @Test
+    public void test2(){
+        Employee employee = new Employee();
+
+    }
 }
