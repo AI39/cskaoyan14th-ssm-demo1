@@ -1,8 +1,16 @@
 package com.cskaoyan14th.controller;
 
-import com.cskaoyan14th.bean.*;
+
+import com.cskaoyan14th.bean.Custom;
+import com.cskaoyan14th.bean.Employee;
+import com.cskaoyan14th.bean.Product;
 import com.cskaoyan14th.service.CustomService;
+import com.cskaoyan14th.service.EmployeeService;
+
+import com.cskaoyan14th.bean.*;
+
 import com.cskaoyan14th.service.DeviceService;
+
 import com.cskaoyan14th.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +31,11 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
+
+    EmployeeService employeeService;
+    @Autowired
     DeviceService deviceService;
+
 
     @RequestMapping("product/get_data")
     @ResponseBody
@@ -39,6 +51,17 @@ public class GetDataController {
         return customList;
     }
 
+
+    /**
+     * 人员的列表查询
+     * @return
+     */
+    @RequestMapping("employee/get_data")
+    @ResponseBody
+    public List<Employee> getEmployeeData() {
+        List<Employee> employeeList = employeeService.queryMember();
+        return employeeList;
+    }
     @RequestMapping("/deviceType/get_data")
     @ResponseBody
     public List<DeviceType> deviceTypeGetData() {
@@ -72,5 +95,6 @@ public class GetDataController {
     public Device getDeviceById(@PathVariable("deviceId") String deviceId) {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
+
     }
 }

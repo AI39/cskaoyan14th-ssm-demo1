@@ -2,7 +2,7 @@ package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.vo.Vo;
-;
+;import java.util.List;
 
 public interface EmployeeService {
     Vo<Employee> queryEmployment(int page, int rows);
@@ -14,4 +14,6 @@ public interface EmployeeService {
     int deleteEmployee(int ids);
 
     Employee queryEmploymentByEmpId(String empId);
+
+    List<Employee> queryMember();
 }
