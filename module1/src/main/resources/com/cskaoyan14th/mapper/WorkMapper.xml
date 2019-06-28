@@ -227,5 +227,35 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="workMapper" type="com.cskaoyan14th.bean.Work">
+    <result column="work_id" property="workId"/>
+    <result column="process_number" property="processNumber"/>
+    <result column="product_id" property="productId"/>
+    <result column="process_id" property="processId"/>
+    <result column="device_id" property="deviceId"/>
+    <result column="rating" property="rating"/>
+    <association property="product" javaType="com.cskaoyan14th.bean.Product">
+        <result column="process_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+    </association>
+    <association property="device" javaType="com.cskaoyan14th.bean.Device">
+        <result column="device_id" property="deviceId"/>
+        <result column="device_name" property="deviceName"/>
+    </association>
+  </resultMap>
+  <select id="multiSelectAll" resultMap="workMapper">
+      select w.work_id, w.process_number, w.product_id, w.process_id, w.device_id, w.rating, p.product_name, d.device_name
+      from work w
+      left join product p on w.product_id = p.product_id
+      left join device d on w.device_id = d.device_id
+  </select>
 
+  <delete id="deleteByIds" >
+      delete
+      from work
+      where work_id in
+      <foreach collection="ids" item="id" separator="," open="(" close=")">
+          #{id}
+      </foreach>
+  </delete>
 </mapper>

@@ -7,4 +7,5 @@ import java.util.List;
 public interface CustomService {
 
     List<Custom> queryCustoms();
+    Custom queryCustomById(String id);
 }

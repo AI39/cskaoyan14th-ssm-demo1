@@ -338,4 +338,37 @@
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
 
+  <resultMap id="employeeMap" type="com.cskaoyan14th.bean.Employee">
+    <result column="empId" property="empId"/>
+    <result column="empName" property="empName"/>
+    <result column="sex" property="sex"/>
+    <result column="idCode" property="idCode"/>
+    <result column="birthday" property="birthday"/>
+    <result column="joinDate" property="joinDate"/>
+    <result column="status" property="status"/>
+    <result column="education" property="education"/>
+    <result column="degree" property="degree"/>
+    <result column="major" property="major"/>
+    <result column="graduateSchool" property="graduateSchool"/>
+    <result column="educationForm" property="educationForm"/>
+    <result column="departmentIde" property="departmentId"/>
+    <association property="department"  javaType="com.cskaoyan14th.bean.Department" >
+      <result column="departmentId" property="departmentId"/>
+      <result column="departmentName" property="departmentName"/>
+      <result column="note" property="note"/>
+    </association>
+  </resultMap>
+  <select id="queryMember" resultMap="employeeMap">
+    select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
+    emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
+    dep.department_name as departmentName,dep.note from  employee emp
+    LEFT  JOIN department dep on  emp.department_id = dep.department_id
+  </select>
+  <!--<select id="queryDepartmentById" resultType="com.cskaoyan14th.bean.Department" >
+    select department_id as deparmentId,department_name as departmentName,note from department where department_id = #{abc}
+  </select>-->
+  <select id="queryCount" resultType="_long">
+    select  count(*) from employee
+  </select>
+
 </mapper>

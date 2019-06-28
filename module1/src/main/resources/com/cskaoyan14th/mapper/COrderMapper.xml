@@ -377,4 +377,9 @@
       left join product p on o.product_id = p.product_id
 
   </select>
+
+  <update id="updateOrder" >
+    update c_order
+    set
+  </update>
 </mapper>
