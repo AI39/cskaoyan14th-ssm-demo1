@@ -4,14 +4,10 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.Custom;
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.CustomService;
-import com.cskaoyan14th.service.EmployeeService;
+import com.cskaoyan14th.service.*;
 
 import com.cskaoyan14th.bean.*;
 
-import com.cskaoyan14th.service.DeviceService;
-
-import com.cskaoyan14th.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +31,9 @@ public class GetDataController {
     EmployeeService employeeService;
     @Autowired
     DeviceService deviceService;
+
+    @Autowired
+    MaterialService materialService;
 
 
     @RequestMapping("product/get_data")
@@ -96,5 +95,22 @@ public class GetDataController {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
 
+    }
+
+
+    //material数据获取
+    @RequestMapping("material/get_data")
+    @ResponseBody
+    public List<Material> getMaterialData(){
+        List<Material> materialList = materialService.getAllMaterial();
+        return materialList;
+    }
+
+    //work数据获取
+    @RequestMapping("work/get_data")
+    @ResponseBody
+    public List<Work> getWorkData(){
+        List<Work> workList = materialService.getAllWork();
+        return workList;
     }
 }
