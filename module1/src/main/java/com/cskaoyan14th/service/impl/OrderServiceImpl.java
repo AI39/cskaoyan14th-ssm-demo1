@@ -60,7 +60,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int updateOrder(COrder order) {
         int update = orderMapper.updateByPrimaryKey(order);
-        System.out.println("插入后返回："+update);
         return update;
     }
 
@@ -124,6 +123,15 @@ public class OrderServiceImpl implements OrderService {
         PageInfo<COrder> pageInfo = new PageInfo<>(orderList1);
         //一个包含数目和当前页对象列表的封装对象
         Vo<COrder> orderList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return orderList;
+    }
+
+    @Override
+    public List<COrder> queryOrders() {
+        COrderExample example = new COrderExample();
+        COrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdIsNotNull();
+        List<COrder> orderList = orderMapper.selectByExample(example);
         return orderList;
     }
 

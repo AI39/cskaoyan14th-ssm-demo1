@@ -2,6 +2,7 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.DeviceMaintain;
 import com.cskaoyan14th.bean.DeviceMaintainExample;
+import com.cskaoyan14th.bean.DeviceMaintainShow;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public interface DeviceMaintainMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<DeviceMaintainShow> selectDeviceMaintainShow();
+
+    List<DeviceMaintainShow> selectDeviceMaintainShowBySingleConditionLike(@Param("type") String type, @Param("searchValue") String searchValue);
 }

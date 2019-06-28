@@ -22,4 +22,6 @@ public interface OrderService {
     Vo<COrder> queryOrdersByOrderId(String searchValue,int page, int rows);
     Vo<COrder> queryOrdersByProductName(String searchValue,int page, int rows);
     Vo<COrder> queryOrdersByCustomName(String searchValue,int page, int rows);
+
+    List<COrder> queryOrders();
 }
