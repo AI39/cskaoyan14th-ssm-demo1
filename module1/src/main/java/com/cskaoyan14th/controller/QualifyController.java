@@ -1,12 +1,9 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
-import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +19,6 @@ import java.util.List;
  */
 @Controller
 public class QualifyController {
-    @Autowired
-    FinalCountCheckMapper finalCountCheckMapper;
-    @Autowired
-    ProcessCountCheckMapper processCountCheckMapper;
-    @Autowired
-    ProcessMeasureCheckMapper processMeasureCheckMapper;
-
     @Autowired
     UnqualifyService unqualifyService;
     @Autowired
@@ -73,6 +63,19 @@ public class QualifyController {
         return "/WEB-INF/jsp/unqualify_add";                                                                       /*跳转到新增界面*/
     }
 
+    @RequestMapping("unqualify/edit_judge")                                                                         //unqualify编辑检查
+    @ResponseBody
+    public ResponseVo<UnqualifyApply> unqualifyEditJudge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("unqualify/edit")                                                                                //新增编辑显示
+    public String unqualifyEdit() {
+        return "/WEB-INF/jsp/unqualify_edit";                                                                       /*跳转到编辑界面*/
+    }
+
+
     /*成品计量质检*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
     public String fMeasureCheckFind(HttpSession session){
@@ -102,6 +105,18 @@ public class QualifyController {
     @RequestMapping("measure/add")                                                                                //新增页面显示
     public String fmAdd() {
         return "/WEB-INF/jsp/measurement_add";
+    }
+
+    @RequestMapping("fMeasureCheck/edit_judge")                                                                         //编辑检查
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheckVo> fmEdit_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("measure/edit")                                                                                //编辑页面显示
+    public String fmEdit() {
+        return "/WEB-INF/jsp/measurement_edit";
     }
 
 
@@ -136,6 +151,18 @@ public class QualifyController {
         return "/WEB-INF/jsp/f_count_check_add";
     }
 
+    @RequestMapping("fCountCheck/edit_judge")                                                                         //编辑检查
+    @ResponseBody
+    public ResponseVo<FinalCountCheckVo> fcEdit_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("f_count_check/edit")                                                                                //编辑页面显示
+    public String fcEdit() {
+        return "/WEB-INF/jsp/f_count_check_edit";
+    }
+
 
     /*工序计量质检*/
     @RequestMapping("p_measure_check/find")                                                                         /*显示增删改按钮*/
@@ -167,6 +194,18 @@ public class QualifyController {
         return "/WEB-INF/jsp/p_measure_check_add";
     }
 
+    @RequestMapping("pMeasureCheck/edit_judge")                                                                         //编辑检查
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheckVo> pmEdit_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("p_measure_check/edit")                                                                                //编辑页面显示
+    public String pmEdit() {
+        return "/WEB-INF/jsp/p_measure_check_edit";
+    }
+
     /*工序计数质检*/
     @RequestMapping("p_count_check/find")                                                                           /*显示增删改按钮*/
     public String pCountCheckFind(HttpSession session){
@@ -195,5 +234,17 @@ public class QualifyController {
     @RequestMapping("p_count_check/add")                                                                                //新增页面显示
     public String pcAdd() {
         return "/WEB-INF/jsp/p_count_check_add";
+    }
+
+    @RequestMapping("pCountCheck/edit_judge")                                                                         //编辑检查
+    @ResponseBody
+    public ResponseVo<ProcessCountCheckVo> pcEdit_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("p_count_check/edit")                                                                                //编辑页面显示
+    public String pcEdit() {
+        return "/WEB-INF/jsp/p_count_check_edit";
     }
 }
