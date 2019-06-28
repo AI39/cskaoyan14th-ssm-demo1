@@ -34,4 +34,5 @@ public interface DeviceMapper {
 
     List<DeviceShow> selectDeviceShow();
 
+    List<DeviceShow> selectDeviceShowBySingleConditionLike(@Param("type")String type, @Param("searchValue")String searchValue);
 }
