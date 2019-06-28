@@ -139,12 +139,26 @@ public class QualifyController {
 
     }
 
-    @RequestMapping("unqualify/search_unqualify_by_productName")
+    @RequestMapping("unqualify/search_unqualify_by_productName")                                                    /*需要多表查询，待修改*/
     @ResponseBody
     public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows){
         Vo<UnqualifyApply> searchUnqualifyByProductName = unqualifyService.searchUnqualifyByProductName(searchValue, page, rows);
         return searchUnqualifyByProductName;
+    }
 
+    @RequestMapping("unqualify/update_note")                                                                        /*更新备注*/
+    @ResponseBody
+    public ResponseVo<UnqualifyApply> UnqualifyUpdateNote(UnqualifyApply unqualifyApply){
+        ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
+        int i = unqualifyService.updateUnqualifyNoteByUnqualifyId(unqualifyApply);
+        if (i == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(500);
+        }
+        return responseVo;
     }
 
     /*成品计量质检*/

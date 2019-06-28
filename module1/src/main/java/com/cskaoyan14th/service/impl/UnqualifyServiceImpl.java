@@ -76,7 +76,7 @@ public class UnqualifyServiceImpl implements UnqualifyService {
     }
 
     @Override
-    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {                /*该方法有问题，只能查非中文，而且只能查单表*/
+    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {                /*该方法有问题，只能查非中文，而且只能查单表，需要多表模糊查询应该怎么做？*/
         PageHelper.startPage(page,rows);
 
         UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
@@ -88,6 +88,12 @@ public class UnqualifyServiceImpl implements UnqualifyService {
 
         Vo<UnqualifyApply> unqualifyApplyVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
         return unqualifyApplyVo;
+    }
+
+    @Override
+    public int updateUnqualifyNoteByUnqualifyId(UnqualifyApply unqualifyApply) {
+        int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply);
+        return i;
     }
 
 }

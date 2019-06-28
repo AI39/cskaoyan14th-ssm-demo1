@@ -27,6 +27,6 @@ public interface UnqualifyService {
 
     Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows);                        /*根据name查询*/
 
-
+    int updateUnqualifyNoteByUnqualifyId(UnqualifyApply unqualifyApply);
 
 }
