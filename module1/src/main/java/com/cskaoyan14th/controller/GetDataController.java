@@ -4,14 +4,10 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.Custom;
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.CustomService;
-import com.cskaoyan14th.service.EmployeeService;
+import com.cskaoyan14th.service.*;
 
 import com.cskaoyan14th.bean.*;
 
-import com.cskaoyan14th.service.DeviceService;
-
-import com.cskaoyan14th.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +27,8 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
-
+    OrderService orderService;
+    @Autowired
     EmployeeService employeeService;
     @Autowired
     DeviceService deviceService;
@@ -51,6 +48,12 @@ public class GetDataController {
         return customList;
     }
 
+    @RequestMapping("order/get_data")
+    @ResponseBody
+    public List<COrder> getOrderData(){
+        List<COrder> orderList = orderService.queryOrders();
+        return orderList;
+    }
 
     /**
      * 人员的列表查询
