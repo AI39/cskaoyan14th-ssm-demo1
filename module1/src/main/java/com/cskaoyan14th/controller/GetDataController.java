@@ -161,14 +161,6 @@ public class GetDataController {
         return materialList;
     }
 
-    //work数据获取
-    @RequestMapping("work/get_data")
-    @ResponseBody
-    public List<Work> getWorkData(){
-        List<Work> workList = materialService.getAllWork();
-        return workList;
-    }
-
     @RequestMapping("deviceFault/get/{deviceFaultId}")
     @ResponseBody
     public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {
