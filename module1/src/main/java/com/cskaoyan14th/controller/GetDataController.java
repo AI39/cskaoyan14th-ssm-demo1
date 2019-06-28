@@ -3,6 +3,9 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.*;
+import com.cskaoyan14th.bean.Custom;
+import com.cskaoyan14th.bean.Employee;
+import com.cskaoyan14th.bean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,8 @@ public class GetDataController {
     ProductService productService;
     @Autowired
     CustomService customService;
+    @Autowired
+    OrderService orderService;
     @Autowired
     EmployeeService employeeService;
     @Autowired
@@ -45,6 +50,12 @@ public class GetDataController {
         return customList;
     }
 
+    @RequestMapping("order/get_data")
+    @ResponseBody
+    public List<COrder> getOrderData(){
+        List<COrder> orderList = orderService.queryOrders();
+        return orderList;
+    }
 
     /**
      * 人员的列表查询
@@ -89,7 +100,6 @@ public class GetDataController {
     public Device getDeviceById(@PathVariable("deviceId") String deviceId) {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
-
     }
 
     @RequestMapping("/manufacture/get_data")
@@ -118,5 +128,12 @@ public class GetDataController {
     public Work getWorkById(@PathVariable("workId") String workId) {
         Work work = workService.multiSelectByWorkId(workId);
         return work;
+    }
+
+    @RequestMapping("deviceFault/get/{deviceFaultId}")
+    @ResponseBody
+    public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {
+        DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
+        return deviceFault;
     }
 }
