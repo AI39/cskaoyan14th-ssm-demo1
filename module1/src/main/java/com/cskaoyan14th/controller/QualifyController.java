@@ -41,7 +41,6 @@ public class QualifyController {
         return "WEB-INF/jsp/unqualify_list";                                                                        /*这里面需要调用query写json返回*/
     }
 
-
     @RequestMapping("unqualify/list")                                                                               /*用于数据回显，返回一个json的数据*/
     @ResponseBody
     public Vo<UnqualifyApply> unqualifyList(int page, int rows){
@@ -61,6 +60,21 @@ public class QualifyController {
     @RequestMapping("unqualify/add")                                                                                //新增页面显示
     public String unqualifyAdd() {
         return "/WEB-INF/jsp/unqualify_add";                                                                       /*跳转到新增界面*/
+    }
+    @RequestMapping("unqualify/insert")
+    @ResponseBody
+    public ResponseVo<UnqualifyApply> unqualifyInsert( UnqualifyApply unqualifyApply){
+        ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
+        int insert = unqualifyService.unqualifyInsert(unqualifyApply);                                                   //检查主键是否冲突
+        if (insert == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setStatus(500);
+            responseVo.setMsg("ERROR");
+        }
+        return responseVo;
+
     }
 
     @RequestMapping("unqualify/edit_judge")                                                                         //unqualify编辑检查

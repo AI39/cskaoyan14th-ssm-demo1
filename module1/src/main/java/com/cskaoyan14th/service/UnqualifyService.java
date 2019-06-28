@@ -16,6 +16,6 @@ public interface UnqualifyService {
 
     Vo<UnqualifyApply> queryUnqualifyApplyLeftEmployeeAndProduct(int page, int rows);                               /*这里是用于多表查询，三张表*/
 
-
+    int unqualifyInsert(UnqualifyApply unqualifyApply);
 
 }

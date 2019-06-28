@@ -23,6 +23,7 @@ public class UnqualifyServiceImpl implements UnqualifyService {
 
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
+
     @Override
     public Vo<UnqualifyApply> queryUnqualifyApplyLeftEmployeeAndProduct(int page, int rows) {
         PageHelper.startPage(page,rows);                                                                                /*这里是设置生成的page数和行数，由前端实现*/
@@ -35,6 +36,12 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         Vo<UnqualifyApply> unqualifyApplyList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
 
         return unqualifyApplyList;
+    }
+
+    @Override
+    public int unqualifyInsert(UnqualifyApply unqualifyApply) {
+        int insert = unqualifyApplyMapper.insert(unqualifyApply);
+        return insert;
     }
 
 }
