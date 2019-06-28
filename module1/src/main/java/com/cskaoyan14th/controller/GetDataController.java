@@ -1,8 +1,10 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Custom;
+import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.bean.Product;
 import com.cskaoyan14th.service.CustomService;
+import com.cskaoyan14th.service.EmployeeService;
 import com.cskaoyan14th.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,8 @@ public class GetDataController {
     ProductService productService;
     @Autowired
     CustomService customService;
-
+    @Autowired
+    EmployeeService employeeService;
     @RequestMapping("product/get_data")
     @ResponseBody
     public List<Product> getProductData(){
@@ -34,5 +37,16 @@ public class GetDataController {
     public List<Custom> getCustomData(){
         List<Custom> customList = customService.queryCustoms();
         return customList;
+    }
+
+    /**
+     * 人员的列表查询
+     * @return
+     */
+    @RequestMapping("employee/get_data")
+    @ResponseBody
+    public List<Employee> getEmployeeData(){
+        List<Employee> employeeList = employeeService.queryMember();
+        return employeeList;
     }
 }
