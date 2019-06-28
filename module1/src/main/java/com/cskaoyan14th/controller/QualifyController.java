@@ -2,8 +2,7 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.*;
-import com.cskaoyan14th.service.FinalMeasureCheckService;
-import com.cskaoyan14th.service.UnqualifyService;
+import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -26,8 +25,6 @@ public class QualifyController {
     @Autowired
     FinalCountCheckMapper finalCountCheckMapper;
     @Autowired
-    FinalMeasuretCheckMapper finalMeasuretCheckMapper;
-    @Autowired
     ProcessCountCheckMapper processCountCheckMapper;
     @Autowired
     ProcessMeasureCheckMapper processMeasureCheckMapper;
@@ -36,6 +33,12 @@ public class QualifyController {
     UnqualifyService unqualifyService;
     @Autowired
     FinalMeasureCheckService finalMeasureCheckService;
+    @Autowired
+    FinalCountCheckService finalCountCheckService;
+    @Autowired
+    ProcessMeasureCheckService processMeasureCheckService;
+    @Autowired
+    ProcessCountCheckService processCountCheckService;
 
     /*不合格品管理*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
@@ -60,13 +63,13 @@ public class QualifyController {
 
     @RequestMapping("unqualify/add_judge")                                                                         //unqualify新增检查
     @ResponseBody
-    public ResponseVo<DeviceType> deviceTypeAdd_judge() {
+    public ResponseVo<UnqualifyApply> unqualifyAdd_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
 
-    @RequestMapping("unqualify/add")                                                                                //deviceType新增页面显示
-    public String deviceTypeAdd() {
+    @RequestMapping("unqualify/add")                                                                                //新增页面显示
+    public String unqualifyAdd() {
         return "/WEB-INF/jsp/unqualify_add";                                                                       /*跳转到新增界面*/
     }
 
@@ -89,6 +92,17 @@ public class QualifyController {
         return finalMeasuretCheckList;
     }
 
+    @RequestMapping("fMeasureCheck/add_judge")                                                                         //新增检查
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheckVo> fmAdd_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("measure/add")                                                                                //新增页面显示
+    public String fmAdd() {
+        return "/WEB-INF/jsp/measurement_add";
+    }
 
 
     /*成品计数质检*/
@@ -105,19 +119,21 @@ public class QualifyController {
 
     @RequestMapping("f_count_check/list")                                                                           /*用于数据回显，返回一个json的数据*/
     @ResponseBody
-    public Vo<FinalCountCheck> finalCountCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        FinalCountCheckExample finalCountCheckExample = new FinalCountCheckExample();
-        FinalCountCheckExample.Criteria criteria = finalCountCheckExample.createCriteria();
-        criteria.andOrderIdIsNotNull();                                                                             /*这里是加了一个条件，用于不让productId为空*/
-        List<FinalCountCheck> finalCountCheckList1 = finalCountCheckMapper.selectByExample(finalCountCheckExample); /*通过生成的example调用底层的mapper方法*/
+    public Vo<FinalCountCheckVo> finalCountCheckList(int page, int rows){
+        Vo<FinalCountCheckVo> finalCountCheckList = finalCountCheckService.queryFinalCountLeftEmployee(page, rows);
+        return  finalCountCheckList;
+    }
 
-        PageInfo<FinalCountCheck> pageInfo = new PageInfo<>(finalCountCheckList1);
+    @RequestMapping("fCountCheck/add_judge")                                                                         //新增检查
+    @ResponseBody
+    public ResponseVo<FinalCountCheckVo> fcAdd_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
 
-
-        Vo<FinalCountCheck> finalCountCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
-        System.out.println(finalCountCheckList);
-        return finalCountCheckList;
+    @RequestMapping("f_count_check/add")                                                                                //新增页面显示
+    public String fcAdd() {
+        return "/WEB-INF/jsp/f_count_check_add";
     }
 
 
@@ -134,16 +150,21 @@ public class QualifyController {
 
     @RequestMapping("p_measure_check/list")
     @ResponseBody
-    public Vo<ProcessMeasureCheck> ProcessMeasureCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        ProcessMeasureCheckExample processMeasureCheckExample = new ProcessMeasureCheckExample();
-        ProcessMeasureCheckExample.Criteria criteria = processMeasureCheckExample.createCriteria();
-        criteria.andProcessIdIsNotNull();
-        List<ProcessMeasureCheck> processMeasureCheckList1 = processMeasureCheckMapper.selectByExample(processMeasureCheckExample);
-        PageInfo<ProcessMeasureCheck> pageInfo = new PageInfo<>(processMeasureCheckList1);
-        Vo<ProcessMeasureCheck> processMeasureCheckList = new Vo<>(pageInfo.getTotal(), pageInfo.getList());
-        System.out.println(processMeasureCheckList);
+    public Vo<ProcessMeasureCheckVo> ProcessMeasureCheckList(int page, int rows){
+        Vo<ProcessMeasureCheckVo> processMeasureCheckList = processMeasureCheckService.queryProcessMeasureLeftEmployee(page, rows);
         return processMeasureCheckList;
+    }
+
+    @RequestMapping("pMeasureCheck/add_judge")                                                                         //新增检查
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheckVo> pmAdd_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
+
+    @RequestMapping("p_measure_check/add")                                                                                //新增页面显示
+    public String pmAdd() {
+        return "/WEB-INF/jsp/p_measure_check_add";
     }
 
     /*工序计数质检*/
@@ -159,20 +180,20 @@ public class QualifyController {
 
     @RequestMapping("p_count_check/list")                                                                           /*用于数据回显，返回一个json的数据*/
     @ResponseBody
-    public Vo<ProcessCountCheck> ProcessCountCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        ProcessCountCheckExample processCountCheckExample = new ProcessCountCheckExample();
-        ProcessCountCheckExample.Criteria criteria = processCountCheckExample.createCriteria();
-        criteria.andProcessIdIsNotNull();                                                                           /*这里是加了一个条件，用于不让productId为空*/
-        List<ProcessCountCheck> processCountCheckList1 = processCountCheckMapper.selectByExample(processCountCheckExample);/*通过生成的example调用底层的mapper方法*/
-
-        PageInfo<ProcessCountCheck> pageInfo = new PageInfo<>(processCountCheckList1);
-
-
-        Vo<ProcessCountCheck> processCountCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
-        System.out.println(processCountCheckList);
+    public Vo<ProcessCountCheckVo> ProcessCountCheckList(int page, int rows){
+        Vo<ProcessCountCheckVo> processCountCheckList = processCountCheckService.queryProcessCountLeftEmployee(page, rows);
         return processCountCheckList;
     }
 
+    @RequestMapping("pCountCheck/add_judge")                                                                         //新增检查
+    @ResponseBody
+    public ResponseVo<ProcessCountCheckVo> pcAdd_judge() {
+        ResponseVo data = new ResponseVo();
+        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+    }
 
+    @RequestMapping("p_count_check/add")                                                                                //新增页面显示
+    public String pcAdd() {
+        return "/WEB-INF/jsp/p_count_check_add";
+    }
 }

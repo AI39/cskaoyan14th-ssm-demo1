@@ -256,4 +256,35 @@
       note = #{note,jdbcType=VARCHAR}
     where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+  <!--............................................................................-->
+
+  <sql id="Process_Measure_Check_Base_Column_List">
+    p.p_measure_check_id, p.process_id, p.check_item, p.cdate, p.measure_data, p.emp_id, p.result, p.note
+  </sql>
+
+  <sql id="Employee_Base_Column_List">
+    e.emp_id , e.emp_name, e.sex as emp_sex, e.id_code as emp_id_code, e.birthday as emp_birthday, e.join_date as emp_join_date,
+    e.status as emp_status, e.education as emp_education, e.degree as emp_degree, e.major as emp_major, e.graduate_school as emp_graduate_school,
+    e.education_form as emp_education_from, e.department_id as emp_department_id
+  </sql>
+  <resultMap id="PMMap" type="com.cskaoyan14th.bean.ProcessMeasureCheckVo">
+    <id column="p_measure_check_id" property="pMeasureCheckId"/>
+    <result column="process_id" property="processId"/>
+    <result column="check_item" property="checkItem"/>
+    <result column="cdate" property="cdate"/>
+    <result column="measure_data" property="measureData"/>
+    <result column="emp_id" property="empId"/>
+    <result column="emp_name" property="empName"/>
+    <result column="result" property="result"/>
+    <result column="note" property="note"/>
+  </resultMap>
+  <select id="queryProcessMeasureCheckLeftEmployee" resultMap="PMMap">
+    select  p.p_measure_check_id, p.process_id, p.check_item, p.cdate, p.measure_data, e.emp_name, p.result, p.note
+    from
+    process_measure_check p,
+    employee e
+    where
+    p.emp_id = e.emp_id
+  </select>
 </mapper>
