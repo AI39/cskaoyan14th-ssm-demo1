@@ -34,4 +34,14 @@ public interface DepartmentMapper {
     Department queryDepartmentById();
 
     List<Department> queryDepartment();
+
+    int insertDepartment(@Param("dep") Department department);
+
+    int updateDeparment(@Param("dep") Department ids);
+
+    int deleteDepartment(@Param("ids") String[] ids);
+
+    List<Department> queryDepartmentByDid(@Param("sea")  String searchValue);
+
+    List<Department> queryDepartmentByName(@Param("name")String searchValue);
 }

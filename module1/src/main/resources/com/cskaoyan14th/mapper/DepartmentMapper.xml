@@ -180,6 +180,7 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <!--查询并生成Department类型-->
   <resultMap id="departmentMap" type="com.cskaoyan14th.bean.Department">
     <result column="departmentId" property="departmentId"/>
     <result column="departmentName" property="departmentName"/>
@@ -188,6 +189,44 @@
   <select id="queryDepartment" resultMap="departmentMap">
     select department_id as departmentId ,department_name as departmentName , note from department
   </select>
+  <!--添加部门-->
+  <insert id="insertDepartment" parameterType="com.cskaoyan14th.bean.Department">
+    insert into department (department_id,department_Name,note) values (#{dep.departmentId},#{dep.departmentName},#{dep.note})
+  </insert>
+  <!--更新部门信息-->
+  <update id="updateDeparment" parameterType="com.cskaoyan14th.bean.Department">
+    update department set department_id = #{dep.departmentId},department_Name = #{dep.departmentName},note = #{dep.note}
+    where department_id = #{dep.departmentId}
+  </update>
+  <!--删除部门操作-->
+  <delete id="deleteDepartment" parameterType="com.cskaoyan14th.bean.Department">
+    delete from department where department_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+       #{id}
+    </foreach>
 
-
+  </delete>
+  <!--条件查询-->
+  <select id="queryDepartmentByDid" resultMap="departmentMap">
+    select
+    department_id as departmentId ,
+    department_name as departmentName ,
+    note
+    from department
+    <where>
+        department_id like
+        CONCAT('%',#{sea},'%')
+    </where>
+  </select>
+  <select id="queryDepartmentByName" resultMap="departmentMap">
+    select
+    department_id as departmentId ,
+    department_name as departmentName ,
+    note
+    from department
+    <where>
+      department_name like
+      CONCAT('%',#{name},'%')
+    </where>
+  </select>
 </mapper>

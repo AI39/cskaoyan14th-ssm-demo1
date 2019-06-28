@@ -4,14 +4,10 @@ package com.cskaoyan14th.controller;
 import com.cskaoyan14th.bean.Custom;
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.CustomService;
-import com.cskaoyan14th.service.EmployeeService;
+import com.cskaoyan14th.service.*;
 
 import com.cskaoyan14th.bean.*;
 
-import com.cskaoyan14th.service.DeviceService;
-
-import com.cskaoyan14th.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +27,9 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
-
     EmployeeService employeeService;
+    @Autowired
+    DepartmentService departmentService;
     @Autowired
     DeviceService deviceService;
 
@@ -51,7 +48,7 @@ public class GetDataController {
         return customList;
     }
 
-
+    /*以下是employ功能块*/
     /**
      * 人员的列表查询
      * @return
@@ -62,6 +59,21 @@ public class GetDataController {
         List<Employee> employeeList = employeeService.queryMember();
         return employeeList;
     }
+    /*以下是department功能块*/
+    /**
+     * 部门列表查询
+     * @return
+     */
+    @RequestMapping("department/get_data")
+    @ResponseBody
+    public List<Department> getDempartmentData(){
+        List<Department> departmentList = departmentService.queryDepartmentAll();
+        return departmentList;
+    }
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/deviceType/get_data")
     @ResponseBody
     public List<DeviceType> deviceTypeGetData() {

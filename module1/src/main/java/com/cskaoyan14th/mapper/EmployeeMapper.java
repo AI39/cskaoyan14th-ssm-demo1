@@ -37,7 +37,13 @@ public interface EmployeeMapper {
 
     int updateEmployee(@Param("emp")Employee employee);
 
-    int deleteEmployee(@Param("ids")int ids);
+    int deleteEmployee(@Param("ids") String[] ids);
 
     Employee queryEmployeeByEmpId(@Param("empId")int empId);
+
+    List<Employee> queryByDepartmentName(@Param("depName")String value);
+
+    List<Employee> searchByEmpId(@Param("empId")String searchValue);
+
+    List<Employee> searchByEmpName(@Param("empName")String searchValue);
 }
