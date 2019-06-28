@@ -11,9 +11,15 @@ public interface EmployeeService {
 
     int updateEmployee(Employee employee);
 
-    int deleteEmployee(int ids);
+    int deleteEmployee(String[] ids);
 
     Employee queryEmploymentByEmpId(String empId);
 
     List<Employee> queryMember();
+
+    Vo<Employee> queryByDepartmentName(String value, int page, int rows);
+
+    Vo<Employee> searchByEmpId(String searchValue, int page, int rows);
+
+    Vo<Employee> searchByEmpName(String searchValue, int page, int rows);
 }

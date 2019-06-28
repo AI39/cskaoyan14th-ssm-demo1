@@ -337,7 +337,7 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-
+  <!--左外查询 employee and department-->
   <resultMap id="employeeMap" type="com.cskaoyan14th.bean.Employee">
     <result column="empId" property="empId"/>
     <result column="empName" property="empName"/>
@@ -364,22 +364,28 @@
     dep.department_name as departmentName,dep.note from  employee emp
     LEFT  JOIN department dep on  emp.department_id = dep.department_id
   </select>
-  <!--<select id="queryDepartmentById" resultType="com.cskaoyan14th.bean.Department" >
-    select department_id as deparmentId,department_name as departmentName,note from department where department_id = #{abc}
-  </select>-->
+  <!--查询条目数-->
   <select id="queryCount" resultType="_long">
     select  count(*) from employee
   </select>
+  <!--添加人员操作-->
   <insert id="insertEmployee" parameterType="com.cskaoyan14th.bean.Employee">
     insert into employee (emp_id,emp_name,sex,id_code,birthday,join_date,status,education,degree,major,graduate_school,education_form,department_id)
     values (#{emp.empId},#{emp.empName},#{emp.sex},#{emp.idCode},#{emp.birthday},#{emp.joinDate},#{emp.status},#{emp.education},#{emp.degree},#{emp.major},#{emp.graduateSchool},#{emp.educationForm},#{emp.departmentId})
   </insert>
+  <!--更新人员操作-->
   <update id="updateEmployee" parameterType="com.cskaoyan14th.bean.Employee">
     update employee set emp_name = #{emp.empId},sex = #{emp.sex},id_code = #{emp.idCode},birthday = #{emp.birthday},join_date = #{emp.joinDate},status = #{emp.status},education = #{emp.education},degree = #{emp.degree},major = #{emp.major},graduate_school = #{emp.graduateSchool},education_form = #{emp.educationForm},department_id  = #{emp.departmentId} where emp_id = #{emp.empId}
   </update>
+  <!--删除人员操作-->
   <delete id="deleteEmployee" parameterType="com.cskaoyan14th.bean.Employee">
-    delete from employee where emp_id = #{ids}
+    delete from employee where emp_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+
   </delete>
+  <!--根据empId左外查询 employee and department 操作-->
   <select id="queryEmployeeByEmpId" resultMap="employeeMap">
     select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
     emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
@@ -387,5 +393,37 @@
     LEFT  JOIN department dep on  emp.department_id = dep.department_id
     where emp.emp_id = #{empId}
   </select>
-
+  <!--根据departmentName条件查询-->
+  <select id="queryByDepartmentName" resultMap="employeeMap">
+    select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
+    emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
+    dep.department_name as departmentName,dep.note from  employee emp
+    LEFT JOIN department dep on  emp.department_id = dep.department_id
+    <where>
+      department_name like
+      CONCAT('%',#{depName},'%')
+    </where>
+  </select>
+  <!--根据empId条件查询-->
+  <select id="searchByEmpId" resultMap="employeeMap">
+    select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
+    emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
+    dep.department_name as departmentName,dep.note from  employee emp
+    LEFT JOIN department dep on  emp.department_id = dep.department_id
+    <where>
+      emp.emp_id like
+      CONCAT('%',#{empId},'%')
+    </where>
+  </select>
+  <!--根据empName条件查询-->
+  <select id="searchByEmpName" resultMap="employeeMap">
+    select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
+    emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
+    dep.department_name as departmentName,dep.note from  employee emp
+    LEFT JOIN department dep on  emp.department_id = dep.department_id
+    <where>
+      emp.emp_name like
+      CONCAT('%',#{empName},'%')
+    </where>
+  </select>
 </mapper>

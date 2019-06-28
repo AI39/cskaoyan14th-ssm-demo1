@@ -31,7 +31,12 @@ public class GetDataController {
     @Autowired
     EmployeeService employeeService;
     @Autowired
+    DepartmentService departmentService;
+    @Autowired
     DeviceService deviceService;
+
+    @Autowired
+    MaterialService materialService;
 
 
     @RequestMapping("product/get_data")
@@ -48,6 +53,8 @@ public class GetDataController {
         return customList;
     }
 
+
+
     @RequestMapping("order/get_data")
     @ResponseBody
     public List<COrder> getOrderData(){
@@ -55,6 +62,7 @@ public class GetDataController {
         return orderList;
     }
 
+    /*以下是employee功能块*/
     /**
      * 人员的列表查询
      * @return
@@ -65,6 +73,21 @@ public class GetDataController {
         List<Employee> employeeList = employeeService.queryMember();
         return employeeList;
     }
+    /*以下是department功能块*/
+    /**
+     * 部门列表查询
+     * @return
+     */
+    @RequestMapping("department/get_data")
+    @ResponseBody
+    public List<Department> getDempartmentData(){
+        List<Department> departmentList = departmentService.queryDepartmentAll();
+        return departmentList;
+    }
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/deviceType/get_data")
     @ResponseBody
     public List<DeviceType> deviceTypeGetData() {
@@ -99,6 +122,26 @@ public class GetDataController {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
     }
+
+
+
+    //material数据获取
+    @RequestMapping("material/get_data")
+    @ResponseBody
+    public List<Material> getMaterialData(){
+        List<Material> materialList = materialService.getAllMaterial();
+        return materialList;
+    }
+
+    //work数据获取
+    @RequestMapping("work/get_data")
+    @ResponseBody
+    public List<Work> getWorkData(){
+        List<Work> workList = materialService.getAllWork();
+        return workList;
+    }
+
+
     @RequestMapping("deviceFault/get/{deviceFaultId}")
     @ResponseBody
     public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {

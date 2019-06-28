@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Material;
+import com.cskaoyan14th.bean.MaterialConsume;
 import com.cskaoyan14th.bean.MaterialReceive;
 import com.cskaoyan14th.bean.Page;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -157,6 +158,21 @@ public class MaterialController {
         return materialVo;
     }
 
+    //material 备注详情更新
+    @RequestMapping("material/update_note")
+    @ResponseBody
+    public ResponseVo<Material> materialNoteUpdate(String materialId,String note){
+        ResponseVo<Material> responseVo = new ResponseVo<>();
+        //编辑
+        int i = materialService.updateMaterialNote(materialId,note);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+
+    }
+
 
     //二。物料收入
     //物料收入 显示
@@ -178,13 +194,6 @@ public class MaterialController {
         return receiveVo;
     }
 
-    //receive里的material数据获取
-    @RequestMapping("/material/get_data")
-    @ResponseBody
-    public List<Material> getMaterialData(){
-        List<Material> materialList = materialService.getAllMaterial();
-        return materialList;
-    }
 
     //material receive新增检查
     @RequestMapping("/materialReceive/add_judge")
@@ -308,6 +317,21 @@ public class MaterialController {
         return receiveVo;
     }
 
+    //material receive备注详情更新
+    @RequestMapping("materialReceive/update_note")
+    @ResponseBody
+    public ResponseVo<MaterialReceive> materialReceiveNoteUpdate(String receiveId,String note){
+        ResponseVo<MaterialReceive> responseVo = new ResponseVo<>();
+        //编辑
+        int i = materialService.updateMaterialReceiveNote(receiveId,note);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+
+    }
+
     //三。物料消耗
     //物料消耗 显示
     @RequestMapping("/materialConsume/find")
@@ -320,13 +344,160 @@ public class MaterialController {
         return "/WEB-INF/jsp/materialConsume_list";
     }
 
-  /*  //物料消耗 显示
+    //物料消耗 显示
     @RequestMapping("/materialConsume/list")
     @ResponseBody
-    public Vo<MaterialReceive> materialReceiveInfoList(int page, int rows){
-        Vo<MaterialReceive> receiveVo = materialService.getMaterialReceiveVo(page, rows);
+    public Vo<MaterialConsume> materialConsumeInfoList(int page, int rows){
+        Vo<MaterialConsume> receiveVo = materialService.getMaterialConsumeVo(page, rows);
         return receiveVo;
-    }*/
+    }
+
+    //material consume新增检查
+    @RequestMapping("/materialConsume/add_judge")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeAdd_judge(){
+        ResponseVo<MaterialConsume> data = new ResponseVo<>();
+        return data;
+    }
+
+    //material consume新增页面弹出
+    @RequestMapping("/materialConsume/add")
+    public String materialConsumeAdd(){
+        return "/WEB-INF/jsp/materialConsume_add";
+    }
+
+
+
+    //material consume新增数据库
+    @RequestMapping("materialConsume/insert")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeInsert(String consumeId, String workId,String materialId, Integer consumeAmount, Date consumeDate,String sender,String receiver,String note){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        MaterialConsume materialConsume = new MaterialConsume();
+        materialConsume.setConsumeAmount(consumeAmount);
+        materialConsume.setConsumeDate(consumeDate);
+        materialConsume.setConsumeId(consumeId);
+        materialConsume.setNote(note);
+        materialConsume.setReceiver(receiver);
+        materialConsume.setSender(sender);
+        materialConsume.setMaterialId(materialId);
+        materialConsume.setWorkId(workId);
+        //检查material consume在数据库中存不存在
+        Boolean flag = materialService.materialConsumeIsExists(consumeId);
+        if(flag){
+            responseVo.setStatus(0);
+            responseVo.setMsg("undefined");
+            return responseVo;
+        }
+
+        int i = materialService.insertMaterialConsume(materialConsume);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+
+    }
+
+    //material consume编辑检查
+    @RequestMapping("/materialConsume/edit_judge")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeEdit_judge(){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        return responseVo;
+    }
+
+    //material consume编辑页面弹出
+    @RequestMapping("/materialConsume/edit")
+    public String materialConsumeEdit(){
+        return "/WEB-INF/jsp/materialConsume_edit";
+    }
+
+    //material consume编辑数据库
+    @RequestMapping("materialConsume/update_all")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeUpdate(String consumeId, String workId,String materialId, Integer consumeAmount, Date consumeDate,String sender,String receiver,String note){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        MaterialConsume materialConsume = new MaterialConsume();
+        materialConsume.setConsumeAmount(consumeAmount);
+        materialConsume.setConsumeDate(consumeDate);
+        materialConsume.setConsumeId(consumeId);
+        materialConsume.setNote(note);
+        materialConsume.setReceiver(receiver);
+        materialConsume.setSender(sender);
+        materialConsume.setMaterialId(materialId);
+        materialConsume.setWorkId(workId);
+        //编辑
+        int i = materialService.updateMaterialConsume(materialConsume);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+
+
+    }
+
+    //material consume删除检查
+    @RequestMapping("/materialConsume/delete_judge")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeDelete_judge(){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        return responseVo;
+    }
+
+    //material consume 删除 数据库
+    @RequestMapping("materialConsume/delete_batch")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeDelete(String[] ids){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        int i = materialService.deleteMaterialConsume(ids);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+    }
+
+    //material consume模糊查询
+    //1.用consume id查
+    @RequestMapping("materialConsume/search_materialConsume_by_consumeId")
+    @ResponseBody
+    public Vo<MaterialConsume> materialConsumeSearchByConsumeId(String searchValue,int page,int rows){
+        Vo<MaterialConsume> receiveVo = materialService.selectMaterialConsumeVoByConsumeId(searchValue, page, rows);
+        return receiveVo;
+    }
+
+    //2.用work id查
+    @RequestMapping("materialConsume/search_materialConsume_by_workId")
+    @ResponseBody
+    public Vo<MaterialConsume> materialConsumeSearchByWorkId(String searchValue,int page,int rows){
+        Vo<MaterialConsume> receiveVo = materialService.selectMaterialConsumeVoByWorkId(searchValue, page, rows);
+        return receiveVo;
+    }
+
+    //3.用material id查
+    @RequestMapping("materialConsume/search_materialConsume_by_materialId")
+    @ResponseBody
+    public Vo<MaterialConsume> materialConsumeSearchByMaterialId(String searchValue,int page,int rows){
+        Vo<MaterialConsume> receiveVo = materialService.selectMaterialConsumeVoByMaterialId(searchValue, page, rows);
+        return receiveVo;
+    }
+
+    //material consume备注详情更新
+    @RequestMapping("materialConsume/update_note")
+    @ResponseBody
+    public ResponseVo<MaterialConsume> materialConsumeNoteUpdate(String consumeId,String note){
+        ResponseVo<MaterialConsume> responseVo = new ResponseVo<>();
+        //编辑
+        int i = materialService.updateMaterialConsumeNote(consumeId,note);
+        if(i==1){
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+        }
+        return responseVo;
+
+    }
 
 
 

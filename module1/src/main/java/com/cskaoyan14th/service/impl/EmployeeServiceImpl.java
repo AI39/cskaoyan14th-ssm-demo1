@@ -42,8 +42,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public int insertEmployee(Employee employee) {
-        int i = employeeMapper.insertEmployee(employee);
-        return i;
+        Employee employee1 = employeeMapper.selectByPrimaryKey(employee.getEmpId());
+        if (employee1 == null){
+            int i = employeeMapper.insertEmployee(employee);
+            return i;
+        }
+        return -1;
     }
 
     /**
@@ -63,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     @Override
-    public int deleteEmployee(int ids ) {
+    public int deleteEmployee(String[] ids ) {
         int i = employeeMapper.deleteEmployee(ids);
         return i;
     }
@@ -87,6 +91,70 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> queryMember() {
         List<Employee> employeeList = employeeMapper.queryMember();
+        return employeeList;
+    }
+
+    /**
+     * 根据DepartmentName查询
+     * @param value
+     * @param page
+     * @param rows
+     * @return
+     */
+    @Override
+    public Vo<Employee> queryByDepartmentName(String value, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        //查询
+        List<Employee> employees = employeeMapper.queryByDepartmentName(value);
+
+        PageInfo<Employee> pageInfo = new PageInfo<Employee>(employees);
+
+        //封装成Json数据
+        Vo<Employee> employeeList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+
+        return employeeList;
+    }
+
+    /**
+     * 根据empId查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @Override
+    public Vo<Employee> searchByEmpId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        //查询
+        List<Employee> employees = employeeMapper.searchByEmpId(searchValue);
+
+        PageInfo<Employee> pageInfo = new PageInfo<Employee>(employees);
+
+        //封装成Json数据
+        Vo<Employee> employeeList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+
+        return employeeList;
+    }
+
+    /**
+     * 根据empName查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @Override
+    public Vo<Employee> searchByEmpName(String searchValue, int page, int rows) {
+
+        PageHelper.startPage(page,rows);
+        //查询
+        List<Employee> employees = employeeMapper.searchByEmpName(searchValue);
+
+        PageInfo<Employee> pageInfo = new PageInfo<Employee>(employees);
+
+        //封装成Json数据
+        Vo<Employee> employeeList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+
         return employeeList;
     }
 }
