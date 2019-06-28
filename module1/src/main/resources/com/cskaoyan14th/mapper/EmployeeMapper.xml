@@ -370,5 +370,22 @@
   <select id="queryCount" resultType="_long">
     select  count(*) from employee
   </select>
+  <insert id="insertEmployee" parameterType="com.cskaoyan14th.bean.Employee">
+    insert into employee (emp_id,emp_name,sex,id_code,birthday,join_date,status,education,degree,major,graduate_school,education_form,department_id)
+    values (#{emp.empId},#{emp.empName},#{emp.sex},#{emp.idCode},#{emp.birthday},#{emp.joinDate},#{emp.status},#{emp.education},#{emp.degree},#{emp.major},#{emp.graduateSchool},#{emp.educationForm},#{emp.departmentId})
+  </insert>
+  <update id="updateEmployee" parameterType="com.cskaoyan14th.bean.Employee">
+    update employee set emp_name = #{emp.empId},sex = #{emp.sex},id_code = #{emp.idCode},birthday = #{emp.birthday},join_date = #{emp.joinDate},status = #{emp.status},education = #{emp.education},degree = #{emp.degree},major = #{emp.major},graduate_school = #{emp.graduateSchool},education_form = #{emp.educationForm},department_id  = #{emp.departmentId} where emp_id = #{emp.empId}
+  </update>
+  <delete id="deleteEmployee" parameterType="com.cskaoyan14th.bean.Employee">
+    delete from employee where emp_id = #{ids}
+  </delete>
+  <select id="queryEmployeeByEmpId" resultMap="employeeMap">
+    select emp.emp_id as empId,emp.emp_name as empName,emp.sex,emp.id_code as idCode,emp.birthday,emp.join_date as joinDate,emp.status,emp.education,emp.degree,
+    emp.major,emp.graduate_school as graduateSchool,emp.education_form as educationForm,emp.department_id as departmentIde,dep.department_id as departmentId,
+    dep.department_name as departmentName,dep.note from  employee emp
+    LEFT  JOIN department dep on  emp.department_id = dep.department_id
+    where emp.emp_id = #{empId}
+  </select>
 
 </mapper>
