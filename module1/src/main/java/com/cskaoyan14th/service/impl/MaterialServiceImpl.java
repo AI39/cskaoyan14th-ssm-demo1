@@ -2,7 +2,10 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.Material;
 import com.cskaoyan14th.bean.MaterialExample;
+import com.cskaoyan14th.bean.MaterialReceive;
+import com.cskaoyan14th.bean.MaterialReceiveExample;
 import com.cskaoyan14th.mapper.MaterialMapper;
+import com.cskaoyan14th.mapper.MaterialReceiveMapper;
 import com.cskaoyan14th.service.MaterialService;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -16,6 +19,9 @@ import java.util.List;
 public class MaterialServiceImpl implements MaterialService {
     @Autowired
     MaterialMapper materialMapper;
+
+    @Autowired
+    MaterialReceiveMapper materialReceiveMapper;
 
     @Override
     public Vo<Material> getMaterialVo(int page, int rows) {
@@ -103,6 +109,16 @@ public class MaterialServiceImpl implements MaterialService {
         PageInfo<Material> pageInfo = new PageInfo<>(list);
         Vo<Material> materialVo= new Vo<>(pageInfo.getTotal(),pageInfo.getList());
         return materialVo;
+    }
+
+    @Override
+    public Vo<MaterialReceive> getMaterialReceiveVo(int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<MaterialReceive> list = materialReceiveMapper.selectMaterialReceive();
+
+        PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
+        Vo<MaterialReceive> receiveVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return receiveVo;
     }
 
 

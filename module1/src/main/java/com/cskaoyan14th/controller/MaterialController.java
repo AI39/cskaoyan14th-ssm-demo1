@@ -1,6 +1,7 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Material;
+import com.cskaoyan14th.bean.MaterialReceive;
 import com.cskaoyan14th.bean.Page;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.service.MaterialService;
@@ -153,5 +154,25 @@ public class MaterialController {
         Vo<Material> materialVo = materialService.selectMaterialVoByType(searchValue,page,rows);
         return materialVo;
     }
+
+
+    @RequestMapping("/materialReceive/find")
+    public String materialReceiveInfoFind(HttpSession session){
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add("materialReceive:add");
+        objects.add("materialReceive:edit");
+        objects.add("materialReceive:delete");
+        session.setAttribute("sysPermissionList",objects);
+        return "/WEB-INF/jsp/materialReceive_list";
+    }
+
+    @RequestMapping("/materialReceive/list")
+    @ResponseBody
+    public Vo<MaterialReceive> materialReceiveInfoList(int page, int rows){
+        Vo<MaterialReceive> receiveVo = materialService.getMaterialReceiveVo(page, rows);
+        return receiveVo;
+    }
+
+
 
 }

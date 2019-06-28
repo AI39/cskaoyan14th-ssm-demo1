@@ -1,7 +1,9 @@
 package com.cskaoyan14th.mapper;
 
+import com.cskaoyan14th.bean.COrder;
 import com.cskaoyan14th.bean.UnqualifyApply;
 import com.cskaoyan14th.bean.UnqualifyApplyExample;
+import com.cskaoyan14th.vo.Vo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,5 +32,6 @@ public interface UnqualifyApplyMapper {
     int updateByPrimaryKey(UnqualifyApply record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
-
+    //UnqualifyApply表左连接employee表还有product表
+    List<UnqualifyApply> queryUnqualifyApplyLeftEmployeeAndProduct();                                                             /*用于json数据的查询*/
 }

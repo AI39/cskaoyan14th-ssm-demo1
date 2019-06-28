@@ -227,5 +227,34 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="manufactureMapper" type="com.cskaoyan14th.bean.Manufacture">
+    <result column="manufacture_sn" property="manufactureSn"/>
+    <result column="order_id" property="orderId"/>
+    <result column="technoiogy_id" property="technologyId"/>
+    <result column="launch_quantity" property="launchQuantity"/>
+    <result column="begin_date" property="beginDate"/>
+    <result column="end_date" property="endDate"/>
+    <association property="cOrder" javaType="com.cskaoyan14th.bean.COrder">
+      <result column="order_id" property="orderId"/>
+    </association>
+    <association property="technology" javaType="com.cskaoyan14th.bean.Technology">
+      <result column="technoiogy_id" property="technologyId"/>
+      <result column="technology_name" property="technologyName"/>
+    </association>
+  </resultMap>
+  <select id="multiSelectAll" resultMap="manufactureMapper">
+    select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+      from manufacture m
+      left join c_order co on m.order_id = co.order_id
+      left join technology t on m.technology_id = t.technology_id
+  </select>
 
+  <delete id="deleteByIds" >
+    delete
+    from manufacture
+    where manufacture_sn in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

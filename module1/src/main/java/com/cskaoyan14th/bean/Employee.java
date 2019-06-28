@@ -1,7 +1,6 @@
 package com.cskaoyan14th.bean;
 
 import java.util.Date;
-import java.util.List;
 
 public class Employee {
     private String empId;
@@ -31,6 +30,38 @@ public class Employee {
     private String departmentId;//部门id
 
     private Department department ;
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getIdCode() {
+        return idCode;
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
 
     public String getEmpName() {
         return empName;

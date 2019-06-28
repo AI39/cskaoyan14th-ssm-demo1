@@ -27,4 +27,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employeeList;
     }
+
+    @Override
+    public int insertEmployee(Employee employee) {
+        int i = employeeMapper.insertEmployee(employee);
+        return i;
+    }
+
+    @Override
+    public int updateEmployee(Employee employee) {
+        int i = employeeMapper.updateEmployee(employee);
+        return i;
+    }
+
+    @Override
+    public int deleteEmployee(int ids ) {
+        int i = employeeMapper.deleteEmployee(ids);
+        return i;
+    }
+
+    @Override
+    public Employee queryEmploymentByEmpId(String empId) {
+        int id = Integer.parseInt(empId);
+        Employee employee = employeeMapper.queryEmployeeByEmpId(id);
+        return employee;
+    }
 }
