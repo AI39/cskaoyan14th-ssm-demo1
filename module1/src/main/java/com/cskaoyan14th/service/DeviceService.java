@@ -3,6 +3,7 @@ package com.cskaoyan14th.service;
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.vo.Vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DeviceService {
@@ -19,19 +20,45 @@ public interface DeviceService {
 
     Vo<DeviceType> searchDeviceTypeByDeviceTypeName(String searchValue, int page, int rows);
 
-    List<Department> getDepartment();
-
     DeviceType getDeviceTypeById(String deviceTypeId);
-
-    Employee getEmployeeById(String employeeId);
 
     Vo<DeviceShow> getDeviceShowVo(int page, int rows);
 
     List<DeviceType> getDeviceType();
 
-    List<Employee> getEmployee();
-
     Boolean deviceIsExists(String deviceId);
 
     int insertDevice(Device device);
+
+    int updateDevice(Device device);
+
+    int deleteDeviceByIds(ArrayList<String> list);
+
+    Vo<DeviceShow> searchDeviceShowByDeviceId(String searchValue, int page, int rows);
+
+    Vo<DeviceShow> searchDeviceShowByDeviceName(String searchValue, int page, int rows);
+
+    Vo<DeviceShow> searchDeviceByDeviceTypeName(String searchValue, int page, int rows);
+    
+    Vo<DeviceCheckShow> getDeviceCheckShowVo(int page, int rows);
+
+    Device getDeviceById(String deviceId);
+
+    List<Device> getDevice();
+
+    Boolean deviceCheckIsExists(String deviceCheckId);
+
+    int insertDeviceCheck(DeviceCheck deviceCheck);
+
+    int updateDeviceCheck(DeviceCheck deviceCheck);
+
+    int deleteDeviceCheckByIds(ArrayList<String> list);
+
+    Vo<DeviceCheckShow> searchDeviceCheckShowByDeviceCheckId(String searchValue, int page, int rows);
+
+    Vo<DeviceCheckShow> searchDeviceCheckShowByDeviceName(String searchValue, int page, int rows);
+
+    Vo<DeviceFaultShow> getDeviceFaultShowVo(int page, int rows);
+
+    List<DeviceFaultShow> getDeviceFaultShow();
 }

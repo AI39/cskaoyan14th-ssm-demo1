@@ -32,6 +32,7 @@ public interface EmployeeMapper {
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
     List<Employee> queryMember();
+
     int insertEmployee(@Param("emp")Employee employee);
 
     int updateEmployee(@Param("emp")Employee employee);

@@ -2,6 +2,7 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.DeviceCheck;
 import com.cskaoyan14th.bean.DeviceCheckExample;
+import com.cskaoyan14th.bean.DeviceCheckShow;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public interface DeviceCheckMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<DeviceCheckShow> selectDeviceCheckShow();
+
+    List<DeviceCheckShow> selectDeviceCheckShowBySingleConditionLike(@Param("type")String type, @Param("searchValue")String searchValue);
 }
