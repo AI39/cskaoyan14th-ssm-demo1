@@ -30,5 +30,8 @@ public interface CustomMapper {
     int updateByPrimaryKey(Custom record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
-
+    //订单表的模糊查询,先在custom表模糊查询客户名
+    List<String> likeSelectIdsByCustomName(String cname);
+    List<Custom> likeSelectCustomsByCustomId(String cid);
+    List<Custom> likeSelectCustomsByCustomName(String cname);
 }

@@ -7,6 +7,7 @@ import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,6 +20,12 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
+    @RequestMapping("get/{oid}")
+    @ResponseBody
+    public COrder get(@PathVariable("oid") String oid){
+        return orderService.selectByIdLeftCustomAndProduct(oid);
+    }
 
     @RequestMapping("find")
     public String find(HttpServletRequest request){
@@ -107,4 +114,24 @@ public class OrderController {
         }
         return responseVo;
     }
+
+    @RequestMapping("search_order_by_orderId")
+    @ResponseBody
+    public Vo<COrder> searchOrderByOrderId(String searchValue,int page,int rows){
+        Vo<COrder> orderList = orderService.queryOrdersByOrderId(searchValue, page, rows);
+        return orderList;
+    }
+    @RequestMapping("search_order_by_orderCustom")
+    @ResponseBody
+    public Vo<COrder> searchOrderByOrderCustomName(String searchValue,int page,int rows){
+        Vo<COrder> orderList = orderService.queryOrdersByCustomName(searchValue, page, rows);
+        return orderList;
+    }
+    @RequestMapping("search_order_by_orderProduct")
+    @ResponseBody
+    public Vo<COrder> searchOrderByOrderProductName(String searchValue,int page,int rows){
+        Vo<COrder> orderList = orderService.queryOrdersByProductName(searchValue, page, rows);
+        return orderList;
+    }
+
 }

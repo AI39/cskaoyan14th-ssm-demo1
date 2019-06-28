@@ -255,4 +255,33 @@
       note = #{note,jdbcType=VARCHAR}
     where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+  <sql id="FinalMeasureCheck_Base_Column_List">
+    f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, f.emp_id, f.result, f.note
+  </sql>
+  <sql id="Employee_Base_Column_List">
+    e.emp_id , e.emp_name, e.sex as emp_sex, e.id_code as emp_id_code, e.birthday as emp_birthday, e.join_date as emp_join_date,
+    e.status as emp_status, e.education as emp_education, e.degree as emp_degree, e.major as emp_major, e.graduate_school as emp_graduate_school,
+    e.education_form as emp_education_from, e.department_id as emp_department_id
+  </sql>
+  <resultMap id="FMMap" type="com.cskaoyan14th.bean.FinalMeasuretCheckVo">
+    <id column="f_measure_check_id" property="fMeasureCheckId"/>
+    <result column="order_id" property="orderId"/>
+    <result column="check_item" property="checkItem"/>
+    <result column="cdate" property="cdate"/>
+    <result column="measure_data" property="measureData"/>
+    <result column="emp_id" property="empId"/>
+    <result column="emp_name" property="empName"/>
+    <result column="result" property="result"/>
+    <result column="note" property="note"/>
+
+  </resultMap>
+  <select id="queryFinalMeasureCheckLeftEmployee" resultMap="FMMap">
+    select f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, e.emp_name, f.result, f.note
+    from
+    final_measuret_check f,
+    employee e
+    where
+    f.emp_id = e.emp_id
+  </select>
 </mapper>

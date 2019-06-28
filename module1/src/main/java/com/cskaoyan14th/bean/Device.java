@@ -56,6 +56,13 @@ public class Device {
 
     public void setDeviceStatusId(String deviceStatusId) {
         this.deviceStatusId = deviceStatusId == null ? null : deviceStatusId.trim();
+        switch(this.deviceStatusId) {
+            case "1" : this.deviceStatus = "良好"; break;
+            case "2" : this.deviceStatus = "故障"; break;
+            case "3" : this.deviceStatus = "维修"; break;
+            case "4" : this.deviceStatus = "报废"; break;
+            default: break;
+        }
     }
 
     public String getDeviceStatus() {
