@@ -175,14 +175,14 @@ public class QualifyController {
 
     @RequestMapping("measure/list")
     @ResponseBody
-    public Vo<FinalMeasuretCheckVo> finalMeasureCheckList(int page, int rows){
-        Vo<FinalMeasuretCheckVo> finalMeasuretCheckList = finalMeasureCheckService.queryFinalMeasureLeftEmployee(page, rows);
+    public Vo<FinalMeasuretCheck> finalMeasureCheckList(int page, int rows){
+        Vo<FinalMeasuretCheck> finalMeasuretCheckList = finalMeasureCheckService.queryFinalMeasureLeftEmployee(page, rows);
         return finalMeasuretCheckList;
     }
 
     @RequestMapping("fMeasureCheck/add_judge")                                                                         //新增检查
     @ResponseBody
-    public ResponseVo<FinalMeasuretCheckVo> fmAdd_judge() {
+    public ResponseVo<FinalMeasuretCheck> fmAdd_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -192,9 +192,25 @@ public class QualifyController {
         return "/WEB-INF/jsp/measurement_add";
     }
 
+    @RequestMapping("measure/insert")
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheck> measureInsert(FinalMeasuretCheck finalMeasuretCheck){
+        ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
+        int insert = finalMeasureCheckService.finalMseaureInsert(finalMeasuretCheck);
+        if (insert == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setStatus(500);
+            responseVo.setMsg("ERROR");
+        }
+        return responseVo;
+
+    }
+
     @RequestMapping("fMeasureCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
-    public ResponseVo<FinalMeasuretCheckVo> fmEdit_judge() {
+    public ResponseVo<FinalMeasuretCheck> fmEdit_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -219,14 +235,14 @@ public class QualifyController {
 
     @RequestMapping("f_count_check/list")                                                                           /*用于数据回显，返回一个json的数据*/
     @ResponseBody
-    public Vo<FinalCountCheckVo> finalCountCheckList(int page, int rows){
-        Vo<FinalCountCheckVo> finalCountCheckList = finalCountCheckService.queryFinalCountLeftEmployee(page, rows);
+    public Vo<FinalCountCheck> finalCountCheckList(int page, int rows){
+        Vo<FinalCountCheck> finalCountCheckList = finalCountCheckService.queryFinalCountLeftEmployee(page, rows);
         return  finalCountCheckList;
     }
 
     @RequestMapping("fCountCheck/add_judge")                                                                         //新增检查
     @ResponseBody
-    public ResponseVo<FinalCountCheckVo> fcAdd_judge() {
+    public ResponseVo<FinalCountCheck> fcAdd_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -238,7 +254,7 @@ public class QualifyController {
 
     @RequestMapping("fCountCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
-    public ResponseVo<FinalCountCheckVo> fcEdit_judge() {
+    public ResponseVo<FinalCountCheck> fcEdit_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -262,14 +278,14 @@ public class QualifyController {
 
     @RequestMapping("p_measure_check/list")
     @ResponseBody
-    public Vo<ProcessMeasureCheckVo> ProcessMeasureCheckList(int page, int rows){
-        Vo<ProcessMeasureCheckVo> processMeasureCheckList = processMeasureCheckService.queryProcessMeasureLeftEmployee(page, rows);
+    public Vo<ProcessMeasureCheck> ProcessMeasureCheckList(int page, int rows){
+        Vo<ProcessMeasureCheck> processMeasureCheckList = processMeasureCheckService.queryProcessMeasureLeftEmployee(page, rows);
         return processMeasureCheckList;
     }
 
     @RequestMapping("pMeasureCheck/add_judge")                                                                         //新增检查
     @ResponseBody
-    public ResponseVo<ProcessMeasureCheckVo> pmAdd_judge() {
+    public ResponseVo<ProcessMeasureCheck> pmAdd_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -281,7 +297,7 @@ public class QualifyController {
 
     @RequestMapping("pMeasureCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
-    public ResponseVo<ProcessMeasureCheckVo> pmEdit_judge() {
+    public ResponseVo<ProcessMeasureCheck> pmEdit_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -304,14 +320,14 @@ public class QualifyController {
 
     @RequestMapping("p_count_check/list")                                                                           /*用于数据回显，返回一个json的数据*/
     @ResponseBody
-    public Vo<ProcessCountCheckVo> ProcessCountCheckList(int page, int rows){
-        Vo<ProcessCountCheckVo> processCountCheckList = processCountCheckService.queryProcessCountLeftEmployee(page, rows);
+    public Vo<ProcessCountCheck> ProcessCountCheckList(int page, int rows){
+        Vo<ProcessCountCheck> processCountCheckList = processCountCheckService.queryProcessCountLeftEmployee(page, rows);
         return processCountCheckList;
     }
 
     @RequestMapping("pCountCheck/add_judge")                                                                         //新增检查
     @ResponseBody
-    public ResponseVo<ProcessCountCheckVo> pcAdd_judge() {
+    public ResponseVo<ProcessCountCheck> pcAdd_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }
@@ -323,7 +339,7 @@ public class QualifyController {
 
     @RequestMapping("pCountCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
-    public ResponseVo<ProcessCountCheckVo> pcEdit_judge() {
+    public ResponseVo<ProcessCountCheck> pcEdit_judge() {
         ResponseVo data = new ResponseVo();
         return data;                                                                                                /*通过抓包看到返回一个空的值*/
     }

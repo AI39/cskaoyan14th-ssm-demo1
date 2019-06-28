@@ -33,5 +33,5 @@ public interface FinalMeasuretCheckMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
     //UnqualifyApply表左连接employee表还有product表
-    List<FinalMeasuretCheckVo> queryFinalMeasureCheckLeftEmployee();
+    List<FinalMeasuretCheck> queryFinalMeasureCheckLeftEmployee();
 }

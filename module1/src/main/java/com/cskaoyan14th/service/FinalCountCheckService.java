@@ -1,6 +1,7 @@
 package com.cskaoyan14th.service;
 
 
+import com.cskaoyan14th.bean.FinalCountCheck;
 import com.cskaoyan14th.bean.FinalCountCheckVo;
 
 import com.cskaoyan14th.vo.Vo;
@@ -11,5 +12,5 @@ import com.cskaoyan14th.vo.Vo;
  */
 
 public interface FinalCountCheckService {
-    Vo<FinalCountCheckVo> queryFinalCountLeftEmployee(int page, int rows);
+    Vo<FinalCountCheck> queryFinalCountLeftEmployee(int page, int rows);
 }
