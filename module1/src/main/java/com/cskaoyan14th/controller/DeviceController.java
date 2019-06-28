@@ -88,7 +88,7 @@ public class DeviceController {
     }
 
     //3.deviceType数据库编辑
-    @RequestMapping("/deviceType/update")
+    @RequestMapping(value = {"/deviceType/update", "/deviceType/update_all"})
     @ResponseBody
     public ResponseVo<DeviceType> deviceTypeUpdate(DeviceType deviceType) {
         ResponseVo<DeviceType> responseVo = new ResponseVo<>();
@@ -232,7 +232,7 @@ public class DeviceController {
     }
 
     //3.deviceList数据库编辑
-    @RequestMapping("/deviceList/update")
+    @RequestMapping(value = {"/deviceList/update", "/deviceList/update_all"})
     @ResponseBody
     public ResponseVo<Device> deviceListUpdate(Device device) {
         ResponseVo<Device> responseVo = new ResponseVo<>();
@@ -461,5 +461,53 @@ public class DeviceController {
         Vo<DeviceFaultShow> deviceFaultShowVo = deviceService.getDeviceFaultShowVo(page, rows);
         return deviceFaultShowVo;
     }
+
+    //(二)DeviceFault新增
+    //1.DeviceFault新增检查
+    @RequestMapping("/deviceFault/add_judge")
+    @ResponseBody
+    public ResponseVo<DeviceFault> deviceFaultAddJudge() {
+        ResponseVo<DeviceFault> responseVo = new ResponseVo<>();
+        return responseVo;
+    }
+
+    //2.DeviceFault新增页面显示
+    @RequestMapping("/deviceFault/add")
+    public String deviceFaultAdd() {
+        return "/WEB-INF/jsp/deviceFault_add";
+    }
+
+    /*//3.DeviceList数据库新增
+    @RequestMapping("deviceCheck/insert")
+    @ResponseBody
+    public ResponseVo<DeviceCheck> deviceCheckInsert(DeviceCheck deviceCheck) {
+        ResponseVo<DeviceCheck> responseVo = new ResponseVo<>();
+        //检查该DeviceCheck的id是否存在
+        Boolean flag = deviceService.deviceCheckIsExists(deviceCheck.getDeviceCheckId());
+        if(flag) {
+            responseVo.setStatus(0);
+            responseVo.setMsg("该设备例检编号已经存在，请更换设备例检编号！");
+            return responseVo;
+        }
+
+        //检查该DeviceCheck的deviceId是否存在
+        flag = deviceService.deviceIsExists(deviceCheck.getDeviceId());
+        if(!flag) {
+            responseVo.setStatus(0);
+            responseVo.setMsg("该设备已删除，请刷新后再试！");
+            return responseVo;
+        }
+
+        //新增
+        int i = deviceService.insertDeviceCheck(deviceCheck);
+        if (i == 1) {
+            responseVo.setStatus(200);
+            responseVo.setMsg("OK");
+            return responseVo;
+        }
+        responseVo.setStatus(99);
+        responseVo.setMsg("未知的错误");
+        return responseVo;
+    }*/
 
 }
