@@ -1,9 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
-import com.cskaoyan14th.bean.COrder;
+import com.cskaoyan14th.bean.*;
 
-import com.cskaoyan14th.bean.UnqualifyApply;
-import com.cskaoyan14th.bean.UnqualifyApplyExample;
 import com.cskaoyan14th.mapper.UnqualifyApplyMapper;
 
 import com.cskaoyan14th.service.UnqualifyService;
@@ -60,6 +58,36 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         int delete = unqualifyApplyMapper.deleteByExample(unqualifyApplyExample);
         System.out.println(delete);
         return delete;
+    }
+
+    @Override
+    public Vo<UnqualifyApply> searchUnqualifyByUnqualifyId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
+        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);                    /*使用逆向工程中的select方法*/
+
+        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+
+        Vo<UnqualifyApply> unqualifyApplyVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return unqualifyApplyVo;
+    }
+
+    @Override
+    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
+        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);                    /*使用逆向工程中的select方法*/
+
+        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+
+        Vo<UnqualifyApply> unqualifyApplyVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return unqualifyApplyVo;
     }
 
 }

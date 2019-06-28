@@ -66,7 +66,7 @@ public class QualifyController {
     @ResponseBody
     public ResponseVo<UnqualifyApply> unqualifyInsert( UnqualifyApply unqualifyApply){
         ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
-        int insert = unqualifyService.unqualifyInsert(unqualifyApply);                                                   //检查主键是否冲突
+        int insert = unqualifyService.unqualifyInsert(unqualifyApply);
         if (insert == 1){
             responseVo.setMsg("OK");
             responseVo.setStatus(200);
@@ -115,12 +115,12 @@ public class QualifyController {
         return data;
     }
 
-    @RequestMapping("unqualify/delete_batch")
+    @RequestMapping("unqualify/delete_batch")                                                                       /*删*/
     @ResponseBody
     public ResponseVo<UnqualifyApply> unqualifyDeleteBatch(String[] ids){
         ResponseVo<UnqualifyApply> responseVo = new ResponseVo<>();
         ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             /*这里为什么要把他转换成list*/
-        int delete = unqualifyService.deleteUnqualifyByIds(list);                                                   /**/
+        int delete = unqualifyService.deleteUnqualifyByIds(list);                                                   /*这里是为了使用逆向工程中的方法*/
         if (delete <= 0){
             responseVo.setStatus(400);
             responseVo.setMsg("删除失败");
@@ -131,6 +131,21 @@ public class QualifyController {
         return responseVo;
     }
 
+    @RequestMapping("unqualify/search_unqualify_by_unqualifyId")                                                    /*要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象*/
+    @ResponseBody
+    public Vo<UnqualifyApply> searchUnqualifyById(String searchValue, int page, int rows){
+        Vo<UnqualifyApply> searchUnqualifyByUnqualifyId = unqualifyService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
+        return searchUnqualifyByUnqualifyId;
+
+    }
+
+    @RequestMapping("unqualify/search_unqualify_by_productName")
+    @ResponseBody
+    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows){
+        Vo<UnqualifyApply> searchUnqualifyByProductName = unqualifyService.searchUnqualifyByProductName(searchValue, page, rows);
+        return searchUnqualifyByProductName;
+
+    }
 
     /*成品计量质检*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
