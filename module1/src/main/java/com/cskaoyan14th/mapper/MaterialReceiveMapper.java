@@ -33,4 +33,8 @@ public interface MaterialReceiveMapper {
 
     List<MaterialReceive> selectMaterialReceive();
 
+    List<MaterialReceive> selectMaterialReceiveByReceiveId(@Param("receiveid") String receiveid);
+
+    List<MaterialReceive> selectMaterialReceiveByMaterialId(@Param("materialid") String materialid);
+
 }
