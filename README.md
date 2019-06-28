@@ -3,7 +3,7 @@
 
 ## 项目规范
 
-* java包规范
+### java包规范
 <details>
 <summary>展开查看</summary>
 <pre><code>
@@ -11,7 +11,7 @@ com.cskaoyan14th
 </code></pre>
 </details>
 
-* idea目录结构规范
+### idea目录结构规范
 <details>
 <summary>展开查看</summary>
 <pre><code>.
@@ -42,7 +42,7 @@ com.cskaoyan14th
 </code></pre>
 </details>
 
-* 数据库规范
+### 数据库规范
 <details>
 <summary>展开查看</summary>
 <pre><code>
@@ -81,7 +81,7 @@ database: production_ssm
 <details>
 <summary>展开查看</summary>
 <pre><code>
-33      : lzl
+33     : lzl
 计划进度: wzg(60%), mxf(40%)
 设备管理: xy(100%)
 工艺监控: lt(100%)

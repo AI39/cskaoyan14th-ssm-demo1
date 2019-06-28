@@ -23,6 +23,16 @@ public class ManufactureServiceImpl implements ManufactureService {
     TechnologyMapper technologyMapper;
 
     @Override
+    public List<Manufacture> multiSelectAll() {
+        return manufactureMapper.multiSelectAll();
+    }
+
+    @Override
+    public Manufacture multiSelectByManufactureSn(String id) {
+        return manufactureMapper.multiSelectByManufactureSn(id);
+    }
+
+    @Override
     public Vo<Manufacture> getManufactureList(int page, int rows) {
         //设置要返回第几页以以及每页要显示的数据条数
         PageHelper.startPage(page, rows);
@@ -37,6 +47,10 @@ public class ManufactureServiceImpl implements ManufactureService {
 
     @Override
     public int insert(Manufacture manufacture) {
+        Manufacture resultManufacture = manufactureMapper.selectByPrimaryKey(manufacture.getManufactureSn());
+        if (resultManufacture != null) {
+            return -1;
+        }
         return manufactureMapper.insert(manufacture);
     }
 

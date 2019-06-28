@@ -243,13 +243,21 @@
     </association>
   </resultMap>
   <select id="multiSelectAll" resultMap="manufactureMapper">
-    select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+      select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
       from manufacture m
       left join c_order co on m.order_id = co.order_id
       left join technology t on m.technology_id = t.technology_id
   </select>
 
-  <delete id="deleteByIds" >
+  <select id="multiSelectByManufactureSn" resultMap="manufactureMapper">
+      select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+      from manufacture m
+      left join c_order co on m.order_id = co.order_id
+      left join technology t on m.technology_id = t.technology_id
+      where m.manufacture_sn = #{id}
+  </select>
+
+  <delete id="deleteByIds">
     delete
     from manufacture
     where manufacture_sn in
