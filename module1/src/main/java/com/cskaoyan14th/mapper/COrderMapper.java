@@ -33,5 +33,16 @@ public interface COrderMapper {
     //c_order表左连接custom表和product表
     List<COrder> queryOrdersLeftCustomAndProduct();
     int updateOrder(COrder order);
+    //c_order表左连接custom表和product表，通过order_id查询
+    COrder selectByIdLeftCustomAndProduct(@Param("oid") String oid);
 
+    /*
+    以下是模糊查询
+     */
+    //订单号order_id模糊查询
+    List<COrder> likeSelectById(@Param("oid") String oid);
+    //客户名查询，需要先在CustomMapper查询custom表获取ids
+    List<COrder> selectByCustomIds(@Param("cidList") List<String> cids);
+    //产品名查询，需要先在ProductMapper查询product表获取ids
+    List<COrder> selectByProductIds(@Param("pidList") List<String> pids);
 }

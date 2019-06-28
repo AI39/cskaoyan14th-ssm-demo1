@@ -5,7 +5,7 @@ import java.util.Date;
 public class MaterialReceive {
     private String receiveId;
 
-    private String materialId;
+    private Material material;
 
     private Integer amount;
 
@@ -17,6 +17,16 @@ public class MaterialReceive {
 
     private String note;
 
+    private String materialId;
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
+
     public String getReceiveId() {
         return receiveId;
     }
@@ -25,12 +35,12 @@ public class MaterialReceive {
         this.receiveId = receiveId == null ? null : receiveId.trim();
     }
 
-    public String getMaterialId() {
-        return materialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialId(String materialId) {
-        this.materialId = materialId == null ? null : materialId.trim();
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Integer getAmount() {
@@ -79,7 +89,7 @@ public class MaterialReceive {
     public String toString() {
         return "MaterialReceive{" +
                 "receiveId='" + receiveId + '\'' +
-                ", materialId='" + materialId + '\'' +
+                ", material=" + material +
                 ", amount=" + amount +
                 ", receiveDate=" + receiveDate +
                 ", sender='" + sender + '\'' +

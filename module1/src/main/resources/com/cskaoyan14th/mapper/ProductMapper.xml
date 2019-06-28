@@ -227,5 +227,32 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-
+  <!--模糊查询-->
+  <select id="likeSelectIdsByProductName" resultType="String">
+    select product_id
+    from product
+    where product_name
+    like CONCAT('%',#{pname},'%')
+  </select>
+  <select id="likeSelectProductsByProductId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product
+    where product_id
+    like CONCAT('%',#{pid},'%')
+  </select>
+  <select id="likeSelectProductsByProductName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product
+    where product_name
+    like CONCAT('%',#{pname},'%')
+  </select>
+  <select id="likeSelectProductsByProductType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product
+    where product_type
+    like CONCAT('%',#{ptype},'%')
+  </select>
 </mapper>

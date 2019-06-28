@@ -1,7 +1,6 @@
 package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.Custom;
-import com.cskaoyan14th.bean.Product;
 import com.cskaoyan14th.service.CustomService;
 import com.cskaoyan14th.util.ToolbarButtons;
 import com.cskaoyan14th.vo.ResponseVo;
@@ -123,5 +122,18 @@ public class CustomController {
             responseVo.setMsg("删除失败");
         }
         return responseVo;
+    }
+
+    @RequestMapping("search_custom_by_customId")
+    @ResponseBody
+    public Vo<Custom> searchCustomByCustomId(String searchValue,int page,int rows){
+        Vo<Custom> customList = customService.queryCustomsByCustomId(searchValue,page,rows);
+        return customList;
+    }
+    @RequestMapping("search_custom_by_customName")
+    @ResponseBody
+    public Vo<Custom> searchCustomByCustomName(String searchValue,int page,int rows){
+        Vo<Custom> customList = customService.queryCustomsByCustomName(searchValue,page,rows);
+        return customList;
     }
 }

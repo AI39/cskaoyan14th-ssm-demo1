@@ -35,4 +35,11 @@ public interface WorkMapper {
 
     int deleteByIds(@Param("ids") String[] ids);
 
+    List<Work> multiSelectByLikeWorkId(@Param("id") String id);
+
+    List<Work> multiSelectByProductIds(@Param("ids") List<String> ids);
+
+    List<Work> multiSelectByDeviceIds(@Param("ids") List<String> ids);
+
+    List<Work> multiSelectByProcessIds(@Param("ids") List<String> ids);
 }

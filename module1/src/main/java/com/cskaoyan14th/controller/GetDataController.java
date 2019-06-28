@@ -27,6 +27,8 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
+    OrderService orderService;
+    @Autowired
     EmployeeService employeeService;
     @Autowired
     DepartmentService departmentService;
@@ -48,7 +50,16 @@ public class GetDataController {
         return customList;
     }
 
-    /*以下是employ功能块*/
+
+
+    @RequestMapping("order/get_data")
+    @ResponseBody
+    public List<COrder> getOrderData(){
+        List<COrder> orderList = orderService.queryOrders();
+        return orderList;
+    }
+
+    /*以下是employee功能块*/
     /**
      * 人员的列表查询
      * @return
@@ -107,6 +118,12 @@ public class GetDataController {
     public Device getDeviceById(@PathVariable("deviceId") String deviceId) {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
-
     }
+    @RequestMapping("deviceFault/get/{deviceFaultId}")
+    @ResponseBody
+    public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {
+        DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
+        return deviceFault;
+    }
+
 }

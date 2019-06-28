@@ -18,9 +18,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Vo<Task> getTaskList(int page, int rows) {
+        //设置要返回第几页以以及每页要显示的数据条数
         PageHelper.startPage(page, rows);
+        //进行查询
         List<Task> taskList1 = taskMapper.multiSelectAll();
+        //把查询结果封装成分页所需的列表
         PageInfo<Task> pageInfo = new PageInfo<Task>(taskList1);
+        //封装成前端所需的数据格式
         Vo<Task> taskList = new Vo<Task>(pageInfo.getTotal(), pageInfo.getList());
         return taskList;
     }
@@ -38,5 +42,44 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public int deleteByIds(String[] ids) {
         return taskMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public Vo<Task> searchTaskListByTaskId(String searchValue, int page, int rows) {
+        //设置要返回第几页以以及每页要显示的数据条数
+        PageHelper.startPage(page, rows);
+        //进行模糊查询
+        List<Task> taskList1 = taskMapper.multiSelectByLikeTaskId(searchValue);
+        //把查询结果封装成分页所需的列表
+        PageInfo<Task> pageInfo = new PageInfo<Task>(taskList1);
+        //封装成前端所需的数据格式
+        Vo<Task> taskList = new Vo<Task>(pageInfo.getTotal(), pageInfo.getList());
+        return taskList;
+    }
+
+    @Override
+    public Vo<Task> searchTaskListByTaskWorkId(String searchValue, int page, int rows) {
+        //设置要返回第几页以以及每页要显示的数据条数
+        PageHelper.startPage(page, rows);
+        //进行模糊查询
+        List<Task> taskList1 = taskMapper.multiSelectByLikeTaskWorkId(searchValue);
+        //把查询结果封装成分页所需的列表
+        PageInfo<Task> pageInfo = new PageInfo<Task>(taskList1);
+        //封装成前端所需的数据格式
+        Vo<Task> taskList = new Vo<Task>(pageInfo.getTotal(), pageInfo.getList());
+        return taskList;
+    }
+
+    @Override
+    public Vo<Task> searchTaskListByTaskManufactureSn(String searchValue, int page, int rows) {
+        //设置要返回第几页以以及每页要显示的数据条数
+        PageHelper.startPage(page, rows);
+        //进行模糊查询
+        List<Task> taskList1 = taskMapper.multiSelectByLikeTaskManufactureSn(searchValue);
+        //把查询结果封装成分页所需的列表
+        PageInfo<Task> pageInfo = new PageInfo<Task>(taskList1);
+        //封装成前端所需的数据格式
+        Vo<Task> taskList = new Vo<Task>(pageInfo.getTotal(), pageInfo.getList());
+        return taskList;
     }
 }
