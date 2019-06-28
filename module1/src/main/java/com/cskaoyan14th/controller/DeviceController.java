@@ -168,14 +168,6 @@ public class DeviceController {
         return deviceShowVo;
     }
 
-    /*//5.保管人显示
-    @RequestMapping("employee/get/{employeeId}")
-    @ResponseBody
-    public Employee getEmployeeById(@PathVariable("employeeId") String employeeId) {
-        Employee employee = deviceService.getEmployeeById(employeeId);
-        return employee;
-    }*/
-
     //(二)DeviceList新增
     //1.DeviceList新增检查
     @RequestMapping("/deviceList/add_judge")

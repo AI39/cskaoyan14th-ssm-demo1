@@ -28,7 +28,7 @@ public class GetDataController {
     @RequestMapping("product/get_data")
     @ResponseBody
     public List<Product> getProductData(){
-        List<Product> productList = productService.queryProductList();
+        List<Product> productList = productService.queryProducts();
         return productList;
     }
 

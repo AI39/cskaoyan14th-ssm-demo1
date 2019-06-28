@@ -1,11 +1,20 @@
 package com.cskaoyan14th.service;
 
 import com.cskaoyan14th.bean.Product;
+import com.cskaoyan14th.vo.Vo;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> queryProductList();
+    List<Product> queryProducts();
     Product queryProductById(String pid);
+
+    Vo<Product> queryProductListPage(int page, int rows);
+
+    int addProduct(Product product);
+
+    int updateProduct(Product product);
+
+    int deleteProductsByIds(String[] ids);
 }

@@ -2,6 +2,8 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.*;
+import com.cskaoyan14th.service.FinalMeasureCheckService;
+import com.cskaoyan14th.service.UnqualifyService;
 import com.cskaoyan14th.vo.ResponseVo;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -22,8 +24,6 @@ import java.util.List;
 @Controller
 public class QualifyController {
     @Autowired
-    UnqualifyApplyMapper unqualifyApplyMapper;
-    @Autowired
     FinalCountCheckMapper finalCountCheckMapper;
     @Autowired
     FinalMeasuretCheckMapper finalMeasuretCheckMapper;
@@ -31,6 +31,11 @@ public class QualifyController {
     ProcessCountCheckMapper processCountCheckMapper;
     @Autowired
     ProcessMeasureCheckMapper processMeasureCheckMapper;
+
+    @Autowired
+    UnqualifyService unqualifyService;
+    @Autowired
+    FinalMeasureCheckService finalMeasureCheckService;
 
     /*不合格品管理*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
@@ -43,20 +48,13 @@ public class QualifyController {
         return "WEB-INF/jsp/unqualify_list";                                                                        /*这里面需要调用query写json返回*/
     }
 
+
     @RequestMapping("unqualify/list")                                                                               /*用于数据回显，返回一个json的数据*/
     @ResponseBody
     public Vo<UnqualifyApply> unqualifyList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
-        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
-        criteria.andProductIdIsNotNull();                                                                           /*这里是加了一个条件，用于不让productId为空*/
-        List<UnqualifyApply> unqualifyApplyList1 = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);     /*通过生成的example调用底层的mapper方法*/
 
-        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(unqualifyApplyList1);
+        Vo<UnqualifyApply> unqualifyApplyList = unqualifyService.queryUnqualifyApplyLeftEmployeeAndProduct(page, rows);
 
-
-        Vo<UnqualifyApply> unqualifyApplyList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
-        System.out.println(unqualifyApplyList);
         return unqualifyApplyList;
     }
 
@@ -82,18 +80,13 @@ public class QualifyController {
         session.setAttribute("sysPermissionList",objects);
         return "WEB-INF/jsp/measurement_list";
     }
+
+
     @RequestMapping("measure/list")
     @ResponseBody
-    public Vo<FinalMeasuretCheck> finalMeasureCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
-        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
-        criteria.andOrderIdIsNotNull();
-        List<FinalMeasuretCheck> finalMeasureCheckList1 = finalMeasuretCheckMapper.selectByExample(finalMeasuretCheckExample);
-        PageInfo<FinalMeasuretCheck> pageInfo = new PageInfo<>(finalMeasureCheckList1);
-        Vo<FinalMeasuretCheck> finalMeasureCheckList = new Vo<>(pageInfo.getTotal(), pageInfo.getList());
-        System.out.println(finalMeasureCheckList);
-        return finalMeasureCheckList;
+    public Vo<FinalMeasuretCheckVo> finalMeasureCheckList(int page, int rows){
+        Vo<FinalMeasuretCheckVo> finalMeasuretCheckList = finalMeasureCheckService.queryFinalMeasureLeftEmployee(page, rows);
+        return finalMeasuretCheckList;
     }
 
 
