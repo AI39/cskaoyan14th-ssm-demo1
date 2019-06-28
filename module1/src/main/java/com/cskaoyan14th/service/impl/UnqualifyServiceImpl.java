@@ -76,13 +76,13 @@ public class UnqualifyServiceImpl implements UnqualifyService {
     }
 
     @Override
-    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {
+    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {                /*该方法有问题，只能查非中文，而且只能查单表*/
         PageHelper.startPage(page,rows);
 
         UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
         UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
         criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
-        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);                    /*使用逆向工程中的select方法*/
+        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);
 
         PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
 
