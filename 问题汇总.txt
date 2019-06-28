@@ -6,5 +6,6 @@
 
 问题3：home.jsp无法访问
 	导入shiro依赖
+
 问题4：pull下来项目后无法正常启动
 	将target目录删除，重新rebuild

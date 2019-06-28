@@ -11,4 +11,10 @@ public interface TaskService {
     int updateByPrimaryKeySelective(Task task);
 
     int deleteByIds(String[] ids);
+
+    Vo<Task> searchTaskListByTaskId(String searchValue, int page, int rows);
+
+    Vo<Task> searchTaskListByTaskWorkId(String searchValue, int page, int rows);
+
+    Vo<Task> searchTaskListByTaskManufactureSn(String searchValue, int page, int rows);
 }

@@ -238,7 +238,7 @@
       <result column="order_id" property="orderId"/>
     </association>
     <association property="technology" javaType="com.cskaoyan14th.bean.Technology">
-      <result column="technoiogy_id" property="technologyId"/>
+      <result column="technology_id" property="technologyId"/>
       <result column="technology_name" property="technologyName"/>
     </association>
   </resultMap>
@@ -257,4 +257,31 @@
       #{id}
     </foreach>
   </delete>
+
+  <select id="multiSelectByLikeManufactureSn" resultMap="manufactureMapper">
+    select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+    from manufacture m
+    left join c_order co on m.order_id = co.order_id
+    left join technology t on m.technology_id = t.technology_id
+    where m.manufacture_sn like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByLikeManufactureOrderId" resultMap="manufactureMapper">
+      select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+      from manufacture m
+      left join c_order co on m.order_id = co.order_id
+      left join technology t on m.technology_id = t.technology_id
+      where m.order_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByTechnologyIds" resultMap="manufactureMapper">
+      select m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date, t.technology_name
+      from manufacture m
+      left join c_order co on m.order_id = co.order_id
+      left join technology t on m.technology_id = t.technology_id
+      where m.technology_id in
+      <foreach collection="ids" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+  </select>
 </mapper>

@@ -11,4 +11,10 @@ public interface ManufactureService {
     int updateByPrimaryKeySelective(Manufacture manufacture);
 
     int deleteByIds(String[] ids);
+
+    Vo<Manufacture> searchManufactureListByManufactureSn(String searchValue, int page, int rows);
+
+    Vo<Manufacture> searchManufactureListByManufactureOrderId(String searchValue, int page, int rows);
+
+    Vo<Manufacture> searchManufactureListByManufactureTechnologyName(String searchValue, int page, int rows);
 }
