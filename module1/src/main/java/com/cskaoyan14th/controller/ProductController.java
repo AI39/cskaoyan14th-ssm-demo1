@@ -122,4 +122,26 @@ public class ProductController {
         }
         return responseVo;
     }
+
+    /*
+    模糊查询
+     */
+    @RequestMapping("search_product_by_productId")
+    @ResponseBody
+    public Vo<Product> searchProductByProductId(String searchValue,int page,int rows){
+        Vo<Product> productList = productService.queryProductsByProductId(searchValue,page,rows);
+        return productList;
+    }
+    @RequestMapping("search_product_by_productName")
+    @ResponseBody
+    public Vo<Product> searchProductByProductName(String searchValue,int page,int rows){
+        Vo<Product> productList = productService.queryProductsByProductName(searchValue,page,rows);
+        return productList;
+    }
+    @RequestMapping("search_product_by_productType")
+    @ResponseBody
+    public Vo<Product> searchProductByProductType(String searchValue,int page,int rows){
+        Vo<Product> productList = productService.queryProductsByProductType(searchValue,page,rows);
+        return productList;
+    }
 }
