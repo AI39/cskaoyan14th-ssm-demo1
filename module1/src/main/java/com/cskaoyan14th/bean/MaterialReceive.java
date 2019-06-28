@@ -75,4 +75,16 @@ public class MaterialReceive {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    @Override
+    public String toString() {
+        return "MaterialReceive{" +
+                "receiveId='" + receiveId + '\'' +
+                ", materialId='" + materialId + '\'' +
+                ", amount=" + amount +
+                ", receiveDate=" + receiveDate +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
