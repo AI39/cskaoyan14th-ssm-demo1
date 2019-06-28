@@ -308,24 +308,8 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-    <resultMap id="deviceShow" type="com.cskaoyan14th.bean.DeviceShow">
-        <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
-        <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
-        <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
-        <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
-        <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
-        <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
-        <result column="device_purchase_price" jdbcType="DECIMAL" property="devicePurchasePrice" />
-        <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
-        <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
-        <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
-        <result column="note" jdbcType="VARCHAR" property="note" />
-        <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName" />
-        <result column="deviceKeeper" jdbcType="VARCHAR" property="deviceKeeper" />
-    </resultMap>
-    <select id="selectDeviceShow" resultMap="deviceShow">
-        select
-        t1.device_id,
+  <sql id="deviceShow_base_column">
+    t1.device_id,
         t1.device_name,
         t1.device_type_id,
         t1.device_status_id,
@@ -339,9 +323,48 @@
         t2.device_type_id AS deviceIdd,
         t2.device_type_name,
         t3.emp_name AS deviceKeeper
-        from device t1
-        LEFT JOIN device_type t2 ON t1.device_type_id = t2.device_type_id
-        LEFT JOIN employee t3 ON t1.device_keeper_id = t3.emp_id
-    </select>
+  </sql>
+  <resultMap id="deviceShowMap" type="com.cskaoyan14th.bean.DeviceShow">
+      <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
+      <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+      <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+      <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
+      <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+      <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
+      <result column="device_purchase_price" jdbcType="DECIMAL" property="devicePurchasePrice" />
+      <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
+      <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
+      <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
+      <result column="note" jdbcType="VARCHAR" property="note" />
+      <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName" />
+      <result column="deviceKeeper" jdbcType="VARCHAR" property="deviceKeeper" />
+  </resultMap>
+
+  <select id="selectDeviceShow" resultMap="deviceShowMap">
+      select
+      <include refid="deviceShow_base_column"/>
+      from device t1
+      LEFT JOIN device_type t2 ON t1.device_type_id = t2.device_type_id
+      LEFT JOIN employee t3 ON t1.device_keeper_id = t3.emp_id
+  </select>
+
+  <select id="selectDeviceShowBySingleConditionLike" resultMap="deviceShowMap">
+    select
+    <include refid="deviceShow_base_column"/>
+    from device t1
+    LEFT JOIN device_type t2 ON t1.device_type_id = t2.device_type_id
+    LEFT JOIN employee t3 ON t1.device_keeper_id = t3.emp_id
+    <where>
+      <if test="type == 'deviceId'">
+        t1.device_id like #{searchValue}
+      </if>
+      <if test="type == 'deviceName'">
+        t1.device_name like #{searchValue}
+      </if>
+      <if test="type == 'deviceTypeName'">
+        t2.device_type_name like #{searchValue}
+      </if>
+    </where>
+  </select>
 
 </mapper>
