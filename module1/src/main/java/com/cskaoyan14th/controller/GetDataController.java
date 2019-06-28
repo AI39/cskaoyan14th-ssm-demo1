@@ -1,17 +1,8 @@
 package com.cskaoyan14th.controller;
 
 
-import com.cskaoyan14th.bean.Custom;
-import com.cskaoyan14th.bean.Employee;
-import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.CustomService;
-import com.cskaoyan14th.service.EmployeeService;
-
 import com.cskaoyan14th.bean.*;
-
-import com.cskaoyan14th.service.DeviceService;
-
-import com.cskaoyan14th.service.ProductService;
+import com.cskaoyan14th.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +22,13 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
-
     EmployeeService employeeService;
     @Autowired
     DeviceService deviceService;
+    @Autowired
+    ManufactureService manufactureService;
+    @Autowired
+    WorkService workService;
 
 
     @RequestMapping("product/get_data")
@@ -96,5 +90,33 @@ public class GetDataController {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
 
+    }
+
+    @RequestMapping("/manufacture/get_data")
+    @ResponseBody
+    public List<Manufacture> manufactureGetData() {
+        List<Manufacture> list = manufactureService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("manufacture/get/{manufactureSn}")
+    @ResponseBody
+    public Manufacture getManufactureById(@PathVariable("manufactureSn") String manufactureSn) {
+        Manufacture manufacture = manufactureService.multiSelectByManufactureSn(manufactureSn);
+        return manufacture;
+    }
+
+    @RequestMapping("/work/get_data")
+    @ResponseBody
+    public List<Work> workGetData() {
+        List<Work> list = workService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("work/get/{workId}")
+    @ResponseBody
+    public Work getWorkById(@PathVariable("workId") String workId) {
+        Work work = workService.multiSelectByWorkId(workId);
+        return work;
     }
 }

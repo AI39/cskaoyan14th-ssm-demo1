@@ -31,6 +31,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int insert(Task task) {
+        Task resultTask = taskMapper.selectByPrimaryKey(task.getTaskId());
+        if (resultTask != null) {
+            return -1;
+        }
         return taskMapper.insert(task);
     }
 

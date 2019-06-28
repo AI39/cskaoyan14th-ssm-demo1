@@ -33,6 +33,8 @@ public interface WorkMapper {
 
     List<Work> multiSelectAll();
 
+    Work multiSelectByWorkId(@Param("id") String id);
+
     int deleteByIds(@Param("ids") String[] ids);
 
     List<Work> multiSelectByLikeWorkId(@Param("id") String id);
