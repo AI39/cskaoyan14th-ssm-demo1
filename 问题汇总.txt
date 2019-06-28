@@ -9,3 +9,5 @@
 
 问题4：pull下来项目后无法正常启动
 	将target目录删除，重新rebuild
+
+问题5：注意mydb.properties

@@ -348,7 +348,7 @@
   </resultMap>
   <select id="queryFinalCountCheckLeftEmployee" resultMap="FCMap">
     select f.f_count_check_id, f.order_id, f.check_item, f.sample, f.check_number, f.unqualify, f.qualify, f.cdate, f.measure_data,
-    e.emp_name, f.result, f.note
+    f.emp_id, e.emp_name, f.result, f.note
     from
     final_count_check f,
     employee e

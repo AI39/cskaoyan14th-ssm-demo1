@@ -348,7 +348,7 @@
   </resultMap>
   <select id="queryProcessCountCheckLeftEmployee" resultMap="PCMap">
     select p.p_count_check_id, p.process_id, p.check_item, p.sample, p.check_number, p.unqualify, p.qualify, p.cdate, p.measure_data,
-    e.emp_name, p.result, p.note
+    p.emp_id, e.emp_name, p.result, p.note
     from
     process_count_check p,
     employee e
