@@ -84,5 +84,39 @@ public class UnqualifyApply {
     }
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    private String productName;                                                                                     //需要别的表中的某个数据
 
+    private String empName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "UnqualifyApply{" +
+                "unqualifyApplyId='" + unqualifyApplyId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", unqualifyItem='" + unqualifyItem + '\'' +
+                ", unqualifyCount=" + unqualifyCount +
+                ", assemblyDate=" + assemblyDate +
+                ", empId='" + empId + '\'' +
+                ", applyDate=" + applyDate +
+                ", note='" + note + '\'' +
+                ", productName='" + productName + '\'' +
+                ", empName='" + empName + '\'' +
+                '}';
+    }
 }

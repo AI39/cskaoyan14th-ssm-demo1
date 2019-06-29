@@ -258,5 +258,54 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <sql id="UnqualifyApply_Base_Column_List">
+    u.unqualify_apply_id, u.product_id, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id, u.apply_date, u.note
+  </sql>
+  <sql id="Product_Base_Column_List">
+    p.product_id as pid, p.product_name, p.product_type, p.image as product_image, p.note as product_note, p.status as product_status
+  </sql>
+  <sql id="Employee_Base_Column_List">
+    e.emp_id , e.emp_name, e.sex as emp_sex, e.id_code as emp_id_code, e.birthday as emp_birthday, e.join_date as emp_join_date,
+    e.status as emp_status, e.education as emp_education, e.degree as emp_degree, e.major as emp_major, e.graduate_school as emp_graduate_school,
+    e.education_form as emp_education_from, e.department_id as emp_department_id
+  </sql>
+  <resultMap id="myUnqualifyMap" type="com.cskaoyan14th.bean.UnqualifyApply">
+    <id column="unqualify_apply_id" property="unqualifyApplyId"/>
+    <result column="product_id" property="productId"/>
+    <result column="product_name" property="productName"/>
+    <result column="unqualify_item" property="unqualifyItem"/>
+    <result column="unqualify_count" property="unqualifyCount"/>
+    <result column="assembly_date" property="assemblyDate"/>
+    <result column="emp_id" property="empId"/>
+    <result column="emp_name" property="empName"/>
+    <result column="apply_date" property="applyDate"/>
+    <result column="note" property="note"/>
+    <result column="product_name" property="productName"/>
+    <result column="emp_name" property="empName"/>
+  </resultMap>
 
+  <select id="queryUnqualifyApplyLeftEmployeeAndProduct" resultMap="myUnqualifyMap">
+    select  u.unqualify_apply_id, u.product_id, p.product_name, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id, e.emp_name, u.apply_date, u.note
+    FROM
+    unqualify_apply u,
+    employee e,
+    product p
+    WHERE
+    u.product_id = p.product_id
+    AND u.emp_id = e.emp_id
+    ORDER BY u.apply_date
+  </select>
+
+  <select id="searchByProductName" resultMap="myUnqualifyMap">
+    select  u.unqualify_apply_id, u.product_id, p.product_name, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id, e.emp_name, u.apply_date, u.note
+    FROM
+    unqualify_apply u,
+    employee e,
+    product p
+    WHERE
+    u.product_id = p.product_id
+    AND u.emp_id = e.emp_id
+    AND p.product_name like #{productName}
+    ORDER BY u.apply_date
+  </select>
 </mapper>

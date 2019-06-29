@@ -31,4 +31,19 @@ public interface EmployeeMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<Employee> queryMember();
+
+    int insertEmployee(@Param("emp")Employee employee);
+
+    int updateEmployee(@Param("emp")Employee employee);
+
+    int deleteEmployee(@Param("ids") String[] ids);
+
+    Employee queryEmployeeByEmpId(@Param("empId")int empId);
+
+    List<Employee> queryByDepartmentName(@Param("depName")String value);
+
+    List<Employee> searchByEmpId(@Param("empId")String searchValue);
+
+    List<Employee> searchByEmpName(@Param("empName")String searchValue);
 }

@@ -375,6 +375,56 @@
       from c_order o
       left join custom c on o.custom_id = c.custom_id
       left join product p on o.product_id = p.product_id
+  </select>
 
+  <select id="selectByIdLeftCustomAndProduct" resultMap="myOrderMap1">
+    select
+    <include refid="Order_Base_Column_List"/>,
+    <include refid="Custom_Base_Column_List"/>,
+    <include refid="Product_Base_Column_List"/>
+    from c_order o
+    left join custom c on o.custom_id = c.custom_id
+    left join product p on o.product_id = p.product_id
+    where o.order_id = #{oid}
+  </select>
+
+  <select id="likeSelectById" resultMap="myOrderMap1">
+    select
+    <include refid="Order_Base_Column_List"/>,
+    <include refid="Custom_Base_Column_List"/>,
+    <include refid="Product_Base_Column_List"/>
+    from c_order o
+    left join custom c on o.custom_id = c.custom_id
+    left join product p on o.product_id = p.product_id
+    where o.order_id
+    like CONCAT('%',#{oid},'%')
+  </select>
+  <select id="selectByProductIds" resultMap="myOrderMap1">
+    select
+    <include refid="Order_Base_Column_List"/>,
+    <include refid="Custom_Base_Column_List"/>,
+    <include refid="Product_Base_Column_List"/>
+    from c_order o
+    left join custom c on o.custom_id = c.custom_id
+    left join product p on o.product_id = p.product_id
+    where o.product_id
+    in
+    <foreach collection="pidList" item="pid" open="(" close=")" separator=",">
+      #{pid}
+    </foreach>
+  </select>
+  <select id="selectByCustomIds" resultMap="myOrderMap1">
+    select
+    <include refid="Order_Base_Column_List"/>,
+    <include refid="Custom_Base_Column_List"/>,
+    <include refid="Product_Base_Column_List"/>
+    from c_order o
+    left join custom c on o.custom_id = c.custom_id
+    left join product p on o.product_id = p.product_id
+    where o.custom_id
+    in
+    <foreach collection="cidList" item="cid" open="(" close=")" separator=",">
+      #{cid}
+    </foreach>
   </select>
 </mapper>

@@ -245,5 +245,49 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <sql id="deviceMaintainShow_base_column">
+    t1.device_maintain_id,
+	t1.device_fault_id,
+	t1.device_maintain_emp_id,
+	t1.device_maintain_date,
+	t1.device_maintain_result,
+	t1.device_maintain_cost,
+	t1.note,
+	t2.emp_name AS deviceMaintainEmp
+  </sql>
+  <resultMap id="deviceMaintainShowMap" type="com.cskaoyan14th.bean.DeviceMaintainShow">
+    <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
+    <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
+    <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
+    <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="deviceMaintainEmp" jdbcType="VARCHAR" property="deviceMaintainEmp" />
+  </resultMap>
+  <select id="selectDeviceMaintainShow" resultMap="deviceMaintainShowMap">
+    select
+    <include refid="deviceMaintainShow_base_column"/>
+    FROM
+    device_maintain t1
+    LEFT JOIN employee t2 ON t1.device_maintain_emp_id = t2.emp_id
+  </select>
 
+  <select id="selectDeviceMaintainShowBySingleConditionLike" resultMap="deviceMaintainShowMap">
+    select
+    <include refid="deviceMaintainShow_base_column"/>
+    FROM
+    device_maintain t1
+    LEFT JOIN employee t2 ON t1.device_maintain_emp_id = t2.emp_id
+
+    <where>
+      <if test="type == 'deviceMaintainId'">
+        t1.device_maintain_id like #{searchValue}
+      </if>
+      <if test="type == 'deviceFaultId'">
+        t1.device_fault_id like #{searchValue}
+      </if>
+    </where>
+
+  </select>
 </mapper>

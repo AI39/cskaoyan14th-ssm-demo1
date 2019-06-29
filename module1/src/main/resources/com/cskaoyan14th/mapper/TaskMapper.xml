@@ -210,5 +210,42 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="taskMapper" type="com.cskaoyan14th.bean.Task">
+      <result column="task_id" property="taskId"/>
+      <result column="manufacture_sn" property="manufactureSn"/>
+      <result column="work_id" property="workId"/>
+      <result column="task_quantity" property="taskQuantity"/>
+      <result column="working_hours" property="workingHours"/>
+  </resultMap>
+  <select id="multiSelectAll" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+  </select>
 
+  <delete id="deleteByIds" >
+    delete
+    from task
+    where task_id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id="multiSelectByLikeTaskId" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where task_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByLikeTaskWorkId" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where work_id like CONCAT('%',#{id},'%')
+  </select>
+
+  <select id="multiSelectByLikeTaskManufactureSn" resultMap="taskMapper">
+      select task_id, manufacture_sn, work_id, task_quantity, working_hours
+      from task
+      where manufacture_sn like CONCAT('%',#{id},'%')
+  </select>
 </mapper>

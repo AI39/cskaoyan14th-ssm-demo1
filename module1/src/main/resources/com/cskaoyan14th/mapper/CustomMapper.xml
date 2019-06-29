@@ -290,5 +290,25 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-
+  <!--模糊查询-->
+  <select id="likeSelectIdsByCustomName" resultType="string">
+    select custom_id
+    from custom
+    where custom_name
+    like CONCAT('%',#{cname},'%')
+  </select>
+  <select id="likeSelectCustomsByCustomId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from custom
+    where custom_id
+    like CONCAT('%',#{cid},'%')
+  </select>
+  <select id="likeSelectCustomsByCustomName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from custom
+    where custom_name
+    like CONCAT('%',#{cname},'%')
+  </select>
 </mapper>

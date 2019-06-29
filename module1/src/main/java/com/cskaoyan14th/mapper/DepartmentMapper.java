@@ -31,4 +31,17 @@ public interface DepartmentMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    Department queryDepartmentById();
+
+    List<Department> queryDepartment();
+
+    int insertDepartment(@Param("dep") Department department);
+
+    int updateDeparment(@Param("dep") Department ids);
+
+    int deleteDepartment(@Param("ids") String[] ids);
+
+    List<Department> queryDepartmentByDid(@Param("sea")  String searchValue);
+
+    List<Department> queryDepartmentByName(@Param("name")String searchValue);
 }

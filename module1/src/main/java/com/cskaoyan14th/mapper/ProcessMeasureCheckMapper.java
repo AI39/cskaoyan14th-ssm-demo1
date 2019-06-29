@@ -1,7 +1,9 @@
 package com.cskaoyan14th.mapper;
 
+import com.cskaoyan14th.bean.FinalCountCheckVo;
 import com.cskaoyan14th.bean.ProcessMeasureCheck;
 import com.cskaoyan14th.bean.ProcessMeasureCheckExample;
+import com.cskaoyan14th.bean.ProcessMeasureCheckVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +30,7 @@ public interface ProcessMeasureCheckMapper {
     int updateByPrimaryKeySelective(ProcessMeasureCheck record);
 
     int updateByPrimaryKey(ProcessMeasureCheck record);
+    /*............................................................................*/
+
+    List<ProcessMeasureCheck> queryProcessMeasureCheckLeftEmployee();
 }

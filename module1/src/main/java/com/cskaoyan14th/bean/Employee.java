@@ -9,40 +9,34 @@ public class Employee {
 
     private String sex;
 
-    private String idCode;
+    private String idCode;//身份证号码
 
     private Date birthday;
 
     private Date joinDate;
 
-    private String status;
+    private String status;//员工状态
 
     private String education;
 
-    private String degree;
+    private String degree;//学位
 
     private String major;
 
     private String graduateSchool;
 
-    private String educationForm;
+    private String educationForm;//受教育形式  全日制/在职
 
-    private String departmentId;
+    private String departmentId;//部门id
+
+    private Department department ;
 
     public String getEmpId() {
         return empId;
     }
 
     public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName == null ? null : empName.trim();
+        this.empId = empId;
     }
 
     public String getSex() {
@@ -50,7 +44,7 @@ public class Employee {
     }
 
     public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+        this.sex = sex;
     }
 
     public String getIdCode() {
@@ -58,7 +52,23 @@ public class Employee {
     }
 
     public void setIdCode(String idCode) {
-        this.idCode = idCode == null ? null : idCode.trim();
+        this.idCode = idCode;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     public Date getBirthday() {
@@ -82,7 +92,7 @@ public class Employee {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
     public String getEducation() {
@@ -90,15 +100,7 @@ public class Employee {
     }
 
     public void setEducation(String education) {
-        this.education = education == null ? null : education.trim();
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree == null ? null : degree.trim();
+        this.education = education;
     }
 
     public String getMajor() {
@@ -106,7 +108,7 @@ public class Employee {
     }
 
     public void setMajor(String major) {
-        this.major = major == null ? null : major.trim();
+        this.major = major;
     }
 
     public String getGraduateSchool() {
@@ -114,7 +116,7 @@ public class Employee {
     }
 
     public void setGraduateSchool(String graduateSchool) {
-        this.graduateSchool = graduateSchool == null ? null : graduateSchool.trim();
+        this.graduateSchool = graduateSchool;
     }
 
     public String getEducationForm() {
@@ -122,7 +124,7 @@ public class Employee {
     }
 
     public void setEducationForm(String educationForm) {
-        this.educationForm = educationForm == null ? null : educationForm.trim();
+        this.educationForm = educationForm;
     }
 
     public String getDepartmentId() {
@@ -130,9 +132,34 @@ public class Employee {
     }
 
     public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
+        this.departmentId = departmentId;
     }
 
-    /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", idCode='" + idCode + '\'' +
+                ", birthday=" + birthday +
+                ", joinDate=" + joinDate +
+                ", status='" + status + '\'' +
+                ", education='" + education + '\'' +
+                ", degree='" + degree + '\'' +
+                ", major='" + major + '\'' +
+                ", graduateSchool='" + graduateSchool + '\'' +
+                ", educationForm='" + educationForm + '\'' +
+                ", departmentId='" + departmentId + '\'' +
+                ", department=" + department +
+                '}';
+    }
 }

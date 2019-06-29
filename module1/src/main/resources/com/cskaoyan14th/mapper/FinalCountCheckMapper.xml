@@ -322,5 +322,37 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
-
+  <sql id="Final_Count_Check_Base_Column_List">
+    f.f_count_check_id, f.order_id, f.check_item, f.sample, f.check_number, f.unqualify, f.qualify, f.cdate, f.measure_data,
+    f.emp_id, f.result, f.note
+  </sql>
+  <sql id="Employee_Base_Column_List">
+    e.emp_id , e.emp_name, e.sex as emp_sex, e.id_code as emp_id_code, e.birthday as emp_birthday, e.join_date as emp_join_date,
+    e.status as emp_status, e.education as emp_education, e.degree as emp_degree, e.major as emp_major, e.graduate_school as emp_graduate_school,
+    e.education_form as emp_education_from, e.department_id as emp_department_id
+  </sql>
+  <resultMap id="FCMap" type="com.cskaoyan14th.bean.FinalCountCheckVo">
+    <id column="f_count_check_id" property="fCountCheckId"/>
+    <id column="order_id" property="orderId"/>
+    <id column="check_item" property="checkItem"/>
+    <id column="sample" property="sample"/>
+    <id column="check_number" property="checkNumber"/>
+    <id column="unqualify" property="unqualify"/>
+    <id column="qualify" property="qualify"/>
+    <id column="cdate" property="cdate"/>
+    <id column="measure_data" property="measureData"/>
+    <id column="emp_id" property="empId"/>
+    <id column="emp_name" property="empName"/>
+    <id column="result" property="result"/>
+    <id column="note" property="note"/>
+  </resultMap>
+  <select id="queryFinalCountCheckLeftEmployee" resultMap="FCMap">
+    select f.f_count_check_id, f.order_id, f.check_item, f.sample, f.check_number, f.unqualify, f.qualify, f.cdate, f.measure_data,
+    f.emp_id, e.emp_name, f.result, f.note
+    from
+    final_count_check f,
+    employee e
+    where
+    f.emp_id = e.emp_id
+  </select>
 </mapper>

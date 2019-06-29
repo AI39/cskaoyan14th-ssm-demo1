@@ -31,4 +31,15 @@ public interface ManufactureMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<Manufacture> multiSelectAll();
+
+    Manufacture multiSelectByManufactureSn(@Param("id") String id);
+
+    int deleteByIds(@Param("ids") String[] ids);
+
+    List<Manufacture> multiSelectByLikeManufactureSn(@Param("id") String id);
+
+    List<Manufacture> multiSelectByLikeManufactureOrderId(@Param("id") String id);
+
+    List<Manufacture> multiSelectByTechnologyIds(@Param("ids") List<String> ids);
 }

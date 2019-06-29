@@ -31,4 +31,17 @@ public interface WorkMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<Work> multiSelectAll();
+
+    Work multiSelectByWorkId(@Param("id") String id);
+
+    int deleteByIds(@Param("ids") String[] ids);
+
+    List<Work> multiSelectByLikeWorkId(@Param("id") String id);
+
+    List<Work> multiSelectByProductIds(@Param("ids") List<String> ids);
+
+    List<Work> multiSelectByDeviceIds(@Param("ids") List<String> ids);
+
+    List<Work> multiSelectByProcessIds(@Param("ids") List<String> ids);
 }

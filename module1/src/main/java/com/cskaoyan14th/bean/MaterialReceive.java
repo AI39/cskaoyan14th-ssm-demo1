@@ -5,7 +5,7 @@ import java.util.Date;
 public class MaterialReceive {
     private String receiveId;
 
-    private String materialId;
+    private Material material;
 
     private Integer amount;
 
@@ -17,6 +17,16 @@ public class MaterialReceive {
 
     private String note;
 
+    private String materialId;
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
+
     public String getReceiveId() {
         return receiveId;
     }
@@ -25,12 +35,12 @@ public class MaterialReceive {
         this.receiveId = receiveId == null ? null : receiveId.trim();
     }
 
-    public String getMaterialId() {
-        return materialId;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMaterialId(String materialId) {
-        this.materialId = materialId == null ? null : materialId.trim();
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Integer getAmount() {
@@ -75,4 +85,16 @@ public class MaterialReceive {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    @Override
+    public String toString() {
+        return "MaterialReceive{" +
+                "receiveId='" + receiveId + '\'' +
+                ", material=" + material +
+                ", amount=" + amount +
+                ", receiveDate=" + receiveDate +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

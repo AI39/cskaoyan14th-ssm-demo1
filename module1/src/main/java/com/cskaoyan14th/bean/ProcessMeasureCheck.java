@@ -15,6 +15,8 @@ public class ProcessMeasureCheck {
 
     private String empId;
 
+    private String empName;
+
     private String result;
 
     private String note;
@@ -81,5 +83,28 @@ public class ProcessMeasureCheck {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessMeasureCheck{" +
+                "pMeasureCheckId='" + pMeasureCheckId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

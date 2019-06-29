@@ -62,5 +62,46 @@ public class Work {
     }
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
-    
+    private Product product;
+    private Process process;
+    private Device device;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    @Override
+    public String toString() {
+        return "Work{" +
+                "workId='" + workId + '\'' +
+                ", processNumber='" + processNumber + '\'' +
+                ", productId='" + productId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", rating=" + rating +
+                ", product=" + product +
+                ", process=" + process +
+                ", device=" + device +
+                '}';
+    }
 }

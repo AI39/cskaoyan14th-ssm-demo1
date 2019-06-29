@@ -2,6 +2,8 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.FinalCountCheck;
 import com.cskaoyan14th.bean.FinalCountCheckExample;
+import com.cskaoyan14th.bean.FinalCountCheckVo;
+import com.cskaoyan14th.bean.FinalMeasuretCheckVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,5 +32,5 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKey(FinalCountCheck record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
-
+    List<FinalCountCheck> queryFinalCountCheckLeftEmployee();
 }

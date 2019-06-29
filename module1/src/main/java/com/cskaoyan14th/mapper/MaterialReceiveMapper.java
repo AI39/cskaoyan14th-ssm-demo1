@@ -31,4 +31,10 @@ public interface MaterialReceiveMapper {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    List<MaterialReceive> selectMaterialReceive();
+
+    List<MaterialReceive> selectMaterialReceiveByReceiveId(@Param("receiveid") String receiveid);
+
+    List<MaterialReceive> selectMaterialReceiveByMaterialId(@Param("materialid") String materialid);
+
 }
