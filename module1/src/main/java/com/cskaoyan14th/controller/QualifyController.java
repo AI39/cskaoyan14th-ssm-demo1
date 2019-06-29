@@ -574,7 +574,20 @@ public class QualifyController {
         return "/WEB-INF/jsp/p_count_check_add";
     }
 
-
+    @RequestMapping("p_count_check/insert")
+    @ResponseBody
+    public ResponseVo<ProcessCountCheck> processCountCheckInsert(ProcessCountCheck processCountCheck){
+        ResponseVo<ProcessCountCheck> responseVo = new ResponseVo<>();
+        int insert = processCountCheckService.processCountInsert(processCountCheck);
+        if (insert == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setStatus(500);
+            responseVo.setMsg("ERROR");
+        }
+        return responseVo;
+    }
 
     @RequestMapping("pCountCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
@@ -586,5 +599,67 @@ public class QualifyController {
     @RequestMapping("p_count_check/edit")                                                                                //编辑页面显示
     public String pcEdit() {
         return "/WEB-INF/jsp/p_count_check_edit";
+    }
+
+    @RequestMapping("p_count_check/update_all")                                                                         /*编辑的逻辑实现*/
+    @ResponseBody
+    public ResponseVo processCountUpdateAll(ProcessCountCheck processCountCheck){
+        ResponseVo responseVo = new ResponseVo();
+        int update = processCountCheckService.processCountUpdate(processCountCheck);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("pCountCheck/delete_judge")
+    @ResponseBody
+    public ResponseVo<ProcessCountCheck> pCountCheckDeleteJudge(){                                                       /*删除判断*/
+        ResponseVo data = new ResponseVo();
+        return data;
+    }
+
+    @RequestMapping("p_count_check/delete_batch")                                                                       //删
+    @ResponseBody
+    public ResponseVo<ProcessCountCheck> processCountDeleteBatch(String[] ids){
+        ResponseVo<ProcessCountCheck> responseVo = new ResponseVo<>();
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             //这里为什么要把他转换成list
+        int delete = processCountCheckService.deleteCountCheckByIds(list);                                                   //这里是为了使用逆向工程中的方法
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("p_count_check/search_pCountCheck_by_pCountCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @ResponseBody
+    public Vo<ProcessCountCheck> searchPCCheckByFCId(String searchValue, int page, int rows){
+        Vo<ProcessCountCheck> searchpCCheckByFCId = processCountCheckService.searchPCCheckByFCId(searchValue, page, rows);
+        return searchpCCheckByFCId;
+
+    }
+
+
+    @RequestMapping("p_count_check/update_note")                                                                        //更新备注
+    @ResponseBody
+    public ResponseVo<ProcessCountCheck> pcCheckUpdateNote(ProcessCountCheck processCountCheck){
+        ResponseVo<ProcessCountCheck> responseVo = new ResponseVo<>();
+        int i = processCountCheckService.updateProcessCountNoteByFCId(processCountCheck);
+        if (i == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(500);
+        }
+        return responseVo;
     }
 }

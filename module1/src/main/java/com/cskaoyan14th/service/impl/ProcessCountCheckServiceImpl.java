@@ -1,8 +1,6 @@
 package com.cskaoyan14th.service.impl;
 
-import com.cskaoyan14th.bean.FinalCountCheckVo;
-import com.cskaoyan14th.bean.ProcessCountCheck;
-import com.cskaoyan14th.bean.ProcessCountCheckVo;
+import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.mapper.ProcessCountCheckMapper;
 import com.cskaoyan14th.service.ProcessCountCheckService;
 import com.cskaoyan14th.vo.Vo;
@@ -35,5 +33,47 @@ public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
         Vo<ProcessCountCheck> processCountCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
 
         return processCountCheckList;
+    }
+
+    @Override
+    public int processCountInsert(ProcessCountCheck processCountCheck) {
+        int insert = processCountCheckMapper.insert(processCountCheck);
+        return insert;
+    }
+
+    @Override
+    public int processCountUpdate(ProcessCountCheck processCountCheck) {
+        int update = processCountCheckMapper.updateByPrimaryKey(processCountCheck);
+        return update;
+    }
+
+    @Override
+    public int deleteCountCheckByIds(List<String> ids) {
+        ProcessCountCheckExample processCountCheckExample = new ProcessCountCheckExample();
+        ProcessCountCheckExample.Criteria criteria = processCountCheckExample.createCriteria();
+        criteria.andPCountCheckIdIn(ids);
+        int delete = processCountCheckMapper.deleteByExample(processCountCheckExample);
+        return delete;
+    }
+
+    @Override
+    public Vo<ProcessCountCheck> searchPCCheckByFCId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        ProcessCountCheckExample processCountCheckExample = new ProcessCountCheckExample();
+        ProcessCountCheckExample.Criteria criteria = processCountCheckExample.createCriteria();
+        criteria.andPCountCheckIdLike("%" + searchValue + "%");
+        List<ProcessCountCheck> processCountChecks = processCountCheckMapper.selectByExample(processCountCheckExample);        /*使用逆向工程中的select方法*/
+
+        PageInfo<ProcessCountCheck> pageInfo = new PageInfo<>(processCountChecks);
+
+        Vo<ProcessCountCheck> processCountCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return processCountCheckList;
+    }
+
+    @Override
+    public int updateProcessCountNoteByFCId(ProcessCountCheck processCountCheck) {
+        int i = processCountCheckMapper.updateByPrimaryKeySelective(processCountCheck);
+        return i;
     }
 }
