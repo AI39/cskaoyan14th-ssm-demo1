@@ -123,8 +123,6 @@ public class GetDataController {
         return device;
     }
 
-
-
     //material数据获取
     @RequestMapping("material/get_data")
     @ResponseBody
@@ -133,13 +131,14 @@ public class GetDataController {
         return materialList;
     }
 
-    //work数据获取
-    @RequestMapping("work/get_data")
+    //material数据通过materialId获取
+    @RequestMapping("material/get/{materialId}")
     @ResponseBody
-    public List<Work> getWorkData(){
-        List<Work> workList = materialService.getAllWork();
-        return workList;
+    public Material getMaterialDataById(@PathVariable("materialId") String materialId){
+        Material material = materialService.selectMaterialById(materialId);
+        return material;
     }
+
 
 
     @RequestMapping("deviceFault/get/{deviceFaultId}")
