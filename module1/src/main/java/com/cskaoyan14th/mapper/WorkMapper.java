@@ -1,5 +1,7 @@
 package com.cskaoyan14th.mapper;
 
+import com.cskaoyan14th.bean.Process;
+import com.cskaoyan14th.bean.TechnologyPlan;
 import com.cskaoyan14th.bean.Work;
 import com.cskaoyan14th.bean.WorkExample;
 import org.apache.ibatis.annotations.Param;
@@ -44,4 +46,6 @@ public interface WorkMapper {
     List<Work> multiSelectByDeviceIds(@Param("ids") List<String> ids);
 
     List<Work> multiSelectByProcessIds(@Param("ids") List<String> ids);
+
+
 }

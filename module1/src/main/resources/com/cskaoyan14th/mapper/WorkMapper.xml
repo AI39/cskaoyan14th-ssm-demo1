@@ -310,4 +310,36 @@
         #{id}
     </foreach>
   </select>
+
+  <!--下面是临时的代码-->
+  <resultMap id="technologyPlanMapper" type="com.cskaoyan14th.bean.TechnologyPlan">
+    <result column="technology_plan_id" property="technologyPlanId"/>
+    <result column="technology_id" property="technologyId"/>
+    <result column="batch_amount" property="batchAmount"/>
+    <result column="start_plan" property="startPlan"/>
+    <result column="end_plan" property="endPlan"/>
+    <result column="commit_plan" property="commitPlan"/>
+    <result column="technology_plan_start" property="technologyPlanStart"/>
+    <result column="technology_plan_end" property="technologyPlanEnd"/>
+  </resultMap>
+  <select id="selectTechnologyPlanAll" resultMap="technologyPlanMapper">
+      select technology_plan_id, technology_id, batch_amount, start_plan, end_plan, commit_plan, technology_plan_start, technology_plan_end
+      from technology_plan
+  </select>
+
+  <resultMap id="ProcessMapper" type="com.cskaoyan14th.bean.Process">
+      <result column="process_id" property="processId"/>
+      <result column="technology_plan_id" property="technologyPlanId"/>
+      <result column="sequence" property="sequence"/>
+      <result column="quota" property="quota"/>
+    <association property="technologyPlan" javaType="com.cskaoyan14th.bean.TechnologyPlan">
+      <result column="technology_plan_id" property="technologyPlanId"/>
+      <result column="technology_id" property="technologyId"/>
+    </association>
+  </resultMap>
+  <select id="multiSelectProcessAll" resultMap="ProcessMapper">
+      select p.process_id, p.technology_plan_id, p.sequence, p.quota, tp.technology_id
+      from process p
+      left join technology_plan tp on p.technology_plan_id = tp.technology_plan_id
+  </select>
 </mapper>

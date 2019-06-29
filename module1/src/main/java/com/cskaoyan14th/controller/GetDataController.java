@@ -3,9 +3,6 @@ package com.cskaoyan14th.controller;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.service.*;
-import com.cskaoyan14th.bean.Custom;
-import com.cskaoyan14th.bean.Employee;
-import com.cskaoyan14th.bean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,10 +33,8 @@ public class GetDataController {
     ManufactureService manufactureService;
     @Autowired
     WorkService workService;
-
     @Autowired
     MaterialService materialService;
-
 
     @RequestMapping("product/get_data")
     @ResponseBody
@@ -132,7 +127,7 @@ public class GetDataController {
         return list;
     }
 
-    @RequestMapping("manufacture/get/{manufactureSn}")
+    @RequestMapping("/manufacture/get/{manufactureSn}")
     @ResponseBody
     public Manufacture getManufactureById(@PathVariable("manufactureSn") String manufactureSn) {
         Manufacture manufacture = manufactureService.multiSelectByManufactureSn(manufactureSn);
@@ -146,12 +141,13 @@ public class GetDataController {
         return list;
     }
 
-    @RequestMapping("work/get/{workId}")
+    @RequestMapping("/work/get/{workId}")
     @ResponseBody
     public Work getWorkById(@PathVariable("workId") String workId) {
         Work work = workService.multiSelectByWorkId(workId);
         return work;
     }
+
 
     //material数据获取
     @RequestMapping("material/get_data")
@@ -167,4 +163,6 @@ public class GetDataController {
         DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
         return deviceFault;
     }
+
+
 }
