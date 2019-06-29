@@ -105,9 +105,6 @@ public class QualifyController {
         return responseVo;
     }
 
-    /*单独根据超链接编辑还没有实现*/
-
-
     @RequestMapping("unqualify/delete_judge")
     @ResponseBody
     public ResponseVo<UnqualifyApply> unqualifyDeleteJudge(){                                                       /*删除判断*/
@@ -161,6 +158,11 @@ public class QualifyController {
         return responseVo;
     }
 
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+
+
     /*成品计量质检*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
     public String fMeasureCheckFind(HttpSession session){
@@ -205,7 +207,6 @@ public class QualifyController {
             responseVo.setMsg("ERROR");
         }
         return responseVo;
-
     }
 
     @RequestMapping("fMeasureCheck/edit_judge")                                                                         //编辑检查
@@ -220,7 +221,76 @@ public class QualifyController {
         return "/WEB-INF/jsp/measurement_edit";
     }
 
+    @RequestMapping("measure/update_all")                                                                         /*编辑的逻辑实现*/
+    @ResponseBody
+    public ResponseVo finalMeasureUpdateAll(FinalMeasuretCheck finalMeasuretCheck){
+        ResponseVo responseVo = new ResponseVo();
+        int update = finalMeasureCheckService.finalMeasureUpdate(finalMeasuretCheck);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
 
+    @RequestMapping("fMeasureCheck/delete_judge")
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheck> fMeasureCheckDeleteJudge(){                                                       /*删除判断*/
+        ResponseVo data = new ResponseVo();
+        return data;
+    }
+
+    @RequestMapping("measure/delete_batch")                                                                       //删
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheck> finalMeasureDeleteBatch(String[] ids){
+        ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             //这里为什么要把他转换成list
+        int delete = finalMeasureCheckService.deleteUnqualifyByIds(list);                                                   //这里是为了使用逆向工程中的方法
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("f_count_check/search_fCountCheck_by_fCountCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @ResponseBody
+    public Vo<FinalCountCheck> searchfCCheckByFCId(String searchValue, int page, int rows){
+        Vo<FinalCountCheck> searchfCCheckByFCId = finalCountCheckService.searchfCCheckByFCId(searchValue, page, rows);
+        return searchfCCheckByFCId;
+
+    }
+
+    @RequestMapping("f_count_check/search_fCountCheck_by_orderId")                                                    //需要多表查询，待修改
+    @ResponseBody
+    public Vo<FinalCountCheck> searchfcCheckByOId(String searchValue, int page, int rows){
+        Vo<FinalCountCheck> searchfcCheckByOId = finalCountCheckService.searchfcCheckByOId(searchValue, page, rows);
+        return searchfcCheckByOId;
+    }
+
+    @RequestMapping("f_count_check/update_note")                                                                        //更新备注
+    @ResponseBody
+    public ResponseVo<FinalCountCheck> UnqualifyUpdateNote(FinalCountCheck finalCountCheck){
+        ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
+        int i = finalCountCheckService.updateFinalCountNoteByFCId(finalCountCheck);
+        if (i == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(500);
+        }
+        return responseVo;
+    }
+
+
+    /*-------------------------------------------------------------------------------------------------------------------*/
     /*成品计数质检*/
     @RequestMapping("f_count_check/find")                                                                           /*显示增删改按钮*/
     public String fCountCheckFind(HttpSession session){
@@ -252,6 +322,22 @@ public class QualifyController {
         return "/WEB-INF/jsp/f_count_check_add";
     }
 
+    @RequestMapping("f_count_check/insert")
+    @ResponseBody
+    public ResponseVo<FinalCountCheck> measureInsert(FinalCountCheck finalCountCheck){
+        ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
+        int insert = finalCountCheckService.finalCountInsert(finalCountCheck);
+        if (insert == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setStatus(500);
+            responseVo.setMsg("ERROR");
+        }
+        return responseVo;
+    }
+
+
     @RequestMapping("fCountCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
     public ResponseVo<FinalCountCheck> fcEdit_judge() {
@@ -264,6 +350,73 @@ public class QualifyController {
         return "/WEB-INF/jsp/f_count_check_edit";
     }
 
+    @RequestMapping("f_count_check/update_all")                                                                         /*编辑的逻辑实现*/
+    @ResponseBody
+    public ResponseVo finalCountUpdateAll(FinalCountCheck finalCountCheck){
+        ResponseVo responseVo = new ResponseVo();
+        int update = finalCountCheckService.finalCountUpdate(finalCountCheck);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("fCountCheck/delete_judge")
+    @ResponseBody
+    public ResponseVo<FinalCountCheck> fCountCheckDeleteJudge(){                                                       /*删除判断*/
+        ResponseVo data = new ResponseVo();
+        return data;
+    }
+
+    @RequestMapping("f_count_check/delete_batch")                                                                       //删
+    @ResponseBody
+    public ResponseVo<FinalCountCheck> finalCountDeleteBatch(String[] ids){
+        ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             //这里为什么要把他转换成list
+        int delete = finalCountCheckService.deleteCountCheckByIds(list);                                                   //这里是为了使用逆向工程中的方法
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @ResponseBody
+    public Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows){
+        Vo<FinalMeasuretCheck> searchUnqualifyByUnqualifyId = finalMeasureCheckService.searchfmCheckByCId(searchValue, page, rows);
+        return searchUnqualifyByUnqualifyId;
+
+    }
+
+    @RequestMapping("measure/search_fMeasureCheck_by_orderId")                                                    //需要多表查询，待修改
+    @ResponseBody
+    public Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows){
+        Vo<FinalMeasuretCheck> searchUnqualifyByProductName = finalMeasureCheckService.searchfmCheckByOId(searchValue, page, rows);
+        return searchUnqualifyByProductName;
+    }
+
+    @RequestMapping("measure/update_note")                                                                        //更新备注
+    @ResponseBody
+    public ResponseVo<FinalMeasuretCheck> UnqualifyUpdateNote(FinalMeasuretCheck finalMeasuretCheck){
+        ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
+        int i = finalMeasureCheckService.updateFinalMeasureNoteByUnqualifyId(finalMeasuretCheck);
+        if (i == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(500);
+        }
+        return responseVo;
+    }
 
     /*工序计量质检*/
     @RequestMapping("p_measure_check/find")                                                                         /*显示增删改按钮*/

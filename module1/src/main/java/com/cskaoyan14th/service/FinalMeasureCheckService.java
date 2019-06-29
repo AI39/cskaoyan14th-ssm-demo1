@@ -5,6 +5,9 @@ import com.cskaoyan14th.bean.FinalMeasuretCheckVo;
 import com.cskaoyan14th.bean.UnqualifyApply;
 import com.cskaoyan14th.vo.Vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author Yuechao Yang
@@ -15,4 +18,16 @@ public interface FinalMeasureCheckService {
     Vo<FinalMeasuretCheck> queryFinalMeasureLeftEmployee(int page, int rows);
 
     int finalMseaureInsert(FinalMeasuretCheck finalMeasuretCheck);
+
+
+    int finalMeasureUpdate(FinalMeasuretCheck finalMeasuretCheck);
+
+    int deleteUnqualifyByIds(List<String> list);
+
+    int updateFinalMeasureNoteByUnqualifyId(FinalMeasuretCheck finalMeasuretCheck);
+
+    Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows);
+
+    Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows);
+
 }

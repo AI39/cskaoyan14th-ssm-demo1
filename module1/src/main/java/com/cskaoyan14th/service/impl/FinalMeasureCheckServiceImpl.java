@@ -2,6 +2,9 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.FinalMeasuretCheck;
 
+import com.cskaoyan14th.bean.FinalMeasuretCheckExample;
+import com.cskaoyan14th.bean.UnqualifyApply;
+import com.cskaoyan14th.bean.UnqualifyApplyExample;
 import com.cskaoyan14th.mapper.FinalMeasuretCheckMapper;
 import com.cskaoyan14th.service.FinalMeasureCheckService;
 import com.cskaoyan14th.vo.Vo;
@@ -39,5 +42,56 @@ public class FinalMeasureCheckServiceImpl implements FinalMeasureCheckService {
     public int finalMseaureInsert(FinalMeasuretCheck finalMeasuretCheck) {
         int insert = finalMeasuretCheckMapper.insert(finalMeasuretCheck);
         return insert;
+    }
+
+    @Override
+    public int finalMeasureUpdate(FinalMeasuretCheck finalMeasuretCheck) {
+        int i = finalMeasuretCheckMapper.updateByPrimaryKey(finalMeasuretCheck);
+        return i;
+    }
+
+    @Override
+    public int deleteUnqualifyByIds(List<String> list) {
+        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
+        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
+        criteria.andFMeasureCheckIdIn(list);
+        int delete = finalMeasuretCheckMapper.deleteByExample(finalMeasuretCheckExample);
+        return delete;
+    }
+
+    @Override
+    public int updateFinalMeasureNoteByUnqualifyId(FinalMeasuretCheck finalMeasuretCheck) {
+        int i = finalMeasuretCheckMapper.updateByPrimaryKeySelective(finalMeasuretCheck);
+        return i;
+    }
+
+    @Override
+    public Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
+        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
+        criteria.andFMeasureCheckIdLike("%" + searchValue + "%");
+        List<FinalMeasuretCheck> finalMeasuretChecks = finalMeasuretCheckMapper.selectByExample(finalMeasuretCheckExample);/*使用逆向工程中的select方法*/
+
+        PageInfo<FinalMeasuretCheck> pageInfo = new PageInfo<>(finalMeasuretChecks);
+
+        Vo<FinalMeasuretCheck> finalMeasuretCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return finalMeasuretCheckList;
+    }
+
+    @Override
+    public Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
+        FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
+        criteria.andOrderIdLike("%" + searchValue + "%");
+        List<FinalMeasuretCheck> finalMeasuretChecks = finalMeasuretCheckMapper.selectByExample(finalMeasuretCheckExample);/*使用逆向工程中的select方法*/
+
+        PageInfo<FinalMeasuretCheck> pageInfo = new PageInfo<>(finalMeasuretChecks);
+
+        Vo<FinalMeasuretCheck> finalMeasuretCheckList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return finalMeasuretCheckList;
     }
 }
