@@ -162,6 +162,18 @@ public class GetDataController {
     }
 
 
+
+    //material数据通过materialId获取
+    @RequestMapping("material/get/{materialId}")
+    @ResponseBody
+    public Material getMaterialDataById(@PathVariable("materialId") String materialId){
+        Material material = materialService.selectMaterialById(materialId);
+        return material;
+    }
+
+
+
+
     @RequestMapping("deviceFault/get/{deviceFaultId}")
     @ResponseBody
     public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {

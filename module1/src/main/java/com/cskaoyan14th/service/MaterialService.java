@@ -64,4 +64,6 @@ public interface MaterialService {
     Vo<MaterialConsume> selectMaterialConsumeVoByMaterialId(String materialid,int page,int rows);
 
     int updateMaterialConsumeNote(String consumeId,String note);
+
+    Material selectMaterialById(String materialId);
 }

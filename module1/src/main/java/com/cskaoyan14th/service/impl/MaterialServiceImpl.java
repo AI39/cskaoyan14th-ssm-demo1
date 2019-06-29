@@ -291,5 +291,11 @@ public class MaterialServiceImpl implements MaterialService {
         return i;
     }
 
+    @Override
+    public Material selectMaterialById(String materialId) {
+        Material material = materialMapper.selectByPrimaryKey(materialId);
+        return material;
+    }
+
 
 }
