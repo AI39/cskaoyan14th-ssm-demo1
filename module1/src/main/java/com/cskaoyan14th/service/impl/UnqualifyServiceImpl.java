@@ -79,10 +79,8 @@ public class UnqualifyServiceImpl implements UnqualifyService {
     public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {                /*该方法有问题，只能查非中文，而且只能查单表，需要多表模糊查询应该怎么做？*/
         PageHelper.startPage(page,rows);
 
-        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
-        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
-        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
-        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);
+
+        List<UnqualifyApply> list = unqualifyApplyMapper.searchByProductName("%"+searchValue+"%");
 
         PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
 

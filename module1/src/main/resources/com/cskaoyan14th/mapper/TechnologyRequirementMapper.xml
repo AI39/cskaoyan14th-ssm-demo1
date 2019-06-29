@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan14th.mapper.technologyRequirementMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan14th.bean.technologyRequirement">
+<mapper namespace="com.cskaoyan14th.mapper.TechnologyRequirementMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan14th.bean.TechnologyRequirement">
     <id column="technology_requirement_id" jdbcType="VARCHAR" property="technologyRequirementId" />
     <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     technology_requirement_id, technology_id, requirement, add_time, revise_time
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan14th.bean.technologyRequirementExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan14th.bean.TechnologyRequirementExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,13 +93,13 @@
     delete from technology_requirement
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan14th.bean.technologyRequirementExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan14th.bean.TechnologyRequirementExample">
     delete from technology_requirement
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan14th.bean.technologyRequirement">
+  <insert id="insert" parameterType="com.cskaoyan14th.bean.TechnologyRequirement">
     insert into technology_requirement (technology_requirement_id, technology_id, 
       requirement, add_time, revise_time
       )
@@ -107,7 +107,7 @@
       #{requirement,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{reviseTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan14th.bean.technologyRequirement">
+  <insert id="insertSelective" parameterType="com.cskaoyan14th.bean.TechnologyRequirement">
     insert into technology_requirement
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="technologyRequirementId != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan14th.bean.technologyRequirementExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan14th.bean.TechnologyRequirementExample" resultType="java.lang.Long">
     select count(*) from technology_requirement
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan14th.bean.technologyRequirement">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan14th.bean.TechnologyRequirement">
     update technology_requirement
     <set>
       <if test="technologyId != null">
@@ -202,7 +202,7 @@
     </set>
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan14th.bean.technologyRequirement">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan14th.bean.TechnologyRequirement">
     update technology_requirement
     set technology_id = #{technologyId,jdbcType=VARCHAR},
       requirement = #{requirement,jdbcType=VARCHAR},
@@ -212,5 +212,42 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="requirementMap" type="com.cskaoyan14th.bean.TechnologyRequirementShow">
+    <id column="technology_requirement_id" jdbcType="VARCHAR" property="technologyRequirementId" />
+    <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+    <result column="requirement" jdbcType="VARCHAR" property="requirement" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="revise_time" jdbcType="TIMESTAMP" property="reviseTime" />
+    <result column="technology_name"  property="technologyName" />
+  </resultMap>
+
+  <select id="selectTechnologyRequirementShow" resultMap="requirementMap">
+    select
+    t1.technology_requirement_id,
+    t1.requirement,
+    t1.add_time,
+    t1.revise_time,
+    t1.technology_id,
+    t2.technology_name
+    from technology_requirement t1
+    left join
+    technology t2
+    on t1.technology_id = t2.technology_id
+  </select>
+  <select id="selectTechnologyRequorementByName" resultMap="requirementMap">
+    select
+    t1.technology_requirement_id,
+    t1.requirement,
+    t1.add_time,
+    t1.revise_time,
+    t1.technology_id,
+    t2.technology_name
+    from technology_requirement t1
+    left join
+    technology t2
+    on t1.technology_id = t2.technology_id
+    where t2.technology_name like #{technologyName}
+  </select>
+
 
 </mapper>

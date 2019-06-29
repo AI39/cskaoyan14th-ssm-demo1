@@ -195,5 +195,20 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="ProcessMapper" type="com.cskaoyan14th.bean.Process">
+    <result column="process_id" property="processId"/>
+    <result column="technology_plan_id" property="technologyPlanId"/>
+    <result column="sequence" property="sequence"/>
+    <result column="quota" property="quota"/>
+    <association property="technologyPlan" javaType="com.cskaoyan14th.bean.TechnologyPlan">
+      <result column="technology_plan_id" property="technologyPlanId"/>
+      <result column="technology_id" property="technologyId"/>
+    </association>
+  </resultMap>
+  <select id="multiSelectProcessAll" resultMap="ProcessMapper">
+      select p.process_id, p.technology_plan_id, p.sequence, p.quota, tp.technology_id
+      from process p
+      left join technology_plan tp on p.technology_plan_id = tp.technology_plan_id
+  </select>
 
 </mapper>

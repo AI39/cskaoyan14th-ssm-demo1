@@ -19,6 +19,18 @@ public class TechnologyPlan {
 
     private Date technologyPlanEnd;
 
+    private String technologyName;
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
+    }
+
+
+
     public String getTechnologyPlanId() {
         return technologyPlanId;
     }
@@ -83,6 +95,35 @@ public class TechnologyPlan {
         this.technologyPlanEnd = technologyPlanEnd;
     }
 
+    public TechnologyPlan(String technologyPlanId, String technologyId, Integer batchAmount, Date startPlan, Date endPlan, Date commitPlan, Date technologyPlanStart, Date technologyPlanEnd, String technologyName) {
+        this.technologyPlanId = technologyPlanId;
+        this.technologyId = technologyId;
+        this.batchAmount = batchAmount;
+        this.startPlan = startPlan;
+        this.endPlan = endPlan;
+        this.commitPlan = commitPlan;
+        this.technologyPlanStart = technologyPlanStart;
+        this.technologyPlanEnd = technologyPlanEnd;
+        this.technologyName = technologyName;
+    }
+
+    public TechnologyPlan() {
+    }
+
+    @Override
+    public String toString() {
+        return "TechnologyPlan{" +
+                "technologyPlanId='" + technologyPlanId + '\'' +
+                ", technologyId='" + technologyId + '\'' +
+                ", batchAmount=" + batchAmount +
+                ", startPlan=" + startPlan +
+                ", endPlan=" + endPlan +
+                ", commitPlan=" + commitPlan +
+                ", technologyPlanStart=" + technologyPlanStart +
+                ", technologyPlanEnd=" + technologyPlanEnd +
+                ", technologyName='" + technologyName + '\'' +
+                '}';
+    }
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
 }

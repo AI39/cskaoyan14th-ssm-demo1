@@ -1,8 +1,12 @@
 package com.cskaoyan14th.service;
 
+import com.cskaoyan14th.bean.FinalMeasuretCheck;
 import com.cskaoyan14th.bean.FinalMeasuretCheckVo;
 import com.cskaoyan14th.bean.UnqualifyApply;
 import com.cskaoyan14th.vo.Vo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -11,5 +15,19 @@ import com.cskaoyan14th.vo.Vo;
  */
 
 public interface FinalMeasureCheckService {
-    Vo<FinalMeasuretCheckVo> queryFinalMeasureLeftEmployee(int page, int rows);
+    Vo<FinalMeasuretCheck> queryFinalMeasureLeftEmployee(int page, int rows);
+
+    int finalMseaureInsert(FinalMeasuretCheck finalMeasuretCheck);
+
+
+    int finalMeasureUpdate(FinalMeasuretCheck finalMeasuretCheck);
+
+    int deleteFMCheckByIds(List<String> list);
+
+    int updateFinalMeasureNoteByUnqualifyId(FinalMeasuretCheck finalMeasuretCheck);
+
+    Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows);
+
+    Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows);
+
 }

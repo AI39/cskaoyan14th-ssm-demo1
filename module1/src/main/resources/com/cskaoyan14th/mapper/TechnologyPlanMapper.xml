@@ -260,5 +260,30 @@
   </update>
 
   <!--上面是逆向工程自动生成的，下面是自己手动添加的-->
+  <resultMap id="TechnologyPlanMap" type="com.cskaoyan14th.bean.TechnologyPlan">
+    <id column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
+    <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+    <result column="batch_amount" jdbcType="INTEGER" property="batchAmount" />
+    <result column="start_plan" jdbcType="TIMESTAMP" property="startPlan" />
+    <result column="end_plan" jdbcType="TIMESTAMP" property="endPlan" />
+    <result column="commit_plan" jdbcType="TIMESTAMP" property="commitPlan" />
+    <result column="technology_plan_start" jdbcType="TIMESTAMP" property="technologyPlanStart" />
+    <result column="technology_plan_end" jdbcType="TIMESTAMP" property="technologyPlanEnd" />
+    <result column="technology_name"  property="technologyName" />
+  </resultMap>
+
+  <select id="selectAllTechnologyPlan"  resultMap="TechnologyPlanMap">
+    select  t1.technology_plan_id, t1.technology_id, t1.batch_amount, t1.start_plan, t1.end_plan, t1.commit_plan,
+    t1.technology_plan_start, t1.technology_plan_end ,t2.technology_name from technology_plan t1 left join technology t2
+    on t1.technology_id = t2.technology_id
+
+  </select>
+  <select id="selectTechnologyPlanByName"  resultMap="TechnologyPlanMap">
+    select  t1.technology_plan_id, t1.technology_id, t1.batch_amount, t1.start_plan, t1.end_plan, t1.commit_plan,
+    t1.technology_plan_start, t1.technology_plan_end ,t2.technology_name from technology_plan t1 left join technology t2
+    on t1.technology_id = t2.technology_id where t2.technology_name like #{technologyName}
+
+  </select>
+
 
 </mapper>

@@ -108,7 +108,7 @@ public class MaterialServiceImpl implements MaterialService {
 
         MaterialExample materialExample = new MaterialExample();
         MaterialExample.Criteria criteria = materialExample.createCriteria();
-        criteria.andMaterialIdLike("%"+type+"%");
+        criteria.andMaterialTypeLike("%"+type+"%");
         List<Material> list = materialMapper.selectByExample(materialExample);
 
         PageInfo<Material> pageInfo = new PageInfo<>(list);
@@ -289,6 +289,12 @@ public class MaterialServiceImpl implements MaterialService {
         materialConsume.setNote(note);
         int i = materialConsumeMapper.updateByPrimaryKey(materialConsume);
         return i;
+    }
+
+    @Override
+    public Material selectMaterialById(String materialId) {
+        Material material = materialMapper.selectByPrimaryKey(materialId);
+        return material;
     }
 
 

@@ -34,4 +34,6 @@ public interface UnqualifyApplyMapper {
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
     //UnqualifyApply表左连接employee表还有product表
     List<UnqualifyApply> queryUnqualifyApplyLeftEmployeeAndProduct();                                                             /*用于json数据的查询*/
+
+    List<UnqualifyApply> searchByProductName(String productName);
 }

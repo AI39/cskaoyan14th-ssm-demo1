@@ -2,6 +2,8 @@ package com.cskaoyan14th.mapper;
 
 import com.cskaoyan14th.bean.TechnologyPlan;
 import com.cskaoyan14th.bean.TechnologyPlanExample;
+import com.cskaoyan14th.bean.TechnologyRequirement;
+import com.cskaoyan14th.bean.TechnologyRequirementShow;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,5 +32,12 @@ public interface TechnologyPlanMapper {
     int updateByPrimaryKey(TechnologyPlan record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
+    List<TechnologyPlan> selectTechnologyPlan();
+
+    List<TechnologyPlan> selectAllTechnologyPlan();
+
+    List<TechnologyPlan> selectTechnologyPlanByName(@Param("technologyName") String technologyName);
+
+
 
 }
