@@ -272,10 +272,12 @@
   <resultMap id="myUnqualifyMap" type="com.cskaoyan14th.bean.UnqualifyApply">
     <id column="unqualify_apply_id" property="unqualifyApplyId"/>
     <result column="product_id" property="productId"/>
+    <result column="product_name" property="productName"/>
     <result column="unqualify_item" property="unqualifyItem"/>
     <result column="unqualify_count" property="unqualifyCount"/>
     <result column="assembly_date" property="assemblyDate"/>
     <result column="emp_id" property="empId"/>
+    <result column="emp_name" property="empName"/>
     <result column="apply_date" property="applyDate"/>
     <result column="note" property="note"/>
     <result column="product_name" property="productName"/>
@@ -291,6 +293,19 @@
     WHERE
     u.product_id = p.product_id
     AND u.emp_id = e.emp_id
+    ORDER BY u.apply_date
+  </select>
+
+  <select id="searchByProductName" resultMap="myUnqualifyMap">
+    select  u.unqualify_apply_id, u.product_id, p.product_name, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id, e.emp_name, u.apply_date, u.note
+    FROM
+    unqualify_apply u,
+    employee e,
+    product p
+    WHERE
+    u.product_id = p.product_id
+    AND u.emp_id = e.emp_id
+    AND p.product_name like #{productName}
     ORDER BY u.apply_date
   </select>
 </mapper>
