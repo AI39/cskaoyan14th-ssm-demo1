@@ -22,7 +22,7 @@ public interface FinalMeasureCheckService {
 
     int finalMeasureUpdate(FinalMeasuretCheck finalMeasuretCheck);
 
-    int deleteUnqualifyByIds(List<String> list);
+    int deleteFMCheckByIds(List<String> list);
 
     int updateFinalMeasureNoteByUnqualifyId(FinalMeasuretCheck finalMeasuretCheck);
 

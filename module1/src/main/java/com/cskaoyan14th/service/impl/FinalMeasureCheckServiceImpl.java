@@ -51,7 +51,7 @@ public class FinalMeasureCheckServiceImpl implements FinalMeasureCheckService {
     }
 
     @Override
-    public int deleteUnqualifyByIds(List<String> list) {
+    public int deleteFMCheckByIds(List<String> list) {
         FinalMeasuretCheckExample finalMeasuretCheckExample = new FinalMeasuretCheckExample();
         FinalMeasuretCheckExample.Criteria criteria = finalMeasuretCheckExample.createCriteria();
         criteria.andFMeasureCheckIdIn(list);

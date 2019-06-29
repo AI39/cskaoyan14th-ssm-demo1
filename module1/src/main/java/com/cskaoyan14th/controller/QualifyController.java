@@ -31,7 +31,7 @@ public class QualifyController {
     @Autowired
     ProcessCountCheckService processCountCheckService;
 
-    /*不合格品管理*/
+    /*不合格品管理,13个功能实现*/
     @RequestMapping("unqualify/find")                                                                               /*显示增删改按钮*/
     public String unqualifyFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
@@ -163,7 +163,7 @@ public class QualifyController {
 
 
 
-    /*成品计量质检*/
+    /*成品计量质检，13个方法实现*/
     @RequestMapping("measure/find")                                                                                 /*显示增删改按钮*/
     public String fMeasureCheckFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
@@ -248,7 +248,7 @@ public class QualifyController {
     public ResponseVo<FinalMeasuretCheck> finalMeasureDeleteBatch(String[] ids){
         ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
         ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             //这里为什么要把他转换成list
-        int delete = finalMeasureCheckService.deleteUnqualifyByIds(list);                                                   //这里是为了使用逆向工程中的方法
+        int delete = finalMeasureCheckService.deleteFMCheckByIds(list);                                                   //这里是为了使用逆向工程中的方法
         if (delete <= 0){
             responseVo.setStatus(400);
             responseVo.setMsg("删除失败");
@@ -259,26 +259,26 @@ public class QualifyController {
         return responseVo;
     }
 
-    @RequestMapping("f_count_check/search_fCountCheck_by_fCountCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
     @ResponseBody
-    public Vo<FinalCountCheck> searchfCCheckByFCId(String searchValue, int page, int rows){
-        Vo<FinalCountCheck> searchfCCheckByFCId = finalCountCheckService.searchfCCheckByFCId(searchValue, page, rows);
-        return searchfCCheckByFCId;
+    public Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows){
+        Vo<FinalMeasuretCheck> searchUnqualifyByUnqualifyId = finalMeasureCheckService.searchfmCheckByCId(searchValue, page, rows);
+        return searchUnqualifyByUnqualifyId;
 
     }
 
-    @RequestMapping("f_count_check/search_fCountCheck_by_orderId")                                                    //需要多表查询，待修改
+    @RequestMapping("measure/search_fMeasureCheck_by_orderId")                                                    //需要多表查询，待修改
     @ResponseBody
-    public Vo<FinalCountCheck> searchfcCheckByOId(String searchValue, int page, int rows){
-        Vo<FinalCountCheck> searchfcCheckByOId = finalCountCheckService.searchfcCheckByOId(searchValue, page, rows);
-        return searchfcCheckByOId;
+    public Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows){
+        Vo<FinalMeasuretCheck> searchUnqualifyByProductName = finalMeasureCheckService.searchfmCheckByOId(searchValue, page, rows);
+        return searchUnqualifyByProductName;
     }
 
-    @RequestMapping("f_count_check/update_note")                                                                        //更新备注
+    @RequestMapping("measure/update_note")                                                                        //更新备注
     @ResponseBody
-    public ResponseVo<FinalCountCheck> UnqualifyUpdateNote(FinalCountCheck finalCountCheck){
-        ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
-        int i = finalCountCheckService.updateFinalCountNoteByFCId(finalCountCheck);
+    public ResponseVo<FinalMeasuretCheck> UnqualifyUpdateNote(FinalMeasuretCheck finalMeasuretCheck){
+        ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
+        int i = finalMeasureCheckService.updateFinalMeasureNoteByUnqualifyId(finalMeasuretCheck);
         if (i == 1){
             responseVo.setMsg("OK");
             responseVo.setStatus(200);
@@ -290,8 +290,10 @@ public class QualifyController {
     }
 
 
-    /*-------------------------------------------------------------------------------------------------------------------*/
-    /*成品计数质检*/
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+
+    /*成品计数质检，13个方法实现*/
     @RequestMapping("f_count_check/find")                                                                           /*显示增删改按钮*/
     public String fCountCheckFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
@@ -324,7 +326,7 @@ public class QualifyController {
 
     @RequestMapping("f_count_check/insert")
     @ResponseBody
-    public ResponseVo<FinalCountCheck> measureInsert(FinalCountCheck finalCountCheck){
+    public ResponseVo<FinalCountCheck> finalCountCheckInsert(FinalCountCheck finalCountCheck){
         ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
         int insert = finalCountCheckService.finalCountInsert(finalCountCheck);
         if (insert == 1){
@@ -388,26 +390,26 @@ public class QualifyController {
         return responseVo;
     }
 
-    @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @RequestMapping("f_count_check/search_fCountCheck_by_fCountCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
     @ResponseBody
-    public Vo<FinalMeasuretCheck> searchfmCheckByCId(String searchValue, int page, int rows){
-        Vo<FinalMeasuretCheck> searchUnqualifyByUnqualifyId = finalMeasureCheckService.searchfmCheckByCId(searchValue, page, rows);
-        return searchUnqualifyByUnqualifyId;
+    public Vo<FinalCountCheck> searchfCCheckByFCId(String searchValue, int page, int rows){
+        Vo<FinalCountCheck> searchfCCheckByFCId = finalCountCheckService.searchfCCheckByFCId(searchValue, page, rows);
+        return searchfCCheckByFCId;
 
     }
 
-    @RequestMapping("measure/search_fMeasureCheck_by_orderId")                                                    //需要多表查询，待修改
+    @RequestMapping("f_count_check/search_fCountCheck_by_orderId")                                                    //需要多表查询，待修改
     @ResponseBody
-    public Vo<FinalMeasuretCheck> searchfmCheckByOId(String searchValue, int page, int rows){
-        Vo<FinalMeasuretCheck> searchUnqualifyByProductName = finalMeasureCheckService.searchfmCheckByOId(searchValue, page, rows);
-        return searchUnqualifyByProductName;
+    public Vo<FinalCountCheck> searchfcCheckByOId(String searchValue, int page, int rows){
+        Vo<FinalCountCheck> searchfcCheckByOId = finalCountCheckService.searchfcCheckByOId(searchValue, page, rows);
+        return searchfcCheckByOId;
     }
 
-    @RequestMapping("measure/update_note")                                                                        //更新备注
+    @RequestMapping("f_count_check/update_note")                                                                        //更新备注
     @ResponseBody
-    public ResponseVo<FinalMeasuretCheck> UnqualifyUpdateNote(FinalMeasuretCheck finalMeasuretCheck){
-        ResponseVo<FinalMeasuretCheck> responseVo = new ResponseVo<>();
-        int i = finalMeasureCheckService.updateFinalMeasureNoteByUnqualifyId(finalMeasuretCheck);
+    public ResponseVo<FinalCountCheck> UnqualifyUpdateNote(FinalCountCheck finalCountCheck){
+        ResponseVo<FinalCountCheck> responseVo = new ResponseVo<>();
+        int i = finalCountCheckService.updateFinalCountNoteByFCId(finalCountCheck);
         if (i == 1){
             responseVo.setMsg("OK");
             responseVo.setStatus(200);
@@ -418,7 +420,10 @@ public class QualifyController {
         return responseVo;
     }
 
-    /*工序计量质检*/
+/*--------------------------------------------------------------------------------------------------------------------------*/
+
+
+    /*工序计量质检,12个方法实现*/
     @RequestMapping("p_measure_check/find")                                                                         /*显示增删改按钮*/
     public String pMeasureCheckFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
@@ -448,11 +453,26 @@ public class QualifyController {
         return "/WEB-INF/jsp/p_measure_check_add";
     }
 
+    @RequestMapping("p_measure_check/insert")
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheck> pmInsert(ProcessMeasureCheck processMeasureCheck){
+        ResponseVo<ProcessMeasureCheck> responseVo = new ResponseVo<>();
+        int insert = processMeasureCheckService.processMeasureInsert(processMeasureCheck);
+        if (insert == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setStatus(500);
+            responseVo.setMsg("ERROR");
+        }
+        return responseVo;
+    }
+
     @RequestMapping("pMeasureCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
     public ResponseVo<ProcessMeasureCheck> pmEdit_judge() {
         ResponseVo data = new ResponseVo();
-        return data;                                                                                                /*通过抓包看到返回一个空的值*/
+        return data;                                                                                                //通过抓包看到返回一个空的值
     }
 
     @RequestMapping("p_measure_check/edit")                                                                                //编辑页面显示
@@ -460,7 +480,71 @@ public class QualifyController {
         return "/WEB-INF/jsp/p_measure_check_edit";
     }
 
-    /*工序计数质检*/
+    @RequestMapping("p_measure_check/update_all")                                                                         //编辑的逻辑实现
+    @ResponseBody
+    public ResponseVo processMeasureUpdateAll(ProcessMeasureCheck processMeasureCheck){
+        ResponseVo responseVo = new ResponseVo();
+        int update = processMeasureCheckService.processMeasureUpdate(processMeasureCheck);
+        if (update == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(400);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("pMeasureCheck/delete_judge")
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheck> pMeasureCheckDeleteJudge(){                                                       /*删除判断*/
+        ResponseVo data = new ResponseVo();
+        return data;
+    }
+
+    @RequestMapping("p_measure_check/delete_batch")                                                                       //删
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheck> processMeasureDeleteBatch(String[] ids){
+        ResponseVo<ProcessMeasureCheck> responseVo = new ResponseVo<>();
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(ids));                                             //这里为什么要把他转换成list
+        int delete = processMeasureCheckService.deletePMCheckByIds(list);                                                   //这里是为了使用逆向工程中的方法
+        if (delete <= 0){
+            responseVo.setStatus(400);
+            responseVo.setMsg("删除失败");
+        } else {
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("p_measure_check/search_pMeasureCheck_by_pMeasureCheckId")                                                    //要分清Vo和responseVo，Vo是封装的page对象，responseVo是封装的显示返回状态的对象
+    @ResponseBody
+    public Vo<ProcessMeasureCheck> searchPmCheckByPId(String searchValue, int page, int rows){
+        Vo<ProcessMeasureCheck> searchPmCheckBypId = processMeasureCheckService.searchPmCheckByPId(searchValue, page, rows);
+        return searchPmCheckBypId;
+
+    }
+
+
+    @RequestMapping("p_measure_check/update_note")                                                                        //更新备注
+    @ResponseBody
+    public ResponseVo<ProcessMeasureCheck> UnqualifyUpdateNote(ProcessMeasureCheck processMeasureCheck){
+        ResponseVo<ProcessMeasureCheck> responseVo = new ResponseVo<>();
+        int i = processMeasureCheckService.updateProcessMeasureNoteByPMeasureId(processMeasureCheck);
+        if (i == 1){
+            responseVo.setMsg("OK");
+            responseVo.setStatus(200);
+        }else {
+            responseVo.setMsg("ERROR");
+            responseVo.setStatus(500);
+        }
+        return responseVo;
+    }
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+
+    /*工序计数质检，12个方法实现*/
     @RequestMapping("p_count_check/find")                                                                           /*显示增删改按钮*/
     public String pCountCheckFind(HttpSession session){
         ArrayList<String> objects = new ArrayList<>();
@@ -489,6 +573,8 @@ public class QualifyController {
     public String pcAdd() {
         return "/WEB-INF/jsp/p_count_check_add";
     }
+
+
 
     @RequestMapping("pCountCheck/edit_judge")                                                                         //编辑检查
     @ResponseBody
