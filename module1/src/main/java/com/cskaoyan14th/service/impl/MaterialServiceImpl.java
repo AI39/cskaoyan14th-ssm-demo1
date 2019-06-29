@@ -108,7 +108,7 @@ public class MaterialServiceImpl implements MaterialService {
 
         MaterialExample materialExample = new MaterialExample();
         MaterialExample.Criteria criteria = materialExample.createCriteria();
-        criteria.andMaterialIdLike("%"+type+"%");
+        criteria.andMaterialTypeLike("%"+type+"%");
         List<Material> list = materialMapper.selectByExample(materialExample);
 
         PageInfo<Material> pageInfo = new PageInfo<>(list);
