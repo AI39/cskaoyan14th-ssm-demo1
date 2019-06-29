@@ -162,6 +162,7 @@ public class GetDataController {
     }
 
 
+
     //material数据通过materialId获取
     @RequestMapping("material/get/{materialId}")
     @ResponseBody
@@ -169,6 +170,7 @@ public class GetDataController {
         Material material = materialService.selectMaterialById(materialId);
         return material;
     }
+
 
 
 

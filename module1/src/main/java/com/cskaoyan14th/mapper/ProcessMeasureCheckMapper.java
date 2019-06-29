@@ -32,5 +32,5 @@ public interface ProcessMeasureCheckMapper {
     int updateByPrimaryKey(ProcessMeasureCheck record);
     /*............................................................................*/
 
-    List<ProcessMeasureCheckVo> queryProcessMeasureCheckLeftEmployee();
+    List<ProcessMeasureCheck> queryProcessMeasureCheckLeftEmployee();
 }

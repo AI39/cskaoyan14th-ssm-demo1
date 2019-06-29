@@ -24,6 +24,8 @@ public class ProcessCountCheck {
 
     private String empId;
 
+    private String empName;
+
     private String result;
 
     private String note;
@@ -126,4 +128,30 @@ public class ProcessCountCheck {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessCountCheck{" +
+                "pCountCheckId='" + pCountCheckId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", sample=" + sample +
+                ", checkNumber=" + checkNumber +
+                ", unqualify=" + unqualify +
+                ", qualify=" + qualify +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
