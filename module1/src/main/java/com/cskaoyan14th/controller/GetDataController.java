@@ -1,13 +1,11 @@
 package com.cskaoyan14th.controller;
 
 
+import com.cskaoyan14th.bean.*;
+import com.cskaoyan14th.service.*;
 import com.cskaoyan14th.bean.Custom;
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.*;
-
-import com.cskaoyan14th.bean.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +32,10 @@ public class GetDataController {
     DepartmentService departmentService;
     @Autowired
     DeviceService deviceService;
+    @Autowired
+    ManufactureService manufactureService;
+    @Autowired
+    WorkService workService;
 
     @Autowired
     MaterialService materialService;
@@ -123,6 +125,34 @@ public class GetDataController {
         return device;
     }
 
+    @RequestMapping("/manufacture/get_data")
+    @ResponseBody
+    public List<Manufacture> manufactureGetData() {
+        List<Manufacture> list = manufactureService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("manufacture/get/{manufactureSn}")
+    @ResponseBody
+    public Manufacture getManufactureById(@PathVariable("manufactureSn") String manufactureSn) {
+        Manufacture manufacture = manufactureService.multiSelectByManufactureSn(manufactureSn);
+        return manufacture;
+    }
+
+    @RequestMapping("/work/get_data")
+    @ResponseBody
+    public List<Work> workGetData() {
+        List<Work> list = workService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("work/get/{workId}")
+    @ResponseBody
+    public Work getWorkById(@PathVariable("workId") String workId) {
+        Work work = workService.multiSelectByWorkId(workId);
+        return work;
+    }
+
     //material数据获取
     @RequestMapping("material/get_data")
     @ResponseBody
@@ -130,6 +160,7 @@ public class GetDataController {
         List<Material> materialList = materialService.getAllMaterial();
         return materialList;
     }
+
 
     //material数据通过materialId获取
     @RequestMapping("material/get/{materialId}")
@@ -147,5 +178,4 @@ public class GetDataController {
         DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
         return deviceFault;
     }
-
 }

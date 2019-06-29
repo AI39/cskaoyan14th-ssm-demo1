@@ -280,7 +280,7 @@
     <result column="note" property="note"/>
   </resultMap>
   <select id="queryProcessMeasureCheckLeftEmployee" resultMap="PMMap">
-    select  p.p_measure_check_id, p.process_id, p.check_item, p.cdate, p.measure_data, e.emp_name, p.result, p.note
+    select  p.p_measure_check_id, p.process_id, p.check_item, p.cdate, p.measure_data, p.emp_id, e.emp_name, p.result, p.note
     from
     process_measure_check p,
     employee e

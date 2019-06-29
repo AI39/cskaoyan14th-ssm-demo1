@@ -1,8 +1,7 @@
 package com.cskaoyan14th.service.impl;
 
-import com.cskaoyan14th.bean.COrder;
+import com.cskaoyan14th.bean.*;
 
-import com.cskaoyan14th.bean.UnqualifyApply;
 import com.cskaoyan14th.mapper.UnqualifyApplyMapper;
 
 import com.cskaoyan14th.service.UnqualifyService;
@@ -23,6 +22,7 @@ public class UnqualifyServiceImpl implements UnqualifyService {
 
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
+
     @Override
     public Vo<UnqualifyApply> queryUnqualifyApplyLeftEmployeeAndProduct(int page, int rows) {
         PageHelper.startPage(page,rows);                                                                                /*这里是设置生成的page数和行数，由前端实现*/
@@ -35,6 +35,65 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         Vo<UnqualifyApply> unqualifyApplyList = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
 
         return unqualifyApplyList;
+    }
+
+    @Override
+    public int unqualifyInsert(UnqualifyApply unqualifyApply) {
+        int insert = unqualifyApplyMapper.insert(unqualifyApply);
+        return insert;
+    }
+
+    @Override
+    public int unqualifyUpdate(UnqualifyApply unqualifyApply) {
+        int update = unqualifyApplyMapper.updateByPrimaryKey(unqualifyApply);
+        System.out.println("插入后返回："+update);
+        return update;
+    }
+
+    @Override
+    public int deleteUnqualifyByIds(List<String> ids) {
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdIn(ids);
+        int delete = unqualifyApplyMapper.deleteByExample(unqualifyApplyExample);
+        System.out.println(delete);
+        return delete;
+    }
+
+    @Override
+    public Vo<UnqualifyApply> searchUnqualifyByUnqualifyId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
+        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);                    /*使用逆向工程中的select方法*/
+
+        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+
+        Vo<UnqualifyApply> unqualifyApplyVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return unqualifyApplyVo;
+    }
+
+    @Override
+    public Vo<UnqualifyApply> searchUnqualifyByProductName(String searchValue, int page, int rows) {                /*该方法有问题，只能查非中文，而且只能查单表，需要多表模糊查询应该怎么做？*/
+        PageHelper.startPage(page,rows);
+
+        UnqualifyApplyExample unqualifyApplyExample = new UnqualifyApplyExample();
+        UnqualifyApplyExample.Criteria criteria = unqualifyApplyExample.createCriteria();
+        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
+        List<UnqualifyApply> list = unqualifyApplyMapper.selectByExample(unqualifyApplyExample);
+
+        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+
+        Vo<UnqualifyApply> unqualifyApplyVo = new Vo<>(pageInfo.getTotal(),pageInfo.getList());
+        return unqualifyApplyVo;
+    }
+
+    @Override
+    public int updateUnqualifyNoteByUnqualifyId(UnqualifyApply unqualifyApply) {
+        int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply);
+        return i;
     }
 
 }

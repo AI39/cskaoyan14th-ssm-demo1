@@ -283,7 +283,7 @@
   </resultMap>
 
   <select id="queryUnqualifyApplyLeftEmployeeAndProduct" resultMap="myUnqualifyMap">
-    select  u.unqualify_apply_id, p.product_name, u.unqualify_item, u.unqualify_count, u.assembly_date, e.emp_name, u.apply_date, u.note
+    select  u.unqualify_apply_id, u.product_id, p.product_name, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id, e.emp_name, u.apply_date, u.note
     FROM
     unqualify_apply u,
     employee e,

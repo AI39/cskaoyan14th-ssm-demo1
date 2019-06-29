@@ -28,6 +28,16 @@ public class WorkServiceImpl implements WorkService {
     ProcessMapper processMapper;
 
     @Override
+    public List<Work> multiSelectAll() {
+        return workMapper.multiSelectAll();
+    }
+
+    @Override
+    public Work multiSelectByWorkId(String id) {
+        return workMapper.multiSelectByWorkId(id);
+    }
+
+    @Override
     public Vo<Work> getWorkList(int page, int rows) {
         //设置要返回第几页以以及每页要显示的数据条数
         PageHelper.startPage(page, rows);
@@ -42,6 +52,10 @@ public class WorkServiceImpl implements WorkService {
 
     @Override
     public int insert(Work work) {
+        Work resultWork = workMapper.selectByPrimaryKey(work.getWorkId());
+        if (resultWork != null) {
+            return -1;
+        }
         return workMapper.insert(work);
     }
 
