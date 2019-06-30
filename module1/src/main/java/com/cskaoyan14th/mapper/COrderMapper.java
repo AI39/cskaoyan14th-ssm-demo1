@@ -45,4 +45,6 @@ public interface COrderMapper {
     List<COrder> selectByCustomIds(@Param("cidList") List<String> cids);
     //产品名查询，需要先在ProductMapper查询product表获取ids
     List<COrder> selectByProductIds(@Param("pidList") List<String> pids);
+
+    int updateNoteOrder(@Param("ord")String orderId,@Param("note") String note);
 }

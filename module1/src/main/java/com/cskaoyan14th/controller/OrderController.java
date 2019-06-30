@@ -4,6 +4,7 @@ import com.cskaoyan14th.bean.COrder;
 import com.cskaoyan14th.service.OrderService;
 import com.cskaoyan14th.util.ToolbarButtons;
 import com.cskaoyan14th.vo.ResponseVo;
+import com.cskaoyan14th.vo.ResponseVoBox;
 import com.cskaoyan14th.vo.Vo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -132,6 +133,14 @@ public class OrderController {
     public Vo<COrder> searchOrderByOrderProductName(String searchValue,int page,int rows){
         Vo<COrder> orderList = orderService.queryOrdersByProductName(searchValue, page, rows);
         return orderList;
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public ResponseVo update_note(String orderId,String note){
+        int i = orderService.updateNoteOrder(orderId,note);
+        ResponseVo box = new ResponseVoBox().Box(i);
+        return box;
     }
 
 }

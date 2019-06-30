@@ -1,5 +1,6 @@
 package com.cskaoyan14th.controller;
 
+import com.cskaoyan14th.bean.Department;
 import com.cskaoyan14th.bean.Employee;
 import com.cskaoyan14th.service.EmployeeService;
 import com.cskaoyan14th.vo.Vo;

@@ -128,4 +128,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentServiceVo;
     }
+
+    @Override
+    public int updateNoteDepartment(String departmentId, String note) {
+        int i = departmentMapper.updateNoteDepartment(departmentId,note);
+        return i;
+    }
+
+    @Override
+    public Department queryDepartmentById(String depId) {
+
+        Department department = departmentMapper.queryDepartmentById(depId);
+        return department;
+    }
 }

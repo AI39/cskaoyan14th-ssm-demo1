@@ -44,4 +44,8 @@ public interface DepartmentMapper {
     List<Department> queryDepartmentByDid(@Param("sea")  String searchValue);
 
     List<Department> queryDepartmentByName(@Param("name")String searchValue);
+
+    int updateNoteDepartment(@Param("dep")String departmentId, @Param("note")String note);
+
+    Department queryDepartmentById(@Param("dep")String depId);
 }

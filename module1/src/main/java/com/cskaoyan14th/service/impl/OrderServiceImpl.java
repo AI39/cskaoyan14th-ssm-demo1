@@ -135,4 +135,10 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
+    @Override
+    public int updateNoteOrder(String orderId, String note) {
+        int i = orderMapper.updateNoteOrder(orderId,note);
+        return i;
+
+    }
 }

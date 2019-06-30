@@ -229,4 +229,13 @@
       CONCAT('%',#{name},'%')
     </where>
   </select>
+  <!--更新部门信息-->
+  <update id="updateNoteDepartment" parameterType="com.cskaoyan14th.bean.Department">
+    update department set note = #{note}
+    where department_id = #{dep}
+  </update>
+  <!--get方法-->
+  <select id="queryDepartmentById" resultMap="departmentMap" >
+    select department_id as departmentId ,department_name as departmentName , note from department where department_id = #{dep} </select>
+
 </mapper>

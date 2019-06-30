@@ -8,6 +8,7 @@ import com.cskaoyan14th.vo.ResponseVoBox;
 import com.cskaoyan14th.vo.Vo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -137,5 +138,25 @@ public class DepartmentController {
     public Vo<Department> searchByName(String  searchValue,int page,int rows){
         Vo<Department> departmentVo = departmentService.searchDepartmentByName(searchValue,page,rows);
         return departmentVo;
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public ResponseVo update_note(String departmentId,String note){
+        int i = departmentService.updateNoteDepartment(departmentId,note);
+        ResponseVo box = new ResponseVoBox().Box(i);
+        return box;
+    }
+
+    /**
+     * 以下为rest风格的Get模块
+     * @param depId
+     * @return ResponseVo
+     */
+    @RequestMapping("get/{depId}")
+    @ResponseBody
+    public Department get(@PathVariable("depId") String depId){
+        Department department = departmentService.queryDepartmentById(depId);
+        return department;
     }
 }

@@ -24,4 +24,6 @@ public interface OrderService {
     Vo<COrder> queryOrdersByCustomName(String searchValue,int page, int rows);
 
     List<COrder> queryOrders();
+
+    int updateNoteOrder(String orderId, String note);
 }

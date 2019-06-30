@@ -19,4 +19,8 @@ public interface DepartmentService {
     Vo<Department> searchDepartmentById(String searchValue, int page, int rows);
 
     Vo<Department> searchDepartmentByName(String searchValue, int page, int rows);
+
+    int updateNoteDepartment(String departmentId, String note);
+
+    Department queryDepartmentById(String depId);
 }

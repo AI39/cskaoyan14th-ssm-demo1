@@ -427,4 +427,8 @@
       #{cid}
     </foreach>
   </select>
+  <update id="updateNoteOrder" parameterType="com.cskaoyan14th.bean.COrder">
+    update c_order set note = #{note}
+    where order_id = #{ord}
+  </update>
 </mapper>
