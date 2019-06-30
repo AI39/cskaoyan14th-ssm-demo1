@@ -26,7 +26,7 @@ public class Technology {
     }
 
     public void setTechnologyId(String technologyId) {
-        this.technologyId = technologyId == null ? null : technologyId.trim();
+        this.technologyId = technologyId;
     }
 
     public String getTechnologyName() {
@@ -34,7 +34,7 @@ public class Technology {
     }
 
     public void setTechnologyName(String technologyName) {
-        this.technologyName = technologyName == null ? null : technologyName.trim();
+        this.technologyName = technologyName;
     }
 
     public BigDecimal getPrice() {
@@ -50,7 +50,7 @@ public class Technology {
     }
 
     public void setVitalProcessPeriod(String vitalProcessPeriod) {
-        this.vitalProcessPeriod = vitalProcessPeriod == null ? null : vitalProcessPeriod.trim();
+        this.vitalProcessPeriod = vitalProcessPeriod;
     }
 
     public Integer getStandardCapacity() {
@@ -93,6 +93,35 @@ public class Technology {
         this.overfulfilCapacity = overfulfilCapacity;
     }
 
+    public Technology(String technologyId, String technologyName, BigDecimal price, String vitalProcessPeriod, Integer standardCapacity, Integer overtimeStandardCapacity, Integer overtimeOverfulfilCapacity, Integer doubleCapacity, Integer overfulfilCapacity) {
+        this.technologyId = technologyId;
+        this.technologyName = technologyName;
+        this.price = price;
+        this.vitalProcessPeriod = vitalProcessPeriod;
+        this.standardCapacity = standardCapacity;
+        this.overtimeStandardCapacity = overtimeStandardCapacity;
+        this.overtimeOverfulfilCapacity = overtimeOverfulfilCapacity;
+        this.doubleCapacity = doubleCapacity;
+        this.overfulfilCapacity = overfulfilCapacity;
+    }
+
+    public Technology() {
+    }
+
+    @Override
+    public String toString() {
+        return "Technology{" +
+                "technologyId='" + technologyId + '\'' +
+                ", technologyName='" + technologyName + '\'' +
+                ", price=" + price +
+                ", vitalProcessPeriod='" + vitalProcessPeriod + '\'' +
+                ", standardCapacity=" + standardCapacity +
+                ", overtimeStandardCapacity=" + overtimeStandardCapacity +
+                ", overtimeOverfulfilCapacity=" + overtimeOverfulfilCapacity +
+                ", doubleCapacity=" + doubleCapacity +
+                ", overfulfilCapacity=" + overfulfilCapacity +
+                '}';
+    }
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
 }

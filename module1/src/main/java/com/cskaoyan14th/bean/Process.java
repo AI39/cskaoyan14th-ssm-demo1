@@ -43,4 +43,24 @@ public class Process {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    TechnologyPlan technologyPlan;
+
+    public TechnologyPlan getTechnologyPlan() {
+        return technologyPlan;
+    }
+
+    public void setTechnologyPlan(TechnologyPlan technologyPlan) {
+        this.technologyPlan = technologyPlan;
+    }
+
+    @Override
+    public String toString() {
+        return "Process{" +
+                "processId='" + processId + '\'' +
+                ", technologyPlanId='" + technologyPlanId + '\'' +
+                ", sequence=" + sequence +
+                ", quota=" + quota +
+                ", technologyPlan=" + technologyPlan +
+                '}';
+    }
 }

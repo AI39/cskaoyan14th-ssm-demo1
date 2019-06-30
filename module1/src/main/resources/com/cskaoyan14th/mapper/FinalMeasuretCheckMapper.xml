@@ -277,7 +277,7 @@
 
   </resultMap>
   <select id="queryFinalMeasureCheckLeftEmployee" resultMap="FMMap">
-    select f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, e.emp_name, f.result, f.note
+    select f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, f.emp_id, e.emp_name, f.result, f.note
     from
     final_measuret_check f,
     employee e

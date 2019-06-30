@@ -32,5 +32,5 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKey(FinalCountCheck record);
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
-    List<FinalCountCheckVo> queryFinalCountCheckLeftEmployee();
+    List<FinalCountCheck> queryFinalCountCheckLeftEmployee();
 }

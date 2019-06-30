@@ -5,6 +5,10 @@ import java.util.Date;
 public class MaterialConsume {
     private String consumeId;
 
+    private Work work;
+
+    private Material material;
+
     private String workId;
 
     private String materialId;
@@ -18,6 +22,22 @@ public class MaterialConsume {
     private String receiver;
 
     private String note;
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
 
     public String getConsumeId() {
         return consumeId;
@@ -85,4 +105,17 @@ public class MaterialConsume {
 
     /*上面是逆向工程自动生成的，下面是自己手动添加的*/
 
+    @Override
+    public String toString() {
+        return "MaterialConsume{" +
+                "consumeId='" + consumeId + '\'' +
+                ", work=" + work +
+                ", material=" + material +
+                ", consumeAmount=" + consumeAmount +
+                ", consumeDate=" + consumeDate +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

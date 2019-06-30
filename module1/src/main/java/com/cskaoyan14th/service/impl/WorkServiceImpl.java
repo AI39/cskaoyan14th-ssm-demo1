@@ -2,10 +2,7 @@ package com.cskaoyan14th.service.impl;
 
 import com.cskaoyan14th.bean.*;
 import com.cskaoyan14th.bean.Process;
-import com.cskaoyan14th.mapper.DeviceMapper;
-import com.cskaoyan14th.mapper.ProcessMapper;
-import com.cskaoyan14th.mapper.ProductMapper;
-import com.cskaoyan14th.mapper.WorkMapper;
+import com.cskaoyan14th.mapper.*;
 import com.cskaoyan14th.service.WorkService;
 import com.cskaoyan14th.vo.Vo;
 import com.github.pagehelper.PageHelper;
@@ -28,6 +25,16 @@ public class WorkServiceImpl implements WorkService {
     ProcessMapper processMapper;
 
     @Override
+    public List<Work> multiSelectAll() {
+        return workMapper.multiSelectAll();
+    }
+
+    @Override
+    public Work multiSelectByWorkId(String id) {
+        return workMapper.multiSelectByWorkId(id);
+    }
+
+    @Override
     public Vo<Work> getWorkList(int page, int rows) {
         //设置要返回第几页以以及每页要显示的数据条数
         PageHelper.startPage(page, rows);
@@ -42,6 +49,10 @@ public class WorkServiceImpl implements WorkService {
 
     @Override
     public int insert(Work work) {
+        Work resultWork = workMapper.selectByPrimaryKey(work.getWorkId());
+        if (resultWork != null) {
+            return -1;
+        }
         return workMapper.insert(work);
     }
 
@@ -151,4 +162,6 @@ public class WorkServiceImpl implements WorkService {
         }
         return new Vo<Work>(0, new ArrayList<Work>());
     }
+
+
 }

@@ -1,13 +1,9 @@
 package com.cskaoyan14th.controller;
 
 
-import com.cskaoyan14th.bean.Custom;
-import com.cskaoyan14th.bean.Employee;
-import com.cskaoyan14th.bean.Product;
-import com.cskaoyan14th.service.*;
-
+import com.cskaoyan14th.bean.Process;
 import com.cskaoyan14th.bean.*;
-
+import com.cskaoyan14th.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +23,8 @@ public class GetDataController {
     @Autowired
     CustomService customService;
     @Autowired
+    TechnologyService technologyService;
+    @Autowired
     OrderService orderService;
     @Autowired
     EmployeeService employeeService;
@@ -34,6 +32,14 @@ public class GetDataController {
     DepartmentService departmentService;
     @Autowired
     DeviceService deviceService;
+    @Autowired
+    ManufactureService manufactureService;
+    @Autowired
+    WorkService workService;
+    @Autowired
+    MaterialService materialService;
+    @Autowired
+    ProcessService processService;
 
 
     @RequestMapping("product/get_data")
@@ -48,6 +54,25 @@ public class GetDataController {
     public List<Custom> getCustomData(){
         List<Custom> customList = customService.queryCustoms();
         return customList;
+    }
+
+    @RequestMapping("technology/get/{technologyId}")
+    @ResponseBody
+    public Technology getTechnologyById(@PathVariable("technologyId") String technologyId){
+        Technology technology = technologyService.getTechnologyById(technologyId);
+        return technology;
+    }
+    @RequestMapping("/technology/get_data")
+    @ResponseBody
+    public List<Technology> getTechnologyData(){
+        List<Technology> allTechnologyData = technologyService.getAllTechnologyData();
+        return allTechnologyData;
+    }
+    @RequestMapping("/technologyPlan/get_data")
+    @ResponseBody
+    public List<TechnologyPlan> getTechnologyPlanData(){
+        List<TechnologyPlan> allTechnologyPlanData = technologyService.getAllTechnologyPlanData();
+        return allTechnologyPlanData;
     }
 
 
@@ -119,11 +144,74 @@ public class GetDataController {
         Device device = deviceService.getDeviceById(deviceId);
         return device;
     }
+
+    @RequestMapping("/manufacture/get_data")
+    @ResponseBody
+    public List<Manufacture> manufactureGetData() {
+        List<Manufacture> list = manufactureService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("/manufacture/get/{manufactureSn}")
+    @ResponseBody
+    public Manufacture getManufactureById(@PathVariable("manufactureSn") String manufactureSn) {
+        Manufacture manufacture = manufactureService.multiSelectByManufactureSn(manufactureSn);
+        return manufacture;
+    }
+
+    @RequestMapping("/work/get_data")
+    @ResponseBody
+    public List<Work> workGetData() {
+        List<Work> list = workService.multiSelectAll();
+        return list;
+    }
+
+    @RequestMapping("/work/get/{workId}")
+    @ResponseBody
+    public Work getWorkById(@PathVariable("workId") String workId) {
+        Work work = workService.multiSelectByWorkId(workId);
+        return work;
+    }
+
+
+    //material数据获取
+    @RequestMapping("material/get_data")
+    @ResponseBody
+    public List<Material> getMaterialData(){
+        List<Material> materialList = materialService.getAllMaterial();
+        return materialList;
+    }
+
+
+
+    //material数据通过materialId获取
+    @RequestMapping("material/get/{materialId}")
+    @ResponseBody
+    public Material getMaterialDataById(@PathVariable("materialId") String materialId){
+        Material material = materialService.selectMaterialById(materialId);
+        return material;
+    }
+
+
     @RequestMapping("deviceFault/get/{deviceFaultId}")
     @ResponseBody
     public DeviceFault getDeviceFaultById(@PathVariable("deviceFaultId") String deviceFaultId) {
         DeviceFault deviceFault = deviceService.getDeviceFaultById(deviceFaultId);
         return deviceFault;
+    }
+
+    @RequestMapping("process/get_data")
+    @ResponseBody
+    public List<Process> processGetData() {
+        List<Process> list = processService.getProcessList();
+        return list;
+    }
+
+    @RequestMapping("/process/get/{processId}")
+    @ResponseBody
+    public Process getProcessById(@PathVariable("processId") String processId) {
+        Process process = processService.getProcessByProcessId(processId);
+        return process;
     }
 
 }

@@ -55,10 +55,13 @@ public class WorkController {
     public ResponseVo insert(Work work){
         ResponseVo responseVo = new ResponseVo();
         int i = workService.insert(work);
-        if (i > 0){
+        if (i == -1){
+            responseVo.setMsg("Id已存在");
+            responseVo.setStatus(0);
+        } else if (i > 0) {
             responseVo.setMsg("OK");
             responseVo.setStatus(200);
-        }else {
+        } else {
             responseVo.setStatus(500);
             responseVo.setMsg("ERROR");
         }

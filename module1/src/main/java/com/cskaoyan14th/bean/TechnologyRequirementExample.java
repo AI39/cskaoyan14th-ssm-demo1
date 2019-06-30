@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class technologyRequirementExample {
+public class TechnologyRequirementExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public technologyRequirementExample() {
+    public TechnologyRequirementExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
